@@ -1,15 +1,23 @@
 library(tidyverse)
 set.seed(01082019)
+
+
+# simulate the points -----------------------------------------------------
+
 n <- 60
 xy <- cbind(x=runif(n, 1, 20),y= runif(n, 1, 10))
 starting_point <- 1
 xy <- xy[c(starting_point, seq(1:60)[-starting_point]),]
 qplot(x=xy[,1], y=xy[,2])
-#distance matrix
+# distance matrix
 grid <- expand.grid(1:60, 1:60) %>% 
   split(1:60^2)
 d <- sapply(grid, function(ij) norm(xy[ij[[1]],]-xy[ij[[2]],], "2")) %>% 
   matrix(60)
+
+
+
+# greedy ------------------------------------------------------------------
 
 greedy_tour_position <- function(d){
   remain <- 2:n
@@ -59,5 +67,39 @@ greedy_tour_sus <- function(d){
 }
 
 sus <- greedy_tour_sus(d)
-greedy_tour_position(d)
+poi <- greedy_tour_position(d)
+
+
+# completely random -----------------------------------------------------------------------
+
+
+rand_tour <- function(d, max_sample){
+  best_tour <- NA
+  best_cost <- Inf
+  trace <- NA
+  for(i in 1:max_sample){
+    tour <- sample(1:NROW(d)) 
+    cost <- tour_cost(tour, d)
+    if(best_cost > cost){
+      best_cost <- cost
+      best_tour <- tour
+    } 
+    trace[[i]] <- cost
+  }
+  return(list(best_tour, trace))
+}
+ns <- 100
+myh <- rand_tour(d, ns)
+myh_trace <- myh[[2]]
+myh_tour <- myh[[1]]
+plot_tour(xy, myh_tour)
+
+min_trace <- sapply(1:ns, function(i) min(myh_trace[1:i]))
+qplot(x=1:length(myh_trace), y=myh_trace, geom="line") +
+  geom_line(aes(x=1:length(min_trace), y=min_trace, color = "red"))
+
+
+
+# neighbourhood search methods --------------------------------------------
+
 
