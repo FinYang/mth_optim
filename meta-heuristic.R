@@ -102,4 +102,69 @@ qplot(x=1:length(myh_trace), y=myh_trace, geom="line") +
 
 # neighbourhood search methods --------------------------------------------
 
+# simple swap between adjacent locations
 
+swap <- function(x){
+  i <- sample(2:length(x), 1)
+  x[c(i-1, i)] <- x[c(i, i-1)]
+  return(x)
+}
+
+rand_descent <- function(d, func, max_sample){
+  x <- rand_tour(d, n)[[1]]
+  trace <- tour_cost(x, d)
+  for(i in 2:max_sample){
+    y <- func(x)
+    if(tour_cost(y, d) < tour_cost(x, d))
+      x <- y
+    trace <- c(trace, tour_cost(x,d))
+  }
+  return(list(x, trace))
+}
+
+ns <- 1000
+neb <- rand_descent(d, swap, ns)
+qplot(x=1:length(neb[[2]]), y=neb[[2]], geom="line") 
+plot_tour(xy, neb[[1]])
+min(neb[[2]])
+
+library(gridExtra)
+before = plot_tour(xy, tour)
+after = plot_tour(xy, swap(tour))
+grid.arrange(before, after )
+
+# reverse part of the sequence
+
+reverse <- function(x){
+  j <- sample(2:length(x), 1)
+  i <- sample(1:(j-1), 1)
+  x[i:j] <- x[j:i]
+  return(x)
+}
+
+before = plot_tour(xy, tour)
+after = plot_tour(xy, reverse(tour))
+grid.arrange(before, after)
+
+neb_re <- rand_descent(d, reverse, ns)
+qplot(x=1:length(neb_re[[2]]), y=neb_re[[2]], geom="line") 
+plot_tour(xy, neb_re[[1]])
+min(neb_re[[2]])
+
+# swap between arbitrary cities
+
+swap2 <- function(x){
+  j <- sample(2:length(x), 1)
+  i <- sample(1:(j-1), 1)
+  x[c(i, j)] <- x[c(j, i)]
+  return(x)
+}
+
+before = plot_tour(xy, tour)
+after = plot_tour(xy, swap2(tour))
+grid.arrange(before, after)
+
+neb2 <- rand_descent(d, swap2, ns)
+qplot(x=1:length(neb2[[2]]), y=neb2[[2]], geom="line") 
+plot_tour(xy, neb2[[1]])
+min(neb2[[2]])
