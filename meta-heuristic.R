@@ -1,6 +1,7 @@
 library(tidyverse)
 set.seed(01082019)
 
+## Traveling Salesman Problem (TSP)
 
 # simulate the points -----------------------------------------------------
 
@@ -111,7 +112,7 @@ swap <- function(x){
 }
 
 rand_descent <- function(d, func, max_sample){
-  x <- rand_tour(d, n)[[1]]
+  x <- rand_tour(d, ns)[[1]]
   trace <- tour_cost(x, d)
   for(i in 2:max_sample){
     y <- func(x)
@@ -168,3 +169,45 @@ neb2 <- rand_descent(d, swap2, ns)
 qplot(x=1:length(neb2[[2]]), y=neb2[[2]], geom="line") 
 plot_tour(xy, neb2[[1]])
 min(neb2[[2]])
+
+
+# Sumulated Annealing -----------------------------------------------------
+
+simulated_annealing <- function(d, func, cooling = 0.99, max_iter = 5e4, mc_length = 100){
+  x <- rand_tour(d, ns)[[1]]
+  walk <- list(x)
+  for(i in 2:mc_length)
+    walk <- c(walk, list(func(walk[[length(walk)]])))
+  trace <- sapply(walk, tour_cost, d=d)
+  best_cost <- min(trace)
+  id_bestcost <- which.min(trace)
+  best_sol <- walk[[id_bestcost]]
+  t <- sd(trace)
+  for(i in (mc_length+1):max_iter){
+    y <- func(x)
+    delta <- tour_cost(x, d) - tour_cost(y, d)
+    if(runif(1) < exp(delta/t)){
+      x <- y
+      if(tour_cost(x, d) < best_cost){
+        best_cost <- tour_cost(x, d)
+        best_sol <- x
+      }
+    }
+    trace <- c(trace, tour_cost(x, d))
+    if(i %% mc_length ==0) 
+      t <- t*cooling
+  }
+  return(list(best_sol, trace))
+}
+
+sa <- simulated_annealing(d, swap)
+min_trace_sa <- sapply(1:length(sa[[2]]), function(i) min(sa[[2]][1:i]))
+qplot(x=1:length(sa[[2]]), y=sa[[2]], geom="line") +
+  geom_line(aes(x=1:length(min_trace_sa), y=min_trace_sa, color = "red"))
+plot_tour(xy, sa[[1]])
+
+sa2 <- simulated_annealing(d, reverse)
+min_trace_sa2 <- sapply(1:length(sa2[[2]]), function(i) min(sa2[[2]][1:i]))
+qplot(x=1:length(sa2[[2]]), y=sa2[[2]], geom="line") +
+  geom_line(aes(x=1:length(min_trace_sa2), y=min_trace_sa2, color = "red"))
+plot_tour(xy, sa2[[1]])
