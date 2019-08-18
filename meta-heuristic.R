@@ -204,10 +204,77 @@ sa <- simulated_annealing(d, swap)
 min_trace_sa <- sapply(1:length(sa[[2]]), function(i) min(sa[[2]][1:i]))
 qplot(x=1:length(sa[[2]]), y=sa[[2]], geom="line") +
   geom_line(aes(x=1:length(min_trace_sa), y=min_trace_sa, color = "red"))
+tour_cost(sa[[1]], d)
 plot_tour(xy, sa[[1]])
 
 sa2 <- simulated_annealing(d, reverse)
 min_trace_sa2 <- sapply(1:length(sa2[[2]]), function(i) min(sa2[[2]][1:i]))
 qplot(x=1:length(sa2[[2]]), y=sa2[[2]], geom="line") +
   geom_line(aes(x=1:length(min_trace_sa2), y=min_trace_sa2, color = "red"))
+tour_cost(sa2[[1]], d)
 plot_tour(xy, sa2[[1]])
+
+
+# Genetic Algorithm -------------------------------------------------------
+
+decode_tour <- function(d, chromosome){
+  return(greedy_tour_position(d * chromosome))
+}
+
+corssover <- function(A, B){
+  C <- A
+  select <- sample(c(T, F), length(A), replace = TRUE)
+  C[select] <- B[select]
+  return(C)
+}
+
+mutate <- function(A, prob = 0.05){
+  dim_A <- dim(A)
+  for(i in 1:dim_A[[1]]){
+    for(j in 1:dim_A[[2]]){
+      if(runif(1) < prob)
+        A[[i, j]] <- runif(1)
+    }
+  }
+  return(A)
+}
+
+genetic_algorithm <- function(d, max_evaluations = 5e4, population_size = 20){
+  population <- replicate(population_size, 
+                          matrix(runif(length(d)), nrow = NROW(d), ncol = NCOL(d)), 
+                          simplify = F)
+  fitness <- sapply(population, function(p) tour_cost(decode_tour(d, p), d))
+  trace <- NULL
+  pb <- txtProgressBar(min = population_size, max = max_evaluations, style = 3)
+  for(i in population_size:max_evaluations){
+    
+    A <- sample(population_size, 1)
+    B <- sample(population_size, 1)
+    C <- corssover(population[[A]], population[[B]])
+    C <- mutate(C, 5/length(d))
+    tour <- decode_tour(d, C)
+    fit <- tour_cost(tour, d)
+    trace <- c(trace, list(c(fit, min(fitness), max(fitness))))
+    
+    if(fit < min(fitness[[A]], fitness[[B]])){
+      if(fitness[[A]] > fitness[[B]])
+        B <- A
+      fitness[[B]] <- fit
+      population[[B]] <- C
+    }
+    setTxtProgressBar(pb, i)
+  }
+  bestval <- min(fitness)
+  best <- which.min(fitness)
+  return(list(decode_tour(d, population[[best]]), trace))
+}
+
+ge <- genetic_algorithm(d)
+individual <- sapply(ge[[2]], function(x) x[[1]])
+pop_min <- sapply(ge[[2]], function(x) x[[2]])
+pop_max <- sapply(ge[[2]], function(x) x[[3]])
+qplot(x=1:length(individual), y=individual, geom = "line") +
+  geom_line(aes(y=pop_min), color = "blue") +
+  geom_line(aes(y=pop_max), color = "red")
+tour_cost(ge[[1]], d)
+plot_tour(xy, ge[[1]])
