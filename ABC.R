@@ -1,6 +1,5 @@
-library(Rcpp)
 
-# sourceCpp("ABC.cpp")
+
 
 #' @param par Vector. Initial value to search for parameter
 #' @param fn The function to optimize over
@@ -39,9 +38,9 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
   
   send_scout_bees <- function(){
     max_stay <- max(n_stay)
-    if(max(n_stay) >= limit){
+    if(max_stay >= limit){
       leave <-   which.max(n_stay)
-      foods[leave, ] <<- runif(D, lb, ub)
+      foods[leave, ] <<- mapply(function(lb, ub) runif(D, lb, ub), lb=lb, ub=ub)
       obj[[leave]] <<- func(foods[leave,])
       nectar[[leave]] <<- taste_nectar(obj[[leave]])
       n_stay[[leave]] <<- 0
@@ -62,8 +61,8 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
     nu <- foods[neighbor,]
     
     nu[[par_change]] <- foods[[i, par_change]] + runif(1, -1, 1)*(foods[[i, par_change]] - foods[[neighbor, par_change]])
-    if(nu[[par_change]]<lb) nu[[par_change]] <- lb 
-    if(nu[[par_change]]>ub) nu[[par_change]] <- ub 
+    if(nu[[par_change]]<lb[[par_change]]) nu[[par_change]] <- lb[[par_change]] 
+    if(nu[[par_change]]>ub[[par_change]]) nu[[par_change]] <- ub[[par_change]] 
     
     obj_nu <- func(nu)
     nectar_nu <- taste_nectar(obj_nu)
@@ -71,7 +70,7 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
     if(nectar_nu >= nectar[[i]]){
       n_stay[[i]]  <<- 0
       foods[i,] <<- nu
-      obj[[i]] <<- func(nu)
+      obj[[i]] <<- obj_nu
       nectar[[i]] <<- taste_nectar(obj[[i]])
     } else {
       n_stay [[i]] <<- n_stay[[i]] + 1
@@ -93,11 +92,17 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
     }
   }
   
-  func <- function(par) fun(par)
+  func <- function(par) fun(par, ...)
   D <- length(par)
+  if (length(lb) == 1 && length(par) > 1) 
+    lb <- rep(lb, D)
+  if (length(ub) == 1 && length(par) > 1) 
+    ub <- rep(ub, D)
+  lb[is.infinite(lb)] <- -.Machine$double.xmax * 1e-10
+  ub[is.infinite(ub)] <- .Machine$double.xmax * 1e-10
   # ini
   # foods <- matrix(runif(SN*D, lb, ub), nrow = SN, ncol = D)
-  foods <- matrix(rep(seq(lb,ub,length.out=SN), D), nrow = SN, ncol = D)
+  foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
   obj <- apply(foods, 1, func)
   nectar <- taste_nectar(obj)
   n_stay <- numeric(SN)
@@ -145,4 +150,3 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
 }
 
 
-a <- ABC(rep(0,2), fun, lb=-10, ub=10, n.stop=50, max.cycle = 1e3)
