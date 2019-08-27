@@ -40,7 +40,7 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
     max_stay <- max(n_stay)
     if(max_stay >= limit){
       leave <-   which.max(n_stay)
-      foods[leave, ] <<- mapply(function(lb, ub) runif(D, lb, ub), lb=lb, ub=ub)
+      foods[leave, ] <<- t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
       obj[[leave]] <<- func(foods[leave,])
       nectar[[leave]] <<- taste_nectar(obj[[leave]])
       n_stay[[leave]] <<- 0
