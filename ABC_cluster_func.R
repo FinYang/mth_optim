@@ -8,7 +8,7 @@
 #' @param limit Integer. The number of waiting perios before dropping a not-improving food source
 #' @param max.cycle Integer. The maxmum number of iteration.
 #' @param n.stop Integer. The number of unchanged results to stop optimizing
-ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
+ABC_cluster <- function(par, fun, ...,data, k, SN  = 20, limit= 100, max.cycle= 1000, n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
   
   
   # send_employed_bees <- function(){
@@ -92,7 +92,7 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
     }
   }
   
-  func <- function(par) fun(par, ...)
+  func <- function(par) fun(par,k=k, ...)
   D <- length(par)
   if (length(lb) == 1 && length(par) > 1) 
     lb <- rep(lb, D)
@@ -102,7 +102,8 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
   ub[is.infinite(ub)] <- .Machine$double.xmax * 1e-10
   # ini
   # foods <- matrix(runif(SN*D, lb, ub), nrow = SN, ncol = D)
-  foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
+  # foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
+  foods <- t(replicate(SN, c(as.matrix(data[sample(NROW(data), k),]))))
   obj <- apply(foods, 1, func)
   nectar <- taste_nectar(obj)
   n_stay <- numeric(SN)
@@ -143,7 +144,7 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
     send_scout_bees()
     round <- round + 1
   }
-
+  
   return(list(par = global_par, value = global_min,
               foods = foods, obj = obj, nectar = nectar,
               n_stay = n_stay, path = path, n_iter = round, n_unchange = n_unchange))
