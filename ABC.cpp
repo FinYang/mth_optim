@@ -69,6 +69,7 @@ void appreciate_best_food(double & global_min,
   if(before == global_min){
     n_unchange++;
   }
+  return;
 }
 
 
