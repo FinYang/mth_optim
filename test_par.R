@@ -51,3 +51,8 @@ appreciate_best_food(global_min, obj, foods, global_par, n_unchange)
 
 
 Rcpp::evalCpp("as<int>(Rcpp::sample(6,1))")
+
+
+a <- ABC_cpp(rep(0,2), fun, lb=-10, ub=10, n.stop=50)
+b <- ABC(rep(0,2), fun, lb=-10, ub=10, n.stop=50)
+microbenchmark::microbenchmark(ABC_cpp(rep(0,2), fun, lb=-10, ub=10, n.stop=50),ABC(rep(0,2), fun, lb=-10, ub=10, n.stop=50) )

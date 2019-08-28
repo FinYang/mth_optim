@@ -7,6 +7,7 @@ ABC_cpp <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
   ub[is.infinite(ub)] <- +(.Machine$double.xmax*1e-10)
   func <- function(par) fun(par, ...)
   foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
-  .abc_cpp(par = par, fun=func, foods = foods, SN = SN, limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
-  
+  out <- .abc_cpp(par = par, fun=func, foods = foods, SN = SN, 
+                  limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
+  return(out[-c("n_stay", "prob")])
 }
