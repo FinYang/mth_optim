@@ -8,7 +8,8 @@
 #' @param limit Integer. The number of waiting perios before dropping a not-improving food source
 #' @param max.cycle Integer. The maxmum number of iteration.
 #' @param n.stop Integer. The number of unchanged results to stop optimizing
-ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
+ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, 
+                n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
   
   
   # send_employed_bees <- function(){
@@ -71,7 +72,7 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
       n_stay[[i]]  <<- 0
       foods[i,] <<- nu
       obj[[i]] <<- obj_nu
-      nectar[[i]] <<- taste_nectar(obj[[i]])
+      nectar[[i]] <<- nectar_nu
     } else {
       n_stay [[i]] <<- n_stay[[i]] + 1
     }
@@ -143,10 +144,10 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, n.stop = 5
     send_scout_bees()
     round <- round + 1
   }
-
+ 
   return(list(par = global_par, value = global_min,
               foods = foods, obj = obj, nectar = nectar,
-              n_stay = n_stay, path = path, n_iter = round, n_unchange = n_unchange))
+              n_stay = n_stay, path = path, n_iter = round, n_unchange = n_unchange, prob = prob))
 }
 
 

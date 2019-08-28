@@ -10,6 +10,10 @@ max.cycle = 1e3
 SN  = 20
 limit= 100
 
+
+ABC_cpp(rep(0,2), fun, lb=-10, ub=10, n.stop=50)
+
+
 library(Rcpp)
 
 
