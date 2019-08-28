@@ -86,11 +86,12 @@ void smell_neighbor(NumericMatrix & foods,
                     int current_bee, 
                     NumericVector & lb, 
                     NumericVector & ub){
-  int par_change = as<int>(Rcpp::sample(D,1));
+  // int par_change = as<int>(Rcpp::sample(D,1)-1);
+  int par_change = Rcpp::sample(D,1)[0]-1;
   int neighbor(1);
   do{
-    neighbor = as<int>(Rcpp::sample(SN,1));
-  } while (neighbor != current_bee);
+    neighbor = Rcpp::sample(SN,1)[0]-1;
+  } while (neighbor == current_bee);
   NumericVector nu = foods(neighbor,_);
   
   nu[par_change] = foods(current_bee, par_change) + R::runif(-1,1)*(foods(current_bee, par_change)-foods(neighbor, par_change));
@@ -99,6 +100,8 @@ void smell_neighbor(NumericMatrix & foods,
   
   double obj_nu = as<double>(fn(nu));
   double nectar_nu = taste_nectar(obj_nu);
+  
+  // Rprintf("here");
   
   if(nectar_nu >= nectar[current_bee]){
     n_stay[current_bee]  = 0;
@@ -109,6 +112,13 @@ void smell_neighbor(NumericMatrix & foods,
     n_stay[current_bee]++;
   }
   
+}
+
+void rcpp_rprintf(NumericVector v){
+  // printing values of all the elements of Rcpp vector  
+  for(int i=0; i<v.length(); ++i){
+    Rprintf("the value of v[%i] : %f \n", i, v[i]);
+  }
 }
 
 
@@ -150,52 +160,90 @@ List ABC_cpp(NumericVector par,
   NumericVector prob(SN);
   NumericMatrix path(max_cycle, D+1);
   NumericVector path_value(max_cycle);
-  //  employed bees
+  
+  // int tpa = 0;
+  
+  // 
+  // //  employed bees
   while(round < max_cycle && n_unchange<n_stop){
+    // round++;
+    // n_unchange++;
     for(int i=0; i<SN;i++){
       smell_neighbor(foods, D, fun, n_stay, obj, nectar, SN, i, lb, ub);
     }
-    
-    
     comment_on_food(prob, nectar, SN);
+    
+    
     //  onlooker
     int j = 0;
     int t = 0;
+    // int q = 0;
     while(t<SN){
+      // Rprintf("%i", t);
       if(R::runif(0,1) < prob[j]){
         t++;
         smell_neighbor(foods, D, fun, n_stay, obj, nectar, SN, j, lb, ub);
-      }
-      if(is_true(Rcpp::all(prob==0))) break;
+      } 
+      // else {
+        // rcpp_rprintf(prob);
+        // Rprintf("%f",prob[0]);
+      // }
+      // if(t==0){
+      //   q++;
+      //   
+      // }
+      // if(q > 100){
+      //   Rprintf("why 0!!!");
+      //   Rprintf("%f",prob[0]);
+      //   break;
+      // }
+      if(is_true(Rcpp::all(Rcpp::na_omit(prob)==0)) || Rcpp::na_omit(prob).size() == 0) break;
+      // if(sum(prob)==0){
+      //  Rprintf("is_true bu guan yong");
+      //  break;
+      // } 
+      // double tp = 0;
+      // for(int w=0; w<SN;w++){
+      //   tp += prob[w];
+      // }
+      // if(tp == 0){
+      //   Rprintf("zhe lia mei yong de dong xi");
+      //   break;
+      // }
+        
       j++;
       if(j == SN) j=0;
     }
     
-    
-    appreciate_best_food(global_min, obj, foods, global_par,  n_unchange);
-    path(round,_) = global_par;
-    path_value[round] = global_min;
-    //  scout
-    send_scout_bees(n_stay, limit, lb, ub, foods, obj, D, nectar, fun);
-    round++;
-    
-  }
-  path = path(Rcpp::Range(0,round),_);
-  path_value = Rcpp::na_omit(path_value);
-  
-  
-  
-  return List::create(_["par"] = global_par, 
-                      _["value"] = global_min,
-                      _["foods"] = foods, 
-                      _["obj"] = obj, 
-                      _["nectar"] = nectar,
-                      _["n_stay"] = n_stay, 
-                      _["path"] = path,
-                      _["path_value"] = path_value,
-                      _["n_iter"] = round+1, 
-                      _["n_unchange"] = n_unchange, 
-                      _["prob"] = prob);
+      appreciate_best_food(global_min, obj, foods, global_par,  n_unchange);
+    // Rprintf("here");
+      path(round,_) = global_par;
+      path_value[round] = global_min;
+      //  scout
+      send_scout_bees(n_stay, limit, lb, ub, foods, obj, D, nectar, fun);
+      round++;
+
+  // }
+    // return List::create(prob, path, path_value, global_min, obj, foods, global_par, n_unchange, nectar, round, n_unchange);
+
+
+    }
+    path = path(Rcpp::Range(0,round-1),_);
+    path_value = path_value[Range(0,round-1)];
+
+
+
+    return List::create(_["par"] = global_par,
+                        _["value"] = global_min,
+                        _["foods"] = foods,
+                        _["obj"] = obj,
+                        _["nectar"] = nectar,
+                        _["n_stay"] = n_stay,
+                        _["path"] = path,
+                        _["path_value"] = path_value,
+                        _["n_iter"] = round+1,
+                        _["n_unchange"] = n_unchange,
+                        _["prob"] = prob);
 }
 
 
@@ -209,6 +257,31 @@ List ABC_cpp(NumericVector par,
 
 
 /***R
+ABC_cpp <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, 
+                    n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
+  if (length(lb) == 1) lb <- rep(lb, length(par))
+  if (length(ub) == 1) ub <- rep(ub, length(par))
+  
+  lb[is.infinite(lb)] <- -(.Machine$double.xmax*1e-10)
+  ub[is.infinite(ub)] <- +(.Machine$double.xmax*1e-10)
+  func <- function(par) fun(par, ...)
+  foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
+  .abc_cpp(par = par, fun=func, foods = foods, SN = SN, limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
+  
+}
 
+par <- rep(0,2)
+fun <- function(x) {
+  -cos(x[1])*cos(x[2])*exp(-((x[1] - pi)^2 + (x[2] - pi)^2))
+}
+lb=-10
+ub=10
+
+n.stop=50
+max.cycle = 1e3
+SN  = 20
+limit= 100
+
+a <- ABC_cpp(rep(0,2), fun, lb=-10, ub=10, n.stop=50)
 */
 

@@ -48,3 +48,6 @@ cppFunction("void appreciate_best_food(double & global_min,
   return;
 }")
 appreciate_best_food(global_min, obj, foods, global_par, n_unchange)
+
+
+Rcpp::evalCpp("as<int>(Rcpp::sample(6,1))")
