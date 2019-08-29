@@ -9,5 +9,18 @@ ABC_cpp <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
   foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
   out <- .abc_cpp(par = par, fun=func, foods = foods, SN = SN, 
                   limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
-  return(out[-c("n_stay", "prob")])
+  return(out[c("par", "value", "foods", "obj", "nectar", "path", "path_value", "n_iter", "n_unchange")])
 }
+
+
+# _["par"] = global_par,
+# _["value"] = global_min,
+# _["foods"] = foods,
+# _["obj"] = obj,
+# _["nectar"] = nectar,
+# _["n_stay"] = n_stay,
+# _["path"] = path,
+# _["path_value"] = path_value,
+# _["n_iter"] = round,
+# _["n_unchange"] = n_unchange,
+# _["prob"] = prob)

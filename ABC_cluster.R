@@ -12,13 +12,13 @@ cluster_obj <- function(par, x, k, d){
 }
 
 
-closest_allocation <- function(D, centre){
+closest_allocation <- function(x, centre){
   k <- length(centre)
-  n <- dim(D)[[1]]
-  d <- dim(D)[[2]]
+  n <- dim(x)[[1]]
+  d <- dim(x)[[2]]
   alloc <- numeric(n)
   for(i in 1:n){
-    dis <- sapply(1:k, function(j) norm(D[i,]-centre[[j]], "2"))
+    dis <- sapply(1:k, function(j) norm(x[i,]-centre[[j]], "2"))
     # minDist <- min(dis)
     alloc[[i]] <- which.min(dis)
   }
