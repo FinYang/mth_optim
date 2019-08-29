@@ -59,7 +59,7 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
       }
     }
     neighbor <- sample_nei((1:SN)[-i])
-    nu <- foods[neighbor,]
+    nu <- foods[i,]
     
     nu[[par_change]] <- foods[[i, par_change]] + runif(1, -1, 1)*(foods[[i, par_change]] - foods[[neighbor, par_change]])
     if(nu[[par_change]]<lb[[par_change]]) nu[[par_change]] <- lb[[par_change]] 
@@ -113,9 +113,9 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
   global_par <- par
   global_min <- func(par)
   
+  n_unchange <- 0
   appreciate_best_food()
   round <- 0
-  n_unchange <- 0
   
   path <- c(global_par, min = global_min)
   while(round < max.cycle && n_unchange < n.stop){

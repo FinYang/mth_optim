@@ -2,17 +2,9 @@
 using namespace Rcpp;
 
 // [[Rcpp::export(name=".test_cpp")]]
-List test(NumericVector par, 
-          Function fun, 
-          NumericMatrix foods,
-          int SN, 
-          int limit, 
-          int max_cycle, 
-          int n_stop, 
-          NumericVector lb, 
-          NumericVector ub){
- 
-  return List::create(SN, limit, max_cycle, n_stop, lb, ub, fun);
+NumericVector test(NumericVector x){
+  x[0]++;
+  return x;
   
 }
 
@@ -21,8 +13,8 @@ List test(NumericVector par,
 
 
 /***R
-.test_cpp(par = par, fun=func, foods = foods, SN = SN, 
-          limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
+# .test_cpp(par = par, fun=func, foods = foods, SN = SN, 
+#           limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
 
-
+.test_cpp(1:3)
 */
