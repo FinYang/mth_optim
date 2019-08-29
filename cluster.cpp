@@ -10,6 +10,7 @@ double ecu_dist( double x, double y) {
   return sqrt( x*x + y*y ) ;
 }
 
+// [[Rcpp::export(name=".closest_allocation_cpp")]]
 IntegerVector closest_allocation(NumericMatrix x, NumericMatrix centre){
   int k = centre.nrow();
   int n = x.nrow();

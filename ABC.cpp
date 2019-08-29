@@ -215,6 +215,8 @@ List ABC_cpp(NumericVector par,
 
 
 /***R
+.abc_cpp(par = par, fun=func, foods = foods, SN = SN, 
+         limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
 # ABC_cpp <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, 
 #                     n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
 #   if (length(lb) == 1) lb <- rep(lb, length(par))
