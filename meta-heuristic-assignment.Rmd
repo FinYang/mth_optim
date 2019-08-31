@@ -1,21 +1,96 @@
 ---
-title: "Meta-heuristics Assignment"
-author: "Yangzhuoran (Fin) Yang (28150295)"
-date: "31/08/2019"
-header-includes:
-  - \usepackage{bbm}
-  - \DeclareMathOperator*{\argmax}{arg\,max} 
-  - \DeclareMathOperator*{\argmin}{arg\,min}
-output: 
+title: 'Artificial Bee Colony (ABC) algorithm and Its Implementation in Clustering'
+author: Yangzhuoran (Fin) Yang (28150295)
+bibliography: assign1.bib
+biblio-style: authoryear-comp
+linespacing: 1
+output:
   bookdown::pdf_document2:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 8
+    keep_tex: no
+    number_sections: yes
+    citation_package: biblatex
+    latex_engine: pdflatex
     toc: no
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, out.width = "80%", fig.align = "center")
 knitr::read_chunk('meta-heuristics-assignment.R')
 ```
 
-```{r library}
+```{r library, eval = F}
 ```
 
+
+# Introduction
+
+Artifical Bee Colony (ABC) algorithm is a meta-heuristic optimization algorithm recently introduced by @Karaboga2005. It simulate the behaviour of a honey bee swarm in the attempt to find the optimal solution. As an general optimization algorithm, it does not limit to Clustering problem. We now introduce each component seperately the give the ABC algorithm in the pseudo-code form. Part of the notation and formulations are adopted from @karaboga2011novel.
+
+
+## Overview
+
+Other than parameter initialization and solution evaluation, the ABC algorithm can be structured into three phases: the employed bee phase, the onlooker bee phase, and the scout bee phase. Each phase mimic the behavior of a group of bees in a honey bee swarm. The employed bee and the onlooker bee search locally while the scout bee is in charge of the global search. In other words, the employed bee and the onlooker bee emphasis intensification by producing better solutions based on the current solution set, while the scout bee emphasis diversification search solutions independently from the current set of solutions.
+
+## Initialization 
+
+To mimic the behavior of a bee swarm, the ABC algorithm needs parameter that defines the size of the swarm: the numer of food sources, or the number of solutions in the solution set. We denote this number as $SN$ (swarm size). The swarm size is one of the most important parameter in the ABC algorithm, as a large swarm size increases the accuarcy and decrease efficiency. We will dicuss the impact of swarm size in more detail in the parameter section.
+
+After $SN$ being decided, the ABC algorithm will simulate the position of initial food sources (the set of solutions) $z_i:i=1,2,\ldots,SN$. The way to simulate the food sources has been tailored in differnt problems in the literature: they can be evenly assigned across the solution space (@ABCoptim), randomly generated from a distribution (@karaboga2011novel), or they can be randomly selected from different data points for the problem of clustering. The main idea is to cover the solution space as much as possible.
+
+Once the position of the inition solutions has been determined, the fitness $f_i:i = 1,2,\ldots,SN$ can be calculated from corresponding cost function/objuective function. The quality of the nectar $fit_i:i=1,2,\ldots,SN$ in the ABC algorithm can be calculated correspondly, using Equation \@ref(eq:nectar)
+
+\begin{equation}
+(\#eq:nectar)
+fit_i = \frac{1}{1/f_i}
+\end{equation}
+
+In the case when the cost function produces negative fitness, the quality of the nectar can be calculated by:
+
+\begin{equation}
+(\#eq:nectar-neg)
+fit_i = 1+|f_i|
+\end{equation}
+
+The solution with best fitness and will be recorded. We can now proceed to the employed bee phase.
+
+## The Employed Bee
+
+The number of employed bees is the same as the number of food sources $SN$. For each employed bee at each food source, the bee implement a neighborhood search to find a new solution by combine the neighbor find with the current position using 
+
+\begin{equation}
+(\#eq:find-neighbor)
+\nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})
+\end{equation}
+
+where $i\in \{1,2,\ldots,SN\}$ is the index of the current position, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of variable we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots,D\}$ is the randomly generated index denoting the position of the 
+
+
+```r
+Algorithm: Artifical Bee Colony
+ 1. Load the training data
+ 2. Generate the initial food sources (the solution set) 
+ 3. Evaluate the quality of nectar (the fitness of initial solutions)
+ 4. While (Condition not met)
+        The employed bee phase
+ 5.     For each employed bee{
+          Produce new solution using neighborhood search
+          Calculate the fitness
+          Selecte the better fitted solution Greedily }
+ 6.     Calculate the probabilities of selecting each solution
+        The onlooker bee phase
+ 7.     For each onlooker bee{  
+          Select a solution based on the probabiliy calculated above
+          Produce new solution using neighborhood search
+          Calculate the fitness
+          Selecte the better fitted solution Greedily }
+ 8.     Abandon the solution that the number of unimproved iteration reach the limit
+        The scout bee phase
+ 9.       Increase the number of food source to SN by finding new solution randomly
+10.     Record the best solution among all food sources
+11. End
+
+```
