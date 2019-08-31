@@ -102,7 +102,7 @@ ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000,
       n_unchange <<- n_unchange+1
     }
   }
-  
+  data <- x
   func <- function(par) fun(par, x=as.matrix(x),...)
   D <- length(par)
   if (length(lb) == 1 && length(par) > 1) 
@@ -122,7 +122,7 @@ ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000,
     any(table(allocc)<(NROW(x)/(2*k))) || length(table(allocc)) <k
   }
   
-  no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=x, k=k, d=d ))
+  no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=as.matrix(x), k=k, d=d ))
   
   while(any(no_food)){
     n_no_food <- sum(no_food)
@@ -171,10 +171,24 @@ ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000,
     send_scout_bees()
     round <- round + 1
   }
+  first_optim <- which(sapply(split(path, 1:NROW(path)), identical, c(tail(path,1))), useNames = F)[[1]]
+  # round <- round + 1
+  centerr <- matrix(global_par, nrow = k, ncol = d)
+  allocc <- .closest_allocation_cpp(as.matrix(x), centerr)
+  centers_moved <- matrix(nrow = k, ncol = d)
+  for (i in 1:k) {
+    for (j in 1:d) {
+      centers_moved[i, j] <- mean(x[(allocc+1) == i, j])
+    }
+  }
   
+  global_par <- c(centers_moved)
+  global_min <- func(global_par)
+  path <- rbind(path, c(global_par,  global_min))
   return(list(par = global_par, value = global_min,
               foods = foods, obj = obj, nectar = nectar,
-              n_stay = n_stay, path = path, n_iter = round, n_unchange = n_unchange, prob = prob))
+              n_stay = n_stay, path = path, n_iter = round, 
+              n_unchange = n_unchange, prob = prob, first_optim = first_optim))
 }
 
 

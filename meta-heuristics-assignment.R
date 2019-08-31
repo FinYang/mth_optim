@@ -24,13 +24,9 @@ partition <- ABC(par, .db, d=d,
 
 
 alloc <- .closest_allocation_cpp(as.matrix(x), matrix(partition$par, nrow = k, ncol = d))
-# alloc <- .closest_allocation_cpp(as.matrix(x), matrix(parr, nrow = k, ncol = d))
 new <- ggplot() +
   geom_point(data=data,mapping =  aes(x=Sepal.Width, y=Petal.Width,color = as.factor(alloc))) +
   geom_point(aes(x=partition$par[1:3], y=partition$par[4:6]), size=2)
-new <- ggplot() +
-  geom_point(data=data,mapping =  aes(x=Sepal.Width, y=Petal.Width,color = as.factor(alloc))) +
-  geom_point(aes(x=parr[1:3], y=parr[4:6]), size=2)
 ggarrange(ori, new, common.legend = T)
 
 
