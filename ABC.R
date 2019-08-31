@@ -8,7 +8,7 @@
 #' @param limit Integer. The number of waiting perios before dropping a not-improving food source
 #' @param max.cycle Integer. The maxmum number of iteration.
 #' @param n.stop Integer. The number of unchanged results to stop optimizing
-ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, 
+ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000, 
                 n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
   
   
@@ -41,7 +41,11 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
     max_stay <- max(n_stay)
     if(max_stay >= limit){
       leave <-   which.max(n_stay)
-      foods[leave, ] <<- t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
+      tem <-  t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
+      while(size_limit(tem, x=x, k=k, d=d)){
+        tem <-  t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
+      }
+      foods[leave, ] <<- tem
       obj[[leave]] <<- func(foods[leave,])
       nectar[[leave]] <<- taste_nectar(obj[[leave]])
       n_stay[[leave]] <<- 0
@@ -65,17 +69,23 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
     if(nu[[par_change]]<lb[[par_change]]) nu[[par_change]] <- lb[[par_change]] 
     if(nu[[par_change]]>ub[[par_change]]) nu[[par_change]] <- ub[[par_change]] 
     
-    obj_nu <- func(nu)
-    nectar_nu <- taste_nectar(obj_nu)
-    
-    if(nectar_nu >= nectar[[i]]){
-      n_stay[[i]]  <<- 0
-      foods[i,] <<- nu
-      obj[[i]] <<- obj_nu
-      nectar[[i]] <<- nectar_nu
+    if(!size_limit(nu, x=x, k=k, d=d)){
+      
+      obj_nu <- func(nu)
+      nectar_nu <- taste_nectar(obj_nu)
+      
+      if(nectar_nu >= nectar[[i]]){
+        n_stay[[i]]  <<- 0
+        foods[i,] <<- nu
+        obj[[i]] <<- obj_nu
+        nectar[[i]] <<- nectar_nu
+      } else {
+        n_stay [[i]] <<- n_stay[[i]] + 1
+      }
     } else {
       n_stay [[i]] <<- n_stay[[i]] + 1
     }
+    
     
   }
   
@@ -93,7 +103,7 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
     }
   }
   
-  func <- function(par) fun(par, ...)
+  func <- function(par) fun(par, x=as.matrix(x),...)
   D <- length(par)
   if (length(lb) == 1 && length(par) > 1) 
     lb <- rep(lb, D)
@@ -103,7 +113,24 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
   ub[is.infinite(ub)] <- .Machine$double.xmax * 1e-10
   # ini
   # foods <- matrix(runif(SN*D, lb, ub), nrow = SN, ncol = D)
-  foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
+  # foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
+  foods <- t(replicate(SN, c(as.matrix(data[sample(NROW(data), k),]))))
+  
+  size_limit <- function(nu,x, k, d){
+    centerr <- matrix(nu, nrow = k, ncol = d)
+    allocc <- .closest_allocation_cpp(as.matrix(x), centerr)
+    any(table(allocc)<(NROW(x)/(2*k))) || length(table(allocc)) <k
+  }
+  
+  no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=x, k=k, d=d ))
+  
+  while(any(no_food)){
+    n_no_food <- sum(no_food)
+    foods[no_food,] <- t(replicate(n_no_food, c(as.matrix(data[sample(NROW(data), k),]))))
+    no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=x, k=k, d=d ))
+  }
+  
+  
   obj <- apply(foods, 1, func)
   nectar <- taste_nectar(obj)
   n_stay <- numeric(SN)
@@ -144,7 +171,7 @@ ABC <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
     send_scout_bees()
     round <- round + 1
   }
- 
+  
   return(list(par = global_par, value = global_min,
               foods = foods, obj = obj, nectar = nectar,
               n_stay = n_stay, path = path, n_iter = round, n_unchange = n_unchange, prob = prob))

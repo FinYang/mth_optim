@@ -74,14 +74,17 @@ double db(NumericVector par, NumericMatrix x, int k, int d){
       dist_intra(i,j) = ecu_dist(poii);
     }
   }
+  
   NumericVector r(k);
   double temm = 0;
   for(int i=0;i<k;i++){
     temm = 0;
     for(int j=0;j<k;j++){
-      double tem = (dist_in[i]+dist_in[j])/dist_intra(i,j);
-      if(tem>temm && i!=j){
-        temm = tem;
+      if(i!=j){
+        double tem = (dist_in[i]+dist_in[j])/dist_intra(i,j);
+        if(tem>temm ){
+          temm = tem;
+        }
       }
     }
     r[i] = temm;
@@ -94,8 +97,9 @@ double db(NumericVector par, NumericMatrix x, int k, int d){
 
 
 /***R
-
-.db(partition$par, as.matrix(x), k=k, d=d)
+# clusterSim::index.DB(as.matrix(x), alloc+1, q=1)$DB
+.db(qu, as.matrix(x), k=k, d=d)
+# .closest_allocation_cpp(as.matrix(x), )
 
 
 
