@@ -1,0 +1,237 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Artificial Bee Colony (ABC) algorithm and Its Implementation in Clustering},
+            pdfauthor={Yangzhuoran (Fin) Yang (28150295)},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[style=authoryear-comp]{biblatex}
+
+\addbibresource{assign1.bib}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Artificial Bee Colony (ABC) algorithm and Its Implementation in Clustering}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Yangzhuoran (Fin) Yang (28150295)}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Artifical Bee Colony (ABC) algorithm is a meta-heuristic optimization algorithm recently introduced by \textcite{Karaboga2005}. It simulate the behaviour of a honey bee swarm in the attempt to find the optimal solution. As an general optimization algorithm, it does not limit to Clustering problem. We now introduce each component seperately the give the ABC algorithm in the pseudo-code form. Part of the notation and formulations are adopted from \textcite{karaboga2011novel}.
+
+\hypertarget{overview}{%
+\subsection{Overview}\label{overview}}
+
+Other than parameter initialization and solution evaluation, the ABC algorithm can be structured into three phases: the employed bee phase, the onlooker bee phase, and the scout bee phase. Each phase mimic the behavior of a group of bees in a honey bee swarm. The employed bee and the onlooker bee search locally while the scout bee is in charge of the global search. In other words, the employed bee and the onlooker bee emphasis intensification by producing better solutions based on the current solution set, while the scout bee emphasis diversification search solutions independently from the current set of solutions.
+
+\hypertarget{initialization}{%
+\subsection{Initialization}\label{initialization}}
+
+To mimic the behavior of a bee swarm, the ABC algorithm needs parameter that defines the size of the swarm: the numer of food sources, or the number of solutions in the solution set. We denote this number as \(SN\) (swarm size). The swarm size is one of the most important parameter in the ABC algorithm, as a large swarm size increases the accuarcy and decrease efficiency. We will dicuss the impact of swarm size in more detail in the parameter section.
+
+After \(SN\) being decided, the ABC algorithm will simulate the position of initial food sources (the set of solutions) \(z_i:i=1,2,\ldots,SN\). The way to simulate the food sources has been tailored in differnt problems in the literature: they can be evenly assigned across the solution space (\textcite{ABCoptim}), randomly generated from a distribution (\textcite{karaboga2011novel}), or they can be randomly selected from different data points for the problem of clustering. The main idea is to cover the solution space as much as possible.
+
+Once the position of the inition solutions has been determined, the fitness \(f_i:i = 1,2,\ldots,SN\) can be calculated from corresponding cost function/objuective function. The quality of the nectar \(fit_i:i=1,2,\ldots,SN\) in the ABC algorithm can be calculated correspondly, using Equation \eqref{eq:nectar}
+
+\begin{equation}
+\label{eq:nectar}
+fit_i = \frac{1}{1/f_i}
+\end{equation}
+
+In the case when the cost function produces negative fitness, the quality of the nectar can be calculated by:
+
+\begin{equation}
+\label{eq:nectar-neg}
+fit_i = 1+|f_i|
+\end{equation}
+
+The solution with best fitness and will be recorded. We can now proceed to main component of the iteration, with the first phase: the employed bee phase.
+
+\hypertarget{the-employed-bee}{%
+\subsection{The Employed Bee}\label{the-employed-bee}}
+
+The number of employed bees is the same as the number of food sources \(SN\). For each employed bee at each food source, the bee implements a neighborhood search to find a new solution by combine the neighbor find with the current position using
+
+\begin{equation}
+\label{eq:find-neighbor}
+\nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})
+\end{equation}
+
+where \(i\in \{1,2,\ldots,SN\}\) is the index of the current position, and \(j\in \{1,2,\ldots,SN\}\) is the randomly generated index of the neighbour. If we denote \(D\) as the number of elements we need to optimize in one solution (the number of dimensions), then \(k\in \{1,2,\ldots,D\}\) is the randomly generated index denoting the position of the element.
+
+After finding the new solution, the employed make a decision on whether to jump from the current solution to the new solution by compare the quality of the nectar of two positions. If the bee decides to jump to the new postion with the higher value of \(fit_i\), it will forget the old position, i.e.~the old solution was not stored in the memory of the algorithm.
+
+\hypertarget{the-onlooker-bee}{%
+\subsection{The Onlooker Bee}\label{the-onlooker-bee}}
+
+The onlooker bee performs the same local search as the employed bee. The difference is the onlooker bee does not implement the search on each and every food source, but selectively perform the search based on the quality of the nectar of each food source. After the employed bee phase, the algorithm calculate the probabilities \(p_i\) of the onlooker bee selecting each food source based on the following equation:
+
+\begin{equation}
+\label{eq:prob}
+p_i = \frac{fit_i}{\sum^{SN}_{i=1} fit_i}
+\end{equation}
+
+Different schemes can be used to calculate the probability. \textcite{ABCoptim} uses the equation bellow
+
+\begin{equation}
+\label{eq:prob2}
+ $$p_i=a\times\frac{fit_i}{\max_i(fit_i)}+b$$
+\end{equation}
+
+with \(a=0.9\) and \(b=0.1\). Probability values are calculated by using the quality of nectar \(fit_i\) and normalized by dividing maximum \(fit_i\).
+
+The number of onlooker bees is the same as the employed bee or the number of food sources \(SN\). Each onlooker bees selects a solution as the base solution, finds a new solution like the employed bee using equation \eqref{eq:find-neighbor}, and choose whether to switch solution using the same greedy approach.
+
+\hypertarget{the-scout-bee}{%
+\subsection{The Scout Bee}\label{the-scout-bee}}
+
+The last two phases focus on the local search of solution
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Algorithm}\OperatorTok{:}\StringTok{ }\NormalTok{Artifical Bee Colony}
+ \FloatTok{1.}\NormalTok{ Load the training data}
+ \FloatTok{2.}\NormalTok{ Generate the initial food }\KeywordTok{sources}\NormalTok{ (the solution set) }
+ \FloatTok{3.}\NormalTok{ Evaluate the quality of }\KeywordTok{nectar}\NormalTok{ (the fitness of initial solutions)}
+ \FloatTok{4.} \KeywordTok{While}\NormalTok{ (Condition not met)}
+\NormalTok{        The employed bee phase}
+ \FloatTok{5.}\NormalTok{     For each employed bee\{}
+\NormalTok{          Produce new solution using neighborhood search}
+\NormalTok{          Calculate the fitness}
+\NormalTok{          Selecte the better fitted solution Greedily \}}
+ \FloatTok{6.}\NormalTok{     Calculate the probabilities of selecting each solution}
+\NormalTok{        The onlooker bee phase}
+ \FloatTok{7.}\NormalTok{     For each onlooker bee\{  }
+\NormalTok{          Select a solution based on the probabiliy calculated above}
+\NormalTok{          Produce new solution using neighborhood search}
+\NormalTok{          Calculate the fitness}
+\NormalTok{          Selecte the better fitted solution Greedily \}}
+ \FloatTok{8.}\NormalTok{     Abandon the solution that the number of unimproved iteration reach the limit}
+\NormalTok{        The scout bee phase}
+ \FloatTok{9.}\NormalTok{       Increase the number of food source to SN by finding new solution randomly}
+\FloatTok{10.}\NormalTok{     Record the best solution among all food sources}
+\FloatTok{11.}\NormalTok{ End}
+\end{Highlighting}
+\end{Shaded}
+
+\printbibliography
+
+
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.7.29)  31 AUG 2019 15:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.7.29)  31 AUG 2019 18:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -847,7 +847,7 @@ File: english.lbx 2018/11/02 v3.12 biblatex localization (PK/MW)
 )
 \@quotelevel=\count316
 \@quotereset=\count317
-(./meta-heuristic-assignment.aux)
+No file meta-heuristic-assignment.aux.
 \openout1 = `meta-heuristic-assignment.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 131.
@@ -943,7 +943,6 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 131.
 LaTeX Info: Redefining \pageref on input line 131.
 LaTeX Info: Redefining \nameref on input line 131.
-(./meta-heuristic-assignment.out) (./meta-heuristic-assignment.out)
 \@outlinefile=\write5
 \openout5 = `meta-heuristic-assignment.out'.
 
@@ -953,8 +952,8 @@ Package biblatex Info: Automatic encoding selection.
 \openout3 = `meta-heuristic-assignment.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'meta-heuristic-assignment.bbl' found.
-(./meta-heuristic-assignment.bbl)
+Package biblatex Info: ... file 'meta-heuristic-assignment.bbl' not found.
+No file meta-heuristic-assignment.bbl.
 Package biblatex Info: Reference section=0 on input line 131.
 Package biblatex Info: Reference segment=0 on input line 131.
 
@@ -978,6 +977,13 @@ df-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+
+LaTeX Warning: Citation 'Karaboga2005' on page 1 undefined on input line 137.
+
+
+LaTeX Warning: Citation 'karaboga2011novel' on page 1 undefined on input line 1
+37.
+
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 147.
 
 (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
@@ -1020,69 +1026,35 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 fg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 168.
 
-(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 169.
+LaTeX Warning: Citation 'ABCoptim' on page 1 undefined on input line 149.
+
+
+LaTeX Warning: Citation 'karaboga2011novel' on page 1 undefined on input line 1
+49.
+
+
+LaTeX Warning: Reference `eq:nectar' on page 1 undefined on input line 151.
+
 [1
 
 {c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
 x.map}]
-Package microtype Info: Character `029' is missing
-(microtype)             in font `T1/lmr/m/sc/10'.
-(microtype)             Ignoring protrusion settings for this character.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 197.
-[2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 197.
-(./meta-heuristic-assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 197.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 197.
-Package rerunfilecheck Info: File `meta-heuristic-assignment.out' has not chang
-ed.
-(rerunfilecheck)             Checksum: CFC32A34BF2CA55ABF10598CAA3EA1E1;327.
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: Citation 'ABCoptim' on page 2 undefined on input line 191.
 
-
-Package biblatex Warning: Please rerun LaTeX.
-(biblatex)                Page breaks have changed.
-
-Package logreq Info: Writing requests to 'meta-heuristic-assignment.run.xml'.
-\openout1 = `meta-heuristic-assignment.run.xml'.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 197.
- ) 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.195  $$p_
+           i=a\times\frac{fit_i}{\max_i(fit_i)}+b$$ 
 Here is how much of TeX's memory you used:
- 19052 strings out of 494553
- 311433 string characters out of 6175971
- 770883 words of memory out of 5000000
- 22436 multiletter control sequences out of 15000+600000
- 48891 words of font info for 66 fonts, out of 8000000 for 9000
+ 18954 strings out of 494553
+ 309413 string characters out of 6175971
+ 769435 words of memory out of 5000000
+ 22361 multiletter control sequences out of 15000+600000
+ 44014 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 43i,5n,54p,930b,1424s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
-nc}{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
-hsy.enc}{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
-m-rm.enc}{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/
-lm-mathit.enc}<c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
-blic/lm/lmbx12.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/typ
-e1/public/lm/lmcsc10.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fon
-ts/type1/public/lm/lmmi10.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dis
-t/fonts/type1/public/lm/lmmi7.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf
--dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/t
-exmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/yangy/AppData/Roaming/TinyT
-eX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/yangy/AppData/Roaming/
-TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/yangy/AppData/Roa
-ming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/yangy/AppDat
-a/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/yangy/A
-ppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on meta-heuristic-assignment.pdf (2 pages, 201039 bytes).
-PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
- 15 named destinations out of 1000 (max. 500000)
- 12313 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 34i,5n,40p,930b,1120s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+!  ==> Fatal error occurred, no output PDF file produced!

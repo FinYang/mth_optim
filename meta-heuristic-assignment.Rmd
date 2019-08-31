@@ -55,18 +55,51 @@ In the case when the cost function produces negative fitness, the quality of the
 fit_i = 1+|f_i|
 \end{equation}
 
-The solution with best fitness and will be recorded. We can now proceed to the employed bee phase.
+The solution with best fitness and will be recorded. We can now proceed to main component of the iteration, with the first phase: the employed bee phase.
 
 ## The Employed Bee
 
-The number of employed bees is the same as the number of food sources $SN$. For each employed bee at each food source, the bee implement a neighborhood search to find a new solution by combine the neighbor find with the current position using 
+The number of employed bees is the same as the number of food sources $SN$. For each employed bee at each food source, the bee implements a neighborhood search to find a new solution by combine the neighbor find with the current position using 
 
 \begin{equation}
 (\#eq:find-neighbor)
 \nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})
 \end{equation}
 
-where $i\in \{1,2,\ldots,SN\}$ is the index of the current position, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of variable we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots,D\}$ is the randomly generated index denoting the position of the 
+where $i\in \{1,2,\ldots,SN\}$ is the index of the current position, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of elements we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots,D\}$ is the randomly generated index denoting the position of the element. $phi_{ij}$ is a random number simulated using a uniform distribution with bound -1 and 1.
+
+After finding the new solution, the employed make a decision on whether to jump from the current solution to the new solution by compare the quality of the nectar of two positions. If the bee decides to jump to the new postion with the higher value of $fit_i$, it will forget the old position, i.e. the old solution was not stored in the memory of the algorithm.
+
+## The Onlooker Bee
+
+The onlooker bee performs the same local search as the employed bee. The difference is the onlooker bee does not implement the search on each and every food source, but selectively perform the search based on the quality of the nectar of each food source. After the employed bee phase, the algorithm calculate the probabilities $p_i$ of the onlooker bee selecting each food source based on the following equation:
+
+\begin{equation}
+(\#eq:prob)
+p_i = \frac{fit_i}{\sum^{SN}_{i=1} fit_i}
+\end{equation}
+
+Different schemes can be used to calculate the probability. @ABCoptim uses the equation bellow
+
+
+\begin{equation}
+(\#eq:prob2)
+ $$p_i=a\times\frac{fit_i}{\max_i(fit_i)}+b$$
+\end{equation}
+
+with $a=0.9$ and $b=0.1$. Probability values are calculated by using the quality of nectar $fit_i$ and normalized by dividing maximum $fit_i$.
+
+The number of onlooker bees is the same as the employed bee or the number of food sources $SN$. Each onlooker bees selects a solution as the base solution, finds a new solution like the employed bee using equation \@ref(eq:find-neighbor), and choose whether to switch solution using the same greedy approach.
+
+## The Scout Bee
+
+The last two phases focus on the local search of solution. The scout bee component prevent the algorithm from stucked in a local optim. After the employed bee and the onlooker bee phase, whether the food source has been moved by one of the bees has been recorded. If a food source has not been improved (moved) up to some some certain number of iteration, called the limit, it is abandoned and a new solution would be found in the scout bee phase. It ransomly generate a solution in the solution space using the following equation
+
+
+$$z_i^j = z_{min}^j + \delta_i^j(z_{max}^j-z_{min}^j)$$
+
+where $z_i$ is the abandoned source and $j\in{1,2,\ldots,D}$ is the index of dimension. $\delta_i^j$ is simple generated from a uniform distribution with bound 0 and 1. The replaced food source can be selected using a differnt method. The main idea is to expand the range of selecting new solution. 
+
 
 
 ```r
