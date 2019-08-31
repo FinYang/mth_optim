@@ -5,24 +5,46 @@ using namespace Rcpp;
 
 
 
-void comment_on_food(NumericVector & prob, 
-                     NumericVector & nectar, 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// void comment_on_food(NumericVector & prob, 
+//                      NumericVector & nectar, 
+//                      int & SN){
+//   double total = 0;
+//   for (int i = 0; i < SN; ++i){
+//     total += nectar[i];
+//   }
+//   
+//   for (int i = 0; i < SN; ++i){
+//     prob[i] = nectar[i]/total;
+//   }
+//   
+// }
+void comment_on_food(NumericVector & prob,
+                     NumericVector  nectar,
                      int & SN){
-  double total = 0;
-  for (int i = 0; i < SN; ++i){
-    total += nectar[i];
+  NumericVector tem = clone(nectar);
+  double maxfit = tem[0];
+  for (int i = 0; i < SN; i++){
+    if(nectar[i] > maxfit) maxfit = nectar[i];
   }
-  
-  for (int i = 0; i < SN; ++i){
-    prob[i] = nectar[i]/total;
+  for (int i = 0; i < SN; i++){
+    prob[i] = (0.9*((nectar[i] + 1e-40)/(maxfit + 1e-40))) + 0.1;
+    
   }
-  
+
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
 double taste_nectar(double obj){
-  return 1/(1+obj);
+  if(obj >= 0){
+    return 1/(1+obj);
+  } else {
+    return 1-obj;
+  }
 }
 
+// send_scout_bees(n_stay, limit, lb, ub, foods, obj, D, nectar, fun);
+////////////////////////////////////////////////////////////////////////////////////////////////
 void send_scout_bees(NumericVector & n_stay, 
                      int & limit, 
                      NumericVector & lb, 
@@ -32,23 +54,26 @@ void send_scout_bees(NumericVector & n_stay,
                      int & D, 
                      NumericVector & nectar, 
                      Function & fn){
-  int max_stay=0;
+  // int max_stay=0;
   int leave = 0;
   for(int i=0; i< n_stay.size(); i++){
-    if(n_stay[i] > max_stay){
-      max_stay = n_stay[i];
+    if(n_stay[i] > n_stay[leave]){
+      // max_stay = n_stay[i];
       leave = i;
     }
   }
-  if(max_stay >= limit){
-    for(int i =0; i<D; i++)
+  if(n_stay[leave] >= limit){
+    for(int i =0; i<D; i++){
       foods(leave,i) = R::runif(lb[i], ub[i]);
+    }
     obj[leave] = as<double>(fn(foods(leave,_)));
     nectar[leave] = taste_nectar(obj[leave]);
     n_stay[leave] = 0;
   }
 }
 
+// appreciate_best_food(global_min, obj, foods, global_par, n_unchange);
+////////////////////////////////////////////////////////////////////////////////////////////////
 void appreciate_best_food(double & global_min, 
                           NumericVector & obj, 
                           NumericMatrix & foods, 
@@ -59,18 +84,18 @@ void appreciate_best_food(double & global_min,
     if(obj[i] < global_min){
       global_min = obj[i];
       global_par = foods(i,_);
-      n_unchange = 0;
     }
   }
   if(before == global_min){
     n_unchange++;
+  } else {
+      n_unchange = 0;
   }
-  return;
 }
 
 
-
-
+// smell_neighbor(foods, D, fun, n_stay, obj, nectar, SN, i, lb, ub);
+////////////////////////////////////////////////////////////////////////////////////////////////
 void smell_neighbor(NumericMatrix & foods,
                     int & D,
                     Function & fn, 
@@ -84,19 +109,28 @@ void smell_neighbor(NumericMatrix & foods,
   // int par_change = as<int>(Rcpp::sample(D,1)-1);
   int par_change = Rcpp::sample(D,1)[0]-1;
   int neighbor(1);
+  
   do{
     neighbor = Rcpp::sample(SN,1)[0]-1;
   } while (neighbor == current_bee);
-  NumericVector nu = foods(neighbor,_);
+  NumericVector tem = foods(current_bee,_);
+  NumericVector nu = clone(tem);
   
   nu[par_change] = foods(current_bee, par_change) + R::runif(-1,1)*(foods(current_bee, par_change)-foods(neighbor, par_change));
   if(nu[par_change]<lb[par_change]) nu[par_change] = lb[par_change]; 
   if(nu[par_change]>ub[par_change]) nu[par_change] = ub[par_change];
   
+  // change another par
+  
+  // par_change = Rcpp::sample(D,1)[0]-1;
+  // nu[par_change] = foods(current_bee, par_change) + R::runif(-1,1)*(foods(current_bee, par_change)-foods(neighbor, par_change));
+  // if(nu[par_change]<lb[par_change]) nu[par_change] = lb[par_change]; 
+  // if(nu[par_change]>ub[par_change]) nu[par_change] = ub[par_change];
+  
   double obj_nu = as<double>(fn(nu));
   double nectar_nu = taste_nectar(obj_nu);
   
-  if(nectar_nu >= nectar[current_bee]){
+  if(nectar_nu > nectar[current_bee]){
     n_stay[current_bee]  = 0;
     foods(current_bee,_) = nu;
     obj[current_bee] = obj_nu;
@@ -114,8 +148,15 @@ void rcpp_rprintf(NumericVector v){
   }
 }
 
-
-
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// //////////////////////////////////////////////////////////////////////////////////////////////
 // [[Rcpp::export(name=".abc_cpp")]]
 List ABC_cpp(NumericVector par, 
              Function fun, 
@@ -135,27 +176,46 @@ List ABC_cpp(NumericVector par,
   //   foods(_,j) = runif(SN);
   // };
   
+  // f
   NumericVector obj(SN);
+  // fitness
   NumericVector nectar(SN);
+  // trail
+  NumericVector n_stay(SN);
+  // prob
+  NumericVector prob(SN);
+  //  solution ****
+  // solution    <- double(D)
+  //   ObjValSol   <- double(1)
+  //   FitnessSol  <- double(1)
+  //   neighbour   <- integer(1)
+  //   param2change<- integer(1)
+  
+  // globalmin
+  double global_min = as<double>(fun(par));
+  // globalparams
+  NumericVector global_par = par;
+  // r *****
+  
+  
   for(int i=0; i<SN;i++){
     obj[i] = as<double>(fun(foods(i,_)));
     nectar[i] = taste_nectar(obj[i]);
+    n_stay[i] = 0;
   }
-  NumericVector n_stay(SN);
   
-  NumericVector global_par = clone(par);
-  double global_min = as<double>(fun(global_par));
   int n_unchange = 0;
   
   appreciate_best_food(global_min, obj, foods, global_par, n_unchange);
-  int round = 0;
   
-  NumericVector prob(SN);
-  NumericMatrix path(max_cycle, D+1);
+  NumericMatrix path(max_cycle, D);
   NumericVector path_value(max_cycle);
+  path(0,_) = global_par;
+  path_value[0] = global_min;
   
+  int round = 0;
+  while(round < max_cycle){
   //  employed bees
-  while(round < max_cycle && n_unchange<n_stop){
     for(int i=0; i<SN;i++){
       smell_neighbor(foods, D, fun, n_stay, obj, nectar, SN, i, lb, ub);
     }
@@ -177,17 +237,18 @@ List ABC_cpp(NumericVector par,
     }
     
     appreciate_best_food(global_min, obj, foods, global_par,  n_unchange);
-    path(round,_) = global_par;
-    path_value[round] = global_min;
+    path(round+1,_) = global_par;
+    path_value[round+1] = global_min;
+    if(n_unchange >= n_stop) break;
     //  scout
     send_scout_bees(n_stay, limit, lb, ub, foods, obj, D, nectar, fun);
+    
     round++;
     
     
-    
   }
-  path = path(Rcpp::Range(0,round-1),_);
-  path_value = path_value[Range(0,round-1)];
+  path = path(Rcpp::Range(0,round),_);
+  path_value = path_value[Range(0,round)];
   
   
   
@@ -215,31 +276,33 @@ List ABC_cpp(NumericVector par,
 
 
 /***R
-# ABC_cpp <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000, 
-#                     n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
-#   if (length(lb) == 1) lb <- rep(lb, length(par))
-#   if (length(ub) == 1) ub <- rep(ub, length(par))
-#   
-#   lb[is.infinite(lb)] <- -(.Machine$double.xmax*1e-10)
-#   ub[is.infinite(ub)] <- +(.Machine$double.xmax*1e-10)
-#   func <- function(par) fun(par, ...)
-#   foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
-#   .abc_cpp(par = par, fun=func, foods = foods, SN = SN, limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
-#   
-# }
-# 
-# par <- rep(0,2)
-# fun <- function(x) {
-#   -cos(x[1])*cos(x[2])*exp(-((x[1] - pi)^2 + (x[2] - pi)^2))
-# }
-# lb=-10
-# ub=10
-# 
-# n.stop=50
-# max.cycle = 1e3
-# SN  = 20
-# limit= 100
-# 
-# a <- ABC_cpp(rep(0,2), fun, lb=-10, ub=10, n.stop=50)
+# .abc_cpp(par = par, fun=func, foods = foods, SN = SN, 
+#          limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
+ABC_cpp <- function(par, fun, ..., SN  = 20, limit= 100, max.cycle= 1000,
+                    n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
+  if (length(lb) == 1) lb <- rep(lb, length(par))
+  if (length(ub) == 1) ub <- rep(ub, length(par))
+
+  lb[is.infinite(lb)] <- -(.Machine$double.xmax*1e-10)
+  ub[is.infinite(ub)] <- +(.Machine$double.xmax*1e-10)
+  func <- function(par) fun(par, ...)
+  foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
+  .abc_cpp(par = par, fun=func, foods = foods, SN = SN, limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
+
+}
+
+par <- rep(0,2)
+fun <- function(x) {
+  -cos(x[1])*cos(x[2])*exp(-((x[1] - pi)^2 + (x[2] - pi)^2))
+}
+lb=-10
+ub=10
+
+n.stop=50
+max.cycle = 1e3
+SN  = 20
+limit= 100
+
+a <- ABC_cpp(rep(0,2), fun, lb=-10, ub=10, n.stop=100)
 */
 
