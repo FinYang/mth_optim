@@ -27,3 +27,9 @@ new <- ggplot() +
   geom_point(data=data,mapping =  aes(x=Sepal.Width, y=Petal.Width,color = as.factor(alloc))) +
   geom_point(aes(x=partition$par[1:3], y=partition$par[4:6]), size=2)
 ggarrange(ori, new, common.legend = T)
+
+
+
+
+clusterSim::index.DB(as.matrix(x), alloc)$DB
+.db(partition$par, as.matrix(x), k=k, d=d)

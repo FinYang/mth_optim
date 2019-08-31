@@ -180,6 +180,7 @@ The scout bee phase in the ANC provides addtional global search that is lacked i
 
 The onlooker bees find the food sources with better quality and conduct seach aroud them: the create new solutions using good solutions. This improves the effeciency of the algorithm as intuitively good solutions may cluster together. Simiar feature can be found in come modified genetic algorithm. The way to select the parent solutions may be weighted towards good solutions.
 
+# 
 
 
 

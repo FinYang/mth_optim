@@ -2,10 +2,14 @@
 using namespace Rcpp;
 
 // [[Rcpp::export(name=".test_cpp")]]
-NumericVector test(NumericVector x){
-  x[0]++;
-  return x;
-  
+double ecu_dist(NumericVector x) {
+  double out = 0;
+  double n= x.size();
+  for(int i=0;i<x.size();i++){
+    out += x[i]*x[i];
+  }
+  double power = 1/n;
+  return pow(out, power);
 }
 
 
@@ -16,5 +20,5 @@ NumericVector test(NumericVector x){
 # .test_cpp(par = par, fun=func, foods = foods, SN = SN, 
 #           limit = limit, max_cycle = max.cycle, n_stop = n.stop, lb=lb,ub=ub)
 
-.test_cpp(1:3)
+.test_cpp(c(0,0))
 */
