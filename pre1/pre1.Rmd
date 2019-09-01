@@ -135,8 +135,11 @@ Parameters:
  - Maximum number of iterations
  - Maximum number of unimproved global minimum
 
+# Comparison
 
+## Simulated annealing
 
+## Genetic Algorithm
 
 # Clustering
 
@@ -161,7 +164,9 @@ Parameters:
  \pause
  - Sample from the existing data points
 
-# Comparison
+## Constraint and Relexation
+
+## Table 2
 
 
 
