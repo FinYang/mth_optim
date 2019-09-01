@@ -309,7 +309,7 @@ The highest objective function belongs to `4_tetra`, which may because its extra
 
 We use a subset of the training data sets to tune our parameters. The data sets we choose are `3_square2` and `4_tetra`, for the numbers of clustes of them are relatively small so it requires less time to run the algorithm. We include `4_tetra` to investgate the power of parameter with different number of dimensions.
 
-The parameters we choose to evaluate and select are The limit (the number of iteartion that each food source can stay the same before being abandoned), the maximum cycle number (MCN) and the number of iteration with no improvment.  The number of food sources $SN$, is well studyed in @akay2009parameter.They argue that the algorithm is robust with different value of $SN$ in general.
+The parameters we choose to evaluate and select are The limit (the number of iteartion that each food source can stay the same before being abandoned), the maximum cycle number (MCN) and the maximum number of unchange (MNU).  The number of food sources $SN$, is well studyed in @akay2009parameter.They argue that the algorithm is robust with different value of $SN$ in general.
 
 We implement a coordinate descent approach where we try different values of one parameter and keep other parameters fixed at the same time. We firstly keep the limit fixed as by @akay2009parameter a value of $SN\times D$ is suited to data with general form. We also keep MCN as 1000 since from the results above no data set rearches MCn of 1,000, but quite a few data sets stops when the number of unchanged solution rearches 200. We acknowdge that there might be correlation issue where the effects of parameters are not independent with each other especially when MCN and the max number of unchange control the stopping of the algorithm together.
 
@@ -325,11 +325,27 @@ We then report the different values we tried in Table 2-6 in the Appendix.
 ## Test data set
 
 
+# (APPENDIX) Appendix {-} 
 
 
 
+```{r sq1}
+```
 
+```{r te1}
+```
 
+```{r sq2}
+```
+
+```{r te2}
+```
+
+```{r sq3}
+```
+
+```{r te3}
+```
 
 
 

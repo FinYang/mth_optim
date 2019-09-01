@@ -128,22 +128,24 @@ for(istop in seq(300, 700, 100)){
 }
 
 # saveRDS(tune1, "tune1.rds")
+## ---- sq1 ----
 tune1 <- readRDS("tune1.rds")
 stopn <- seq(300, 700, 100)
 value1 <- sapply(tune1, function(x) c(x[[1]]$value, x[[2]]$value))
 runn1 <- sapply(tune1, function(x) c(x[[1]]$n_iter, x[[2]]$n_iter))
 first1 <- sapply(tune1, function(x) c(x[[1]]$first_optim, x[[2]]$first_optim))
 sq1 <- rbind(value1[1,], runn1[1,], first1[1,])
-colnames(sq1) <- paste0("Max.No.unchange ",stopn)
+colnames(sq1) <- paste0("MNU ",stopn)
 rownames(sq1) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(sq1)
 te1 <- rbind(value1[2,], runn1[2,], first1[2,])
-colnames(te1) <- paste0("Max.No.unchange ",stopn)
+colnames(te1) <- paste0("MNU ",stopn)
 rownames(te1) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(te1)
+knitr::kable(sq1, caption = "Performance on data 3_square2 using different MNU with fixed MCN of 1000 and limit of SN*N")
+## ---- te1 ----
+knitr::kable(te1, caption = "Performance on data 4_tetra using different MNU with fixed MCN of 1000 and limit of SN*N")
 
 
-##
+## ----  ----
 
 tune2 <- NULL
 for(istop in seq(300, 700, 100)){
@@ -153,22 +155,24 @@ for(istop in seq(300, 700, 100)){
 }
 
 # saveRDS(tune2, "tune2.rds")
+## ---- sq2 ----
 tune2 <- readRDS("tune2.rds")
 stopn <- seq(300, 700, 100)
 value2 <- sapply(tune2, function(x) c(x[[1]]$value, x[[2]]$value))
 runn2 <- sapply(tune2, function(x) c(x[[1]]$n_iter, x[[2]]$n_iter))
 first2 <- sapply(tune2, function(x) c(x[[1]]$first_optim, x[[2]]$first_optim))
 sq2 <- rbind(value2[1,], runn2[1,], first2[1,])
-colnames(sq2) <- paste0("Max.No.unchange ",stopn)
+colnames(sq2) <- paste0("MCN ",stopn)
 rownames(sq2) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(sq2)
 te2 <- rbind(value2[2,], runn2[2,], first2[2,])
-colnames(te2) <- paste0("Max.No.unchange ",stopn)
+colnames(te2) <- paste0("MCN ",stopn)
 rownames(te2) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(te2)
+knitr::kable(sq2, caption = "Performance on data 3_square2 using different MCN with fixed MNU of 200 and limit of SN*N")
+## ---- te2 ----
+knitr::kable(te2, caption = "Performance on data 4_tetra using different MCN with fixed MNU of 200 and limit of SN*N")
 
 
-
+## ----  ----
 ##
 
 
@@ -180,21 +184,23 @@ for(istop in seq(20, 70, 10)){
 }
 
 # saveRDS(tune3, "tune3.rds")
+## ---- sq3 ----
 tune3 <- readRDS("tune3.rds")
 stopn <- seq(20, 70, 10)
 value3 <- sapply(tune3, function(x) c(x[[1]]$value, x[[2]]$value))
 runn3 <- sapply(tune3, function(x) c(x[[1]]$n_iter, x[[2]]$n_iter))
 first3 <- sapply(tune3, function(x) c(x[[1]]$first_optim, x[[2]]$first_optim))
 sq3 <- rbind(value3[1,], runn3[1,], first3[1,])
-colnames(sq3) <- paste0("Max.No.unchange ",stopn)
+colnames(sq3) <- paste0("Limit ",stopn)
 rownames(sq3) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(sq3)
 te3 <- rbind(value3[2,], runn3[2,], first3[2,])
-colnames(te3) <- paste0("Max.No.unchange ",stopn)
+colnames(te3) <- paste0("Limit ",stopn)
 rownames(te3) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(te3)
+knitr::kable(sq3, caption = "Performance on data 3_square2 using different limit with fixed MNU of 200 and MCN of 550")
+## ---- te3 ----
+knitr::kable(te3, caption = "Performance on data 4_tetra using different limit with fixed MNU of 200 and MCN of 550")
 
-
+## ----  ----
 
 ## ---- tu_tab ----
 
