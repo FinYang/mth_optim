@@ -28,82 +28,24 @@ knitr::read_chunk('meta-heuristics-assignment.R')
 
 # Introduction
 
-Artifical Bee Colony (ABC) algorithm is a meta-heuristic optimization algorithm recently introduced by @Karaboga2005. It simulate the behaviour of a honey bee swarm in the attempt to find the optimal solution. As an general optimization algorithm, it does not limit to Clustering problem. We now introduce each component seperately the give the ABC algorithm in the pseudo-code form. Part of the notation and formulations are adopted from @karaboga2011novel.
+Artifical Bee Colony (ABC) algorithm is a meta-heuristic optimization algorithm recently introduced by @Karaboga2005. It simulate the behaviour of a honey bee swarm in the attempt to find the optimal solution. As an general optimization algorithm, it does not limit to Clustering problem. We now give a brief overview of how the ABC algorithm works and summarize the algorithm in the pseudo-code that follows. Intruduction of each component in detail is given later in the clustering section. Part of the notation and formulations are adopted from @karaboga2011novel.
 
 
 ## Overview
 
-Other than parameter initialization and solution evaluation, the ABC algorithm can be structured into three phases: the employed bee phase, the onlooker bee phase, and the scout bee phase. Each phase mimic the behavior of a group of bees in a honey bee swarm. The employed bee and the onlooker bee search locally while the scout bee is in charge of the global search. In other words, the employed bee and the onlooker bee emphasis intensification by producing better solutions based on the current solution set, while the scout bee emphasis diversification search solutions independently from the current set of solutions.
+Other than parameter initialization and solution evaluation, the ABC algorithm can be structured into three phases: the employed bee phase, the onlooker bee phase, and the scout bee phase. Each phase mimic the behavior of a group of bees in a honey bee swarm. 
 
-## Initialization 
+At the beginning of the algorithm, the total number of food sources (the solution set) is to be determined and denoted as $SN$ (swarm size). The swarm size is one of the most important parameter in the ABC algorithm, as a large swarm size increases the accuarcy and decrease efficiency. We will dicuss the impact of swarm size in more detail in the parameter section.
 
-To mimic the behavior of a bee swarm, the ABC algorithm needs parameter that defines the size of the swarm: the numer of food sources, or the number of solutions in the solution set. We denote this number as $SN$ (swarm size). The swarm size is one of the most important parameter in the ABC algorithm, as a large swarm size increases the accuarcy and decrease efficiency. We will dicuss the impact of swarm size in more detail in the parameter section.
+After $SN$ being decided, the ABC algorithm will simulate the position of initial food sources. The way to simulate the food sources has been tailored in differnt problems in the literature: they can be evenly assigned across the solution space (@ABCoptim), randomly generated from a distribution (@karaboga2011novel), or they can be randomly selected from different data points for the problem of clustering. The main idea is to cover the solution space as much as possible.
 
-After $SN$ being decided, the ABC algorithm will simulate the position of initial food sources (the set of solutions) $z_i:i=1,2,\ldots,SN$. The way to simulate the food sources has been tailored in differnt problems in the literature: they can be evenly assigned across the solution space (@ABCoptim), randomly generated from a distribution (@karaboga2011novel), or they can be randomly selected from different data points for the problem of clustering. The main idea is to cover the solution space as much as possible.
+The number of the employed bees or the number of the onlooker bees is the same as the swarm size, or to be specified by the user. In the employed bee phase, the bees search locally to find a neighbour, create a new solution by combining the existing solutions, then decide if to replace the current solution with the new solution using a greedy selection approach. The onlooker bee then performs similar neighbourhood search, the difference is the onlooker bee will search neighbours and create new solutions around existing solutions with better quality, so the onlooker bees provide a tendency towards where it is likely to produce good solution. The way that the employed bees and onlooker bees find neighbour and create new solutions, and the which solution that the onlooker bees select can be calculated using the general methods in the ABC algothim, or can be different depending on the problem at hand.
 
-Once the position of the inition solutions has been determined, the fitness $f_i:i = 1,2,\ldots,SN$ can be calculated from corresponding cost function/objuective function. The quality of the nectar $fit_i:i=1,2,\ldots,SN$ in the ABC algorithm can be calculated correspondly, using Equation \@ref(eq:nectar)
-
-\begin{equation}
-(\#eq:nectar)
-fit_i = \frac{1}{1/f_i}
-\end{equation}
-
-In the case when the cost function produces negative fitness, the quality of the nectar can be calculated by:
-
-\begin{equation}
-(\#eq:nectar-neg)
-fit_i = 1+|f_i|
-\end{equation}
-
-The decision on the nectar calculation largerly depends on the problem to solve. The solution with best fitness and will be recorded. We can now proceed to main component of the iteration, with the first phase: the employed bee phase.
-
-## The Employed Bee
-
-The number of employed bees is the same as the number of food sources $SN$. For each employed bee at each food source, the bee implements a neighbourhood search to find a new solution by combine the neighbour find with the current position using 
-
-\begin{equation}
-(\#eq:find-neighbour)
-\nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})
-\end{equation}
-
-where $i\in \{1,2,\ldots,SN\}$ is the index of the current position, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of elements we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots,D\}$ is the randomly generated index denoting the position of the element. $phi_{ij}$ is a random number simulated using a uniform distribution with bound -1 and 1.
-
-After finding the new solution, the employed make a decision on whether to jump from the current solution to the new solution by compare the quality of the nectar of two positions. If the bee decides to jump to the new postion with the higher value of $fit_i$, it will forget the old position, i.e. the old solution was not stored in the memory of the algorithm.
-
-## The Onlooker Bee
-
-The onlooker bee performs the same local search as the employed bee. The difference is the onlooker bee does not implement the search on each and every food source, but selectively perform the search based on the quality of the nectar of each food source. After the employed bee phase, the algorithm calculate the probabilities $p_i$ of the onlooker bee selecting each food source based on the following equation:
-
-\begin{equation}
-(\#eq:prob)
-p_i = \frac{fit_i}{\sum^{SN}_{i=1} fit_i}
-\end{equation}
-
-Different schemes can be used to calculate the probability, depending on the problem to solve. @ABCoptim uses the equation bellow
+After the phases of the employed bee and onlooker bee, whether one solution has been improved is recorded for each food source. If one solution could not be improved up to some certain number of iteration, it will be discarded and the scout bees will find a replacement in the solution space to fill the postion, where the way to find new solutions can be independent with the current solutions. The employed bee and the onlooker bee search locally while the scout bee is in charge of the global search. In other words, the employed bee and the onlooker bee emphasis intensification by producing better solutions based on the current solution set, while the scout bee emphasis diversification search solutions independently from the current set of solutions. The ABC algorithm aims to chieve a balance between intensification and diversification through three different phases mimicing three different types of bee.
 
 
-\begin{equation}
-(\#eq:prob2)
-p_i=a\times\frac{fit_i}{\max_i(fit_i)}+b
-\end{equation}
+The updated solution in each iteartion is the best solution among all the food sources in that iteration, and the final solution chosen by the algorithm is the best solution among all the food sources tried in the past up until the time the condition is met. Stopping condition are required to determine when to stop the algorithm. @karaboga2011novel choose to use the maximum number of iteration as the stopping condition. @ABCoptim includes the number of umimproved iteration: the algorithm stops when the result does not improve up to a certain number.
 
-with $a=0.9$ and $b=0.1$. Probability values are calculated by using the quality of nectar $fit_i$ and normalized by dividing maximum $fit_i$.
-
-The number of onlooker bees is the same as the employed bee or the number of food sources $SN$. Each onlooker bees selects a solution as the base solution, finds a new solution like the employed bee using equation \@ref(eq:find-neighbour), and choose whether to switch solution using the same greedy approach.
-
-## The Scout Bee
-
-The last two phases focus on the local search of solution. The scout bee component prevent the algorithm from stucked in a local optim. After the employed bee and the onlooker bee phase, whether the food source has been moved by one of the bees has been recorded. If a food source has not been improved (moved) up to some some certain number of iteration, called the limit, it is abandoned and a new solution would be found in the scout bee phase. It ransomly generate a solution in the solution space using the following equation
-
-\begin{equation}
-(\#eq:scout)
-z_i^j = z_{min}^j + \delta_i^j(z_{max}^j-z_{min}^j)
-\end{equation}
-
-
-where $z_i$ is the abandoned source and $j\in{1,2,\ldots,D}$ is the index of dimension. $\delta_i^j$ is simple generated from a uniform distribution with bound 0 and 1. The replaced food source can be selected using a differnt method in different problems. The main idea is to expand the range of selecting new solution. 
-
-## Summary
 
 The ABC algorithm can be summarized in the following pseudo-code.
 
@@ -132,14 +74,13 @@ Algorithm: Artifical Bee Colony
 11. End
 
 ```
-The updated solution in each iteartion is the best solution among all the food sources in that iteration, and the final solution chosen by the algorithm is the best solution among all the food sources tried in the past up until the time the condition is met. Stopping condition are required to determine when to stop the algorithm. @karaboga2011novel choose to use the maximum number of iteration as the stopping condition. @ABCoptim includes the number of umimproved iteration: the algorithm stops when the result does not improve up to a certain number.
 
-
-The ABC algorithm aims to chieve a balance between intensification and diversification through three different phases mimicing three different types of bee.
 
 ## The parameters
 
 There are three parameeters in the ABC determines the quality of optimization and needs to be taken carefully: 1. the number of food sources (SN) which is also the number of empleyed bees or the onlooker bees; 2. the value of limit that decides when to abandon food sources; 3. the stopping conditions, such as the maximum cycle number (MCN) or the maximum number of unchanged iteration. 
+
+The number of the employed bees, the onlooker bees, or the scout bees can also be customized based on the specified problem. As @karaboga2011novel emphsis the three parameters mentioned above, we will assume the number of the employed bees or the onlooker bees are the same as the swarm size $SN$ and assme the number of scout bees is one per iteration in the following discussion, which would be sufficent in general optimization problem. 
 
 ### The number of food sources (SN)
 
@@ -168,7 +109,7 @@ The ABC algorithm does not have the feature to accept a worse move if we conside
 
 The genetic algorithm imitates the process of evolution. It selects multiple solutions (selection), create a new solution from those existing solutions (crossover), modify the solution to create another new solution (mutation), calculate the objective value of the new solution (evaluation) and determine whether to replace a existing solution using the new solution (update). 
 
-Many components in the ABC algorithm largely share the same process in the genetic algorithm. The bees finding neighbours is corresping to selction in GA. Creating new solution using the neighbour is corresping to the crossover in GA. calculating the fitness of the new solution and deciding whether to take the new solution are corresping to evaluation and update. The differece is for the step of mutation. In GA, mutation is done separatly from crossover, but in ABC the mutation step is embeded in the crossover: after selecting a neighbour, the bee create the new solution not only based on the esisting ones, but also adding a random component, the random number generation in Equation \@ref(eq:find-neighbour).
+Many components in the ABC algorithm largely share the same process in the genetic algorithm. The bees finding neighbours is corresping to selction in GA. Creating new solution using the neighbour is corresping to the crossover in GA. calculating the fitness of the new solution and deciding whether to take the new solution are corresping to evaluation and update. The differece is for the step of mutation. In GA, mutation is done separatly from crossover, but in ABC the mutation step is embeded in the crossover: after selecting a neighbour, the bee create the new solution not only based on the esisting ones, but also adding a random component. (The random number generation in Equation \@ref(eq:find-neighbour) which is to be discussed later.)
 
 ### Its own features
 
@@ -180,9 +121,104 @@ The scout bee phase in the ANC provides addtional global search that is lacked i
 
 The onlooker bees find the food sources with better quality and conduct seach aroud them: the create new solutions using good solutions. This improves the effeciency of the algorithm as intuitively good solutions may cluster together. Simiar feature can be found in come modified genetic algorithm. The way to select the parent solutions may be weighted towards good solutions.
 
-# 
+# Applying the ABC Algorithm to Solve Sudoku Puzzles
+
+@pacurib2009solving provides solution of Sudoku puzzles using the ABC algorithm. Sudoku puzzles is a logic-based combinatorial puzzle. Players are given a map of $n\times n$ squares (cells) with some of the squares filled with numbers called the starting squares. The player aims to fill out the rest of cells based on the following three rules
+
+1. A number can only appear once in each row 
+2. A number can only appear once in each column 
+3. A number can only appear once in a $m\times m$ predifined sub-block.
+
+Figure \@ref(fig:sudoku) is an example of $9\times 9$ sudoku puzzle with $3\times 3$ sub-blocks.
+
+```{r sudoku, fig.cap = "An example of sudoku puzzle from Pacurib, J. A., Seno, G. M. M., and Yusiong, J. P. T. (2009, December)", fig.align="center"}
+knitr::include_graphics("sudoku.png")
+```
+
+@pacurib2009solving apply the ABC algorithm by imposing the third constrain in the solution space while only evaluate objective function using the other two constrains in the algorithm.  
+
+## Solution representation
+
+The 
 
 
+## The parameters specification
+
+## Approach of finding neighbour
+
+
+
+
+# Detailed process in the context of clustering
+
+## Initialization 
+
+To mimic the behavior of a bee swarm, the ABC algorithm needs parameter that defines the size of the swarm: the numer of food sources, or the number of solutions in the solution set. We denote this number as $SN$ (swarm size).
+
+<!-- After $SN$ being decided, the ABC algorithm will simulate the position of initial food sources (the set of solutions) $z_i:i=1,2,\ldots,SN$. The way to simulate the food sources has been tailored in differnt problems in the literature: they can be evenly assigned across the solution space (@ABCoptim), randomly generated from a distribution (@karaboga2011novel), or they can be randomly selected from different data points for the problem of clustering. The main idea is to cover the solution space as much as possible. -->
+
+Once the position of the inition solutions has been determined, the fitness $f_i:i = 1,2,\ldots,SN$ can be calculated from corresponding cost function/objuective function. The quality of the nectar $fit_i:i=1,2,\ldots,SN$ in the ABC algorithm can be calculated correspondly, using Equation \@ref(eq:nectar)
+
+\begin{equation}
+(\#eq:nectar)
+fit_i = \frac{1}{1/f_i}
+\end{equation}
+
+In the case when the cost function produces negative fitness, the quality of the nectar can be calculated by:
+
+\begin{equation}
+(\#eq:nectar-neg)
+fit_i = 1+|f_i|
+\end{equation}
+
+<!-- The decision on the nectar calculation largerly depends on the problem to solve. The solution with best fitness and will be recorded. We can now proceed to main component of the iteration, with the first phase: the employed bee phase. -->
+
+## The Employed Bee
+
+The number of employed bees is set to be the same as the number of food sources $SN$. For each employed bee at each food source, the bee implements a neighbourhood search to find a new solution by combine the neighbour find with the current position using 
+
+\begin{equation}
+(\#eq:find-neighbour)
+\nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})
+\end{equation}
+
+where $i\in \{1,2,\ldots,SN\}$ is the index of the current position, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of elements we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots,D\}$ is the randomly generated index denoting the position of the element. $phi_{ij}$ is a random number simulated using a uniform distribution with bound -1 and 1.
+
+After finding the new solution, the employed make a decision on whether to jump from the current solution to the new solution by compare the quality of the nectar of two positions. If the bee decides to jump to the new postion with the higher value of $fit_i$, it will forget the old position, i.e. the old solution was not stored in the memory of the algorithm.
+
+## The Onlooker Bee
+
+The onlooker bee performs the same local search as the employed bee. The difference is the onlooker bee does not implement the search on each and every food source, but selectively perform the search based on the quality of the nectar of each food source. After the employed bee phase, the algorithm calculate the probabilities $p_i$ of the onlooker bee selecting each food source based on the following equation:
+
+\begin{equation}
+(\#eq:prob)
+p_i = \frac{fit_i}{\sum^{SN}_{i=1} fit_i}
+\end{equation}
+
+<!-- Different schemes can be used to calculate the probability, depending on the problem to solve. @ABCoptim uses the equation bellow -->
+
+
+\begin{equation}
+(\#eq:prob2)
+p_i=a\times\frac{fit_i}{\max_i(fit_i)}+b
+\end{equation}
+
+with $a=0.9$ and $b=0.1$. Probability values are calculated by using the quality of nectar $fit_i$ and normalized by dividing maximum $fit_i$.
+
+The number of onlooker bees is the same as the employed bee or the number of food sources $SN$. Each onlooker bees selects a solution as the base solution, finds a new solution like the employed bee using equation \@ref(eq:find-neighbour), and choose whether to switch solution using the same greedy approach.
+
+## The Scout Bee
+
+The last two phases focus on the local search of solution. The scout bee component prevent the algorithm from stucked in a local optim. After the employed bee and the onlooker bee phase, whether the food source has been moved by one of the bees has been recorded. If a food source has not been improved (moved) up to some some certain number of iteration, called the limit, it is abandoned and a new solution would be found in the scout bee phase. It ransomly generate a solution in the solution space using the following equation
+
+\begin{equation}
+(\#eq:scout)
+z_i^j = z_{min}^j + \delta_i^j(z_{max}^j-z_{min}^j)
+\end{equation}
+
+
+where $z_i$ is the abandoned source and $j\in{1,2,\ldots,D}$ is the index of dimension. $\delta_i^j$ is simple generated from a uniform distribution with bound 0 and 1. The replaced food source can be selected using a differnt method in different problems. The main idea is to expand the range of selecting new solution. 
+ 
 
 
 
