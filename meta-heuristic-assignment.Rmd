@@ -3,7 +3,7 @@ title: 'Artificial Bee Colony (ABC) algorithm and Its Implementation in Clusteri
 author: Yangzhuoran (Fin) Yang (28150295)
 bibliography: assign1.bib
 biblio-style: authoryear-comp
-linespacing: 1
+linespacing: 0.7
 output:
   bookdown::pdf_document2:
     fig_caption: yes
@@ -13,7 +13,7 @@ output:
     number_sections: yes
     citation_package: biblatex
     latex_engine: pdflatex
-    toc: no
+    toc: yes
 ---
 
 
@@ -147,7 +147,7 @@ There are two stopping criteria. While the objective function is the number of d
 
 ## Adjusted approach
 
-The approach of creating new solution is adjusted to fit this specific problem. Given the solution representation of a vector of digits, a random number $j$ is chosen for the feasible solution $X_i$ and the randomly chosen neighbor $X_k$. If we denote the new solution as $V_i$, the value of each element (denoted using subscript $j$ ) of $V_i$ is determined by the following equation:
+The initial food sources are simulated by randomly place digits within the bounds in the cells which satisfying the third constaint. The approach of creating new solution is adjusted to fit this specific problem. Given the solution representation of a vector of digits, a random number $j$ is chosen for the feasible solution $X_i$ and the randomly chosen neighbor $X_k$. If we denote the new solution as $V_i$, the value of each element (denoted using subscript $j$ ) of $V_i$ is determined by the following equation:
 
 $$V_{ij} = X_{ij} + rand[0,1]\times |X_{ij} - X_{ij}|$$
 
@@ -162,13 +162,38 @@ The fitness is calculated using the generic function in Equation \@ref(eq:nectar
 @pacurib2009solving apply the ABC algorithm to sudoku puzzles with three different difficulities. By comparing the average number of cycles needed to solve the sudoku puzzles and the average time needed, they conclude that the more difficult the puzzle is, the longer it needs to solve the puzzle. They also find that the modified ABC algorithm outperforms the Genetic-Algorithm-based sudoku solver.
 
 
-# Detailed process in the context of clustering
+# Detailed process in Clustering
+
+We now give the ABC algorithm in the context of clustering, with the decisions of choosing problem specific parts of the heuristic discussed in detail in the process.
+
+## Solution Representation and Objective Function 
+
+The problem of clustering involves deviding data points into different groups with respect to the similarity in their features without any information on the true classification of the data. It is an unsupervised learning problem. The solution representation needs to indicates the group distributed to each data point. We are closest allocation scheme, where the data points are allocated to the nearst centroids, the centres of the clusters. The clustering problem effectively becomes optimization for findding the best location of centroids, while the unique solution of the cluster of each point can be found using the closest allocation.
+
+At the begnning of the algorithm, the number of clusters $k$ needs to be given. Once we have the data with dimension $D$, we can write the centroids in the form of a $k\times D$ matrix where each row indicates one centroid and each column corresponds to one coordinate. The solution representation is effectively a vector with length $k\times D$.
+
+<!-- DDDDD -->
+The objective function we are using is the average of the distance between data points and their coressponding centroids, where the distance is calculated using Euclidean norm. After we run the algorithm, the Davis-Bouldin index is used to evaluate the quality of the final solution of centroids. 
+<!-- DDDDD -->
+
+## Data processing
+
+To generlize our approach, we add the step of data standardization before we run the algorithm. Depending on the magnitude of variable in the data set, variables may be weight differently in the clustering problem. Although the decision of whether to standardize the data depends largely on the nature of the data set, we propose the standardization steop to give even weight for each variable.
+
+The data is standardized using the following function:
+
+$$z^*_{ij} = \frac{z_{ij}}{\max_{j}|z_{ij}|}$$
+
+where $i$ denotes the observation, $j$ is the index of the variable. Using this approach, the coordinates of the data point will be bounded between -1 and 1 (if the variable only have positive value, it will be bounded between 0 and 1). The bounded can be a valid starting point in simulation in the scout bee phase and in setting initial value in general. It also drives the values that are close to zero away from 0 when the variable is intricically smally then 1.
+
+We do not use the popular standardization that centres the variable to have mean zero and scales standard deviation to one, as the bound of data set will be arbitrary to uniformly apply. We do recommend using different scaling method based on the nature of the data set.
 
 ## Initialization 
 
-To mimic the behavior of a bee swarm, the ABC algorithm needs parameter that defines the size of the swarm: the numer of food sources, or the number of solutions in the solution set. We denote this number as $SN$ (swarm size).
+To mimic the behavior of a bee swarm, the ABC algorithm needs parameter that defines the size of the swarm: the numer of food sources, or the number of solutions in the solution set. We denote this number as $SN$ (swarm size). We then simulate the posotion of initial food sources (the set of solutions) $z_i:i=1,2,\ldots,SN$. In our clustering problem, the food sources are simulated such that each centroids in each solution is randomly sampled from the data points, with the constraint that each cluster has at least $\frac{n}{2k}$ points where $n$ is the number of points in the data set. If the food source simulated does not satisfied the constraint, a new food source will be simulated to replace the old one until all food sources meet the constraint.
 
-<!-- After $SN$ being decided, the ABC algorithm will simulate the position of initial food sources (the set of solutions) $z_i:i=1,2,\ldots,SN$. The way to simulate the food sources has been tailored in differnt problems in the literature: they can be evenly assigned across the solution space (@ABCoptim), randomly generated from a distribution (@karaboga2011novel), or they can be randomly selected from different data points for the problem of clustering. The main idea is to cover the solution space as much as possible. -->
+When we simulate the food source, we do not using the methods from @ABCoptim where the food sources are evenly assigned across the solution space, because such an assignment will result in solution not meeting the minimum numble of points in one cluster. We do not randomly generate the food sources uniformly given the uppen bound and lower bound of the solution for the same reason. A larger number of simulation is required to produce feasible food sources in such a setting. 
+
 
 Once the position of the inition solutions has been determined, the fitness $f_i:i = 1,2,\ldots,SN$ can be calculated from corresponding cost function/objuective function. The quality of the nectar $fit_i:i=1,2,\ldots,SN$ in the ABC algorithm can be calculated correspondly, using Equation \@ref(eq:nectar)
 
@@ -184,20 +209,24 @@ In the case when the cost function produces negative fitness, the quality of the
 fit_i = 1+|f_i|
 \end{equation}
 
-<!-- The decision on the nectar calculation largerly depends on the problem to solve. The solution with best fitness and will be recorded. We can now proceed to main component of the iteration, with the first phase: the employed bee phase. -->
+We do not need to use this function as in the problem of clustering, the distance representation is always positive.
+
 
 ## The Employed Bee
 
-The number of employed bees is set to be the same as the number of food sources $SN$. For each employed bee at each food source, the bee implements a neighbourhood search to find a new solution by combine the neighbour find with the current position using 
+The number of employed bees is set to be the same as the number of food sources $SN$ as in the basic ABC algorithm. For each employed bee at each food source, the bee implements a neighbourhood search to find a new solution by combine the neighbour find with the current position using 
 
 \begin{equation}
 (\#eq:find-neighbour)
 \nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})
 \end{equation}
 
-where $i\in \{1,2,\ldots,SN\}$ is the index of the current position, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of elements we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots,D\}$ is the randomly generated index denoting the position of the element. $phi_{ij}$ is a random number simulated using a uniform distribution with bound -1 and 1.
+where $i\in \{1,2,\ldots,SN\}$ is the index of the current solution, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of elements we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots,D\}$ is the randomly generated index denoting the position of the element. $phi_{ij}$ is a random number simulated using a uniform distribution with bound -1 and 1.
 
-After finding the new solution, the employed make a decision on whether to jump from the current solution to the new solution by compare the quality of the nectar of two positions. If the bee decides to jump to the new postion with the higher value of $fit_i$, it will forget the old position, i.e. the old solution was not stored in the memory of the algorithm.
+Other than the above general step to generate new solutions, in the clustering problem we add the addition contriants that the new solution needs to produce clusters that have minimum $\frac{n}{2k}$ data points in them. If the constraint is not satisfied, the bee would skip the greedy algorithm and forget the new solution before entering next phase.
+
+If a feasible solution is found, the employed make a decision on whether to jump from the current solution to the new solution by compare the quality of the nectar of two positions. If the bee decides to jump to the new postion with the higher value of $fit_i$, it will forget the old position, i.e. the old solution was not stored in the memory of the algorithm.
+
 
 ## The Onlooker Bee
 
@@ -208,7 +237,7 @@ The onlooker bee performs the same local search as the employed bee. The differe
 p_i = \frac{fit_i}{\sum^{SN}_{i=1} fit_i}
 \end{equation}
 
-<!-- Different schemes can be used to calculate the probability, depending on the problem to solve. @ABCoptim uses the equation bellow -->
+Different schemes can be used to calculate the probability, depending on the problem to solve. @ABCoptim uses the equation bellow
 
 
 \begin{equation}
@@ -218,11 +247,14 @@ p_i=a\times\frac{fit_i}{\max_i(fit_i)}+b
 
 with $a=0.9$ and $b=0.1$. Probability values are calculated by using the quality of nectar $fit_i$ and normalized by dividing maximum $fit_i$.
 
-The number of onlooker bees is the same as the employed bee or the number of food sources $SN$. Each onlooker bees selects a solution as the base solution, finds a new solution like the employed bee using equation \@ref(eq:find-neighbour), and choose whether to switch solution using the same greedy approach.
+We would adopt the first approach as the choice of the parameter $a$ and $b$ in the second equation is quite arbitrary. Under the above $a$ and $b$ values, when the value of nectar is (approxmately) the same for all the food source, the probability of going to each food source is (nearly) 1, then the onlooker bees are nothing different from the employed bees. Instead, using the ratio of current nectar to the totol nectar gains additional randomness in such a situation, while on average the times of selecting each food source is the same as using the other method.
+
+In our setting, the number of onlooker bees is the same as the employed bee or the number of food sources $SN$ as in basic ABC algorithm. Each onlooker bees selects a solution as the base solution, finds a new solution like the employed bee using equation \@ref(eq:find-neighbour), and choose whether to switch solution using the same greedy approach.
 
 ## The Scout Bee
 
-The last two phases focus on the local search of solution. The scout bee component prevent the algorithm from stucked in a local optim. After the employed bee and the onlooker bee phase, whether the food source has been moved by one of the bees has been recorded. If a food source has not been improved (moved) up to some some certain number of iteration, called the limit, it is abandoned and a new solution would be found in the scout bee phase. It ransomly generate a solution in the solution space using the following equation
+The last two phases focus on the local search of solution. The scout bee component prevent the algorithm from stucked in a local optim. After the employed bee and the onlooker bee phase, whether the food source has been moved by one of the bees has been recorded. If a food source has not been improved (moved) up to some some certain number of iteration, called the limit, it is abandoned and a new solution would be found in the scout bee phase. Like in the basic ABC algorithm, the number of scout bee is set to be 1, meaning in each iteration, only 1 of the food source will be abandoned and replaces if multiple food sources research the limit. 
+The scout ransomly generate a solution in the solution space using the following equation
 
 \begin{equation}
 (\#eq:scout)
@@ -230,8 +262,14 @@ z_i^j = z_{min}^j + \delta_i^j(z_{max}^j-z_{min}^j)
 \end{equation}
 
 
-where $z_i$ is the abandoned source and $j\in{1,2,\ldots,D}$ is the index of dimension. $\delta_i^j$ is simple generated from a uniform distribution with bound 0 and 1. The replaced food source can be selected using a differnt method in different problems. The main idea is to expand the range of selecting new solution. 
+where $z_i$ is the abandoned source and $j\in{1,2,\ldots,D}$ is the index of dimension. $\delta_i^j$ is simple generated from a uniform distribution with bound 0 and 1. In other words, it is generated from a uniform distribution with lower bound $z_{min}$ and upper bound $z_{max}$. As the main idea is to expand the range of selecting new solution, unlike how we simulate the initial food sources, we are not sample from the data points, which may limit the range that the scout bee searches. We still impose the constraint where the number of data points in a cluster needs to be more than $\frac{n}{2k}$. The simulation will be redone if not satisfied. 
  
+## Evaluation and Parameters for Initial Testing
+
+<!-- DDDDD -->
+In each iteration, the best solution in terms of minimum average distant between points and centroids will be recorded and updataed if the new solution is better than the current global solution. The algorithm will stop once it reaches the maximum number of cycles or the number of unchanged iteration reaches the criteria. We can evaluate the final solution using the DB index, which measures the distances within a cluster relative to the distance to between clusters.
+
+See @akay2009parameter for a full discussion on the parameter tuning on the ABC algorithm. We follow their recommendataion and use $SN\times D$ as the value of the limit, Based on their argument, the ABC algorithm can provide a consistant robust result with different the swarm size. The minimum swarm size they use in testing is 50. We decrease the value to 20 to try to decrease the time it needs to run in each iteration. We set the maximum number of iteartion to be 1000 and the maximum number of unchange iteration to be 200, 20% of the maximum number of iteration, to achieve a reasonable running time.
 
 
 

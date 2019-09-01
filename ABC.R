@@ -9,7 +9,7 @@
 #' @param max.cycle Integer. The maxmum number of iteration.
 #' @param n.stop Integer. The number of unchanged results to stop optimizing
 ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000, 
-                n.stop = 50, lb= rep(-Inf, length(par)), ub= rep(+Inf, length(par))){
+                n.stop = 50, lb= rep(-1, length(par)), ub= rep(1, length(par))){
   
   
   # send_employed_bees <- function(){
