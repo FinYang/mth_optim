@@ -22,8 +22,9 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, out.width 
 knitr::read_chunk('meta-heuristics-assignment.R')
 ```
 
-```{r library, eval = F}
+```{r library}
 ```
+
 
 
 # Introduction
@@ -281,10 +282,44 @@ See @akay2009parameter for a full discussion on the parameter tuning on the ABC 
 
 For the constraint we imposed on the clustering problem that each cluster must include to a certain amount of data points sometimes is hard to satisfied, especially in the initial food sources simulation, even we are starting with sampling form existing data point. Therefore, we set the following relaxation in each attempt to find feasible solution. In those situation, the solution produced using the ABC algorithm may not admits the constraint.
 
-1. For the initial solution input and the simulation for food sources, a maximum of 10,000 simulation is tested against the constraint
+1. For the initial solution input, a maximum of 4,000 simulation is tested against the constraint.
+2. For the simulation for food sources, a maximum of 2,500 simulation is tested against the constraint
 2. In the scout bee phase, a mximum of 2,000 new solution is tested against the constraint
+3. If the search for the initial solution or for the initial food sources admits the maximum simulations, we relax the constranit to that each cluster must include $\frac{n}{10k}$ data points.
 
 # Implementation
+
+```{r train-data}
+```
+
+## Implementation on the training instances
+
+```{r table1}
+```
+
+Table \@ref(tab:table1) gives the performance measures of the algorithm on the training data set. Note the number of iteration and the iteration the best solution was first found do not include the number of simulations that the algorithm needs to produce feasible initial food sources and valid new solution in the scout bee phase.
+
+The `18_s-set1` data set is the one data set that research the condition to relax the constraint that each cluster must has $\frac{n}{2k}$ data points for it has 18 clusters and the sample size is 5,000, but in terms of the final objuective value, it is has the best value of DB index among all the data set. The number of iteration it requires to find the optimal solution is not bad comparing to other data set with a large number of cluster.
+
+Some of the data sets that require the least time including `3_square2` and `7_aggregation`. For `3_square2` the result is not suprising for it is a two dimensional data with only 3 clusters. The result for `7_aggregation` is doubtfull for its 7 clusters, and by looking at the difference between the total number of iteration and the time it first admits the final solution, we can say that the algorithm stops because the number of unchanged global solution has rearched 200. If we change the stopping criteria it may improve further with more iterations.
+
+The highest objective function belongs to `4_tetra`, which may because its extra dimension to others. The number of iteration is in the middle of the distribution. In conclusion, if the final objective value is not the only measure of performence, it is quite hard to comment on the performence without seeing the plots visually.
+
+## Parameter tuning
+
+We use a subset of the training data sets to tune our parameters. The data sets we choose are `3_square2` and `4_tetra`, for the numbers of clustes of them are relatively small so it requires less time to run the algorithm. We include `4_tetra` to investgate the power of parameter with different number of dimensions.
+
+The parameters we choose to evaluate and select are The limit (the number of iteartion that each food source can stay the same before being abandoned), the maximum cycle number (MCN) and the number of iteration with no improvment.  The number of food sources $SN$, is well studyed in @akay2009parameter.They argue that the algorithm is robust with different value of $SN$ in general.
+
+We implement a coordinate descent approach where we try different values of one parameter and keep other parameters fixed at the same time. We firstly keep the limit fixed as by @akay2009parameter a value of $SN\times D$ is suited to data with general form. We also keep MCN as 1000 since from the results above no data set rearches MCn of 1,000, but quite a few data sets stops when the number of unchanged solution rearches 200. We acknowdge that there might be correlation issue where the effects of parameters are not independent with each other especially when MCN and the max number of unchange control the stopping of the algorithm together.
+
+We then report the different values we tried in Table \@ref(fig:tu_tab).
+
+```{r tu_tab}
+```
+
+
+
 
 
 

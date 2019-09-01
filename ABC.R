@@ -9,7 +9,7 @@
 #' @param max.cycle Integer. The maxmum number of iteration.
 #' @param n.stop Integer. The number of unchanged results to stop optimizing
 ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000, 
-                n.stop = 50, lb= rep(-1, length(par)), ub= rep(1, length(par))){
+                n.stop = 50, lb= rep(-1, length(par)), ub= rep(1, length(par)), const){
   
   
   # send_employed_bees <- function(){
@@ -46,7 +46,7 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
       # tem <-  t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
       
       try_scout <- 0
-      while(size_limit(tem, x=x, k=k, d=d)){
+      while(size_limit(tem, x=x, k=k, d=d, const = const)){
         tem <-  c(as.matrix(data[sample(NROW(data), k),]))
         try_scout <- try_scout +1
         if(try_scout == 500) cat("\n")
@@ -79,7 +79,7 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
     if(nu[[par_change]]<lb[[par_change]]) nu[[par_change]] <- lb[[par_change]] 
     if(nu[[par_change]]>ub[[par_change]]) nu[[par_change]] <- ub[[par_change]] 
     
-    if(!size_limit(nu, x=x, k=k, d=d)){
+    if(!size_limit(nu, x=x, k=k, d=d, const = const)){
       
       obj_nu <- func(nu)
       nectar_nu <- taste_nectar(obj_nu)
@@ -127,22 +127,25 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
   # foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
   foods <- t(replicate(SN, c(as.matrix(data[sample(NROW(data), k),]))))
   
-  size_limit <- function(nu,x, k, d){
+  size_limit <- function(nu,x, k, d, const){
     centerr <- matrix(nu, nrow = k, ncol = d)
     allocc <- .closest_allocation_cpp(as.matrix(x), centerr)
-    any(table(allocc)<(NROW(x)/(2*k))) || length(table(allocc)) <k
+    any(table(allocc)<const) || length(table(allocc)) <k
   }
   
-  no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=as.matrix(x), k=k, d=d ))
+  no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=as.matrix(x), k=k, d=d, const = const ))
   
   try_no_food <- 0
   while(any(no_food)){
     n_no_food <- sum(no_food)
     foods[no_food,] <- t(replicate(n_no_food, c(as.matrix(data[sample(NROW(data), k),]))))
-    no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=x, k=k, d=d ))
+    no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=x, k=k, d=d, const = const ))
     try_no_food <- try_no_food +1
     cat("\rNumber of initial foods tried:", try_no_food)
-    if(try_no_food == 10000) break
+    if(try_no_food == 2500){
+      const <- (NROW(x)/(10*k))
+      break
+    } 
   }
   cat("\n")
   
