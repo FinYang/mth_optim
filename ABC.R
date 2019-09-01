@@ -8,7 +8,7 @@
 #' @param limit Integer. The number of waiting perios before dropping a not-improving food source
 #' @param max.cycle Integer. The maxmum number of iteration.
 #' @param n.stop Integer. The number of unchanged results to stop optimizing
-ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000, 
+ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000, 
                 n.stop = 50, lb= rep(-1, length(par)), ub= rep(1, length(par))){
   
   
@@ -41,10 +41,20 @@ ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000,
     max_stay <- max(n_stay)
     if(max_stay >= limit){
       leave <-   which.max(n_stay)
-      tem <-  t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
+      # tem <-  c(t(replicate(k,mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))))
+      tem <-  c(as.matrix(data[sample(NROW(data), k),]))
+      # tem <-  t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
+      
+      try_scout <- 0
       while(size_limit(tem, x=x, k=k, d=d)){
-        tem <-  t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
+        tem <-  c(as.matrix(data[sample(NROW(data), k),]))
+        try_scout <- try_scout +1
+        if(try_scout == 500) cat("\n")
+        if(try_scout > 500)
+          cat("\rNumber of scout bee tried:", try_scout)
+        if(try_scout == 2000) break
       }
+      if(try_scout > 500) cat("\n")
       foods[leave, ] <<- tem
       obj[[leave]] <<- func(foods[leave,])
       nectar[[leave]] <<- taste_nectar(obj[[leave]])
@@ -103,7 +113,8 @@ ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000,
     }
   }
   data <- x
-  func <- function(par) fun(par, x=as.matrix(x),...)
+  ########
+  func <- function(par) fun(par, x=as.matrix(x), k=k, d=d)
   D <- length(par)
   if (length(lb) == 1 && length(par) > 1) 
     lb <- rep(lb, D)
@@ -124,12 +135,16 @@ ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000,
   
   no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=as.matrix(x), k=k, d=d ))
   
+  try_no_food <- 0
   while(any(no_food)){
     n_no_food <- sum(no_food)
     foods[no_food,] <- t(replicate(n_no_food, c(as.matrix(data[sample(NROW(data), k),]))))
     no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=x, k=k, d=d ))
+    try_no_food <- try_no_food +1
+    cat("\rNumber of initial foods tried:", try_no_food)
+    if(try_no_food == 10000) break
   }
-  
+  cat("\n")
   
   obj <- apply(foods, 1, func)
   nectar <- taste_nectar(obj)
@@ -170,21 +185,23 @@ ABC <- function(par, fun, x, ..., SN  = 20, limit= 100, max.cycle= 1000,
     # scout bee
     send_scout_bees()
     round <- round + 1
+    cat("\r",round/max.cycle*100, "%")
   }
   first_optim <- which(sapply(split(path, 1:NROW(path)), identical, c(tail(path,1))), useNames = F)[[1]]
-  # round <- round + 1
-  centerr <- matrix(global_par, nrow = k, ncol = d)
-  allocc <- .closest_allocation_cpp(as.matrix(x), centerr)
-  centers_moved <- matrix(nrow = k, ncol = d)
-  for (i in 1:k) {
-    for (j in 1:d) {
-      centers_moved[i, j] <- mean(x[(allocc+1) == i, j])
-    }
-  }
   
-  global_par <- c(centers_moved)
-  global_min <- func(global_par)
-  path <- rbind(path, c(global_par,  global_min))
+  ## move centroids to the centre
+  # centerr <- matrix(global_par, nrow = k, ncol = d)
+  # allocc <- .closest_allocation_cpp(as.matrix(x), centerr)
+  # centers_moved <- matrix(nrow = k, ncol = d)
+  # for (i in 1:k) {
+  #   for (j in 1:d) {
+  #     centers_moved[i, j] <- mean(x[(allocc+1) == i, j])
+  #   }
+  # }
+  # 
+  # global_par <- c(centers_moved)
+  # global_min <- func(global_par)
+  # path <- rbind(path, c(global_par,  global_min))
   return(list(par = global_par, value = global_min,
               foods = foods, obj = obj, nectar = nectar,
               n_stay = n_stay, path = path, n_iter = round, 

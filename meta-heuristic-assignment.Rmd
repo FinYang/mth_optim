@@ -173,8 +173,11 @@ The problem of clustering involves deviding data points into different groups wi
 At the begnning of the algorithm, the number of clusters $k$ needs to be given. Once we have the data with dimension $D$, we can write the centroids in the form of a $k\times D$ matrix where each row indicates one centroid and each column corresponds to one coordinate. The solution representation is effectively a vector with length $k\times D$.
 
 <!-- DDDDD -->
-The objective function we are using is the average of the distance between data points and their coressponding centroids, where the distance is calculated using Euclidean norm. After we run the algorithm, the Davis-Bouldin index is used to evaluate the quality of the final solution of centroids. 
+<!-- The objective function we are using is the average of the distance between data points and their coressponding centroids, where the distance is calculated using Euclidean norm. After we run the algorithm, the Davis-Bouldin index is used to evaluate the quality of the final solution of centroids.  -->
 <!-- DDDDD -->
+The objective function we are using is the Davis-Bouldin index, where the distance is calculated using Euclidean norm. The DB index measures the distances within a cluster relative to the distance to between clusters, which matches our approace of clostest allocation.
+
+
 
 ## Data processing
 
@@ -254,7 +257,7 @@ In our setting, the number of onlooker bees is the same as the employed bee or t
 ## The Scout Bee
 
 The last two phases focus on the local search of solution. The scout bee component prevent the algorithm from stucked in a local optim. After the employed bee and the onlooker bee phase, whether the food source has been moved by one of the bees has been recorded. If a food source has not been improved (moved) up to some some certain number of iteration, called the limit, it is abandoned and a new solution would be found in the scout bee phase. Like in the basic ABC algorithm, the number of scout bee is set to be 1, meaning in each iteration, only 1 of the food source will be abandoned and replaces if multiple food sources research the limit. 
-The scout ransomly generate a solution in the solution space using the following equation
+The scout in general ransomly generate a solution in the solution space using the following equation
 
 \begin{equation}
 (\#eq:scout)
@@ -262,14 +265,31 @@ z_i^j = z_{min}^j + \delta_i^j(z_{max}^j-z_{min}^j)
 \end{equation}
 
 
-where $z_i$ is the abandoned source and $j\in{1,2,\ldots,D}$ is the index of dimension. $\delta_i^j$ is simple generated from a uniform distribution with bound 0 and 1. In other words, it is generated from a uniform distribution with lower bound $z_{min}$ and upper bound $z_{max}$. As the main idea is to expand the range of selecting new solution, unlike how we simulate the initial food sources, we are not sample from the data points, which may limit the range that the scout bee searches. We still impose the constraint where the number of data points in a cluster needs to be more than $\frac{n}{2k}$. The simulation will be redone if not satisfied. 
+where $z_i$ is the abandoned source and $j\in{1,2,\ldots,D}$ is the index of dimension. $\delta_i^j$ is simple generated from a uniform distribution with bound 0 and 1. In other words, it is generated from a uniform distribution with lower bound $z_{min}$ and upper bound $z_{max}$. However, in the context of clustering, we are still sampling from the data points, which can limit the range that the scout bee searches. We still impose the constraint where the number of data points in a cluster needs to be more than $\frac{n}{2k}$. The simulation will be redone if not satisfied, so if the range it search is too wide it may not get a feasible solution in any time soon. 
  
 ## Evaluation and Parameters for Initial Testing
 
 <!-- DDDDD -->
-In each iteration, the best solution in terms of minimum average distant between points and centroids will be recorded and updataed if the new solution is better than the current global solution. The algorithm will stop once it reaches the maximum number of cycles or the number of unchanged iteration reaches the criteria. We can evaluate the final solution using the DB index, which measures the distances within a cluster relative to the distance to between clusters.
+<!-- In each iteration, the best solution in terms of minimum average distant between points and centroids will be recorded and updataed if the new solution is better than the current global solution. The algorithm will stop once it reaches the maximum number of cycles or the number of unchanged iteration reaches the criteria. We can evaluate the final solution using the DB index, which measures the distances within a cluster relative to the distance to between clusters. -->
+<!-- DDDDD -->
+In each iteration, the best solution in terms of the DB index will be recorded and updataed if the new solution is better than the current global solution. The algorithm will stop once it reaches the maximum number of cycles or the number of unchanged iteration reaches the criteria. 
+
 
 See @akay2009parameter for a full discussion on the parameter tuning on the ABC algorithm. We follow their recommendataion and use $SN\times D$ as the value of the limit, Based on their argument, the ABC algorithm can provide a consistant robust result with different the swarm size. The minimum swarm size they use in testing is 50. We decrease the value to 20 to try to decrease the time it needs to run in each iteration. We set the maximum number of iteartion to be 1000 and the maximum number of unchange iteration to be 200, 20% of the maximum number of iteration, to achieve a reasonable running time.
+
+## Relaxation in High Dimensional Data
+
+For the constraint we imposed on the clustering problem that each cluster must include to a certain amount of data points sometimes is hard to satisfied, especially in the initial food sources simulation, even we are starting with sampling form existing data point. Therefore, we set the following relaxation in each attempt to find feasible solution. In those situation, the solution produced using the ABC algorithm may not admits the constraint.
+
+1. For the initial solution input and the simulation for food sources, a maximum of 10,000 simulation is tested against the constraint
+2. In the scout bee phase, a mximum of 2,000 new solution is tested against the constraint
+
+# Implementation
+
+
+
+
+
 
 
 

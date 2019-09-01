@@ -98,7 +98,7 @@ double db(NumericVector par, NumericMatrix x, int k, int d){
 
 /***R
 # clusterSim::index.DB(as.matrix(x), alloc+1, q=1)$DB
-.db(qu, as.matrix(x), k=k, d=d)
+# .db(qu, as.matrix(x), k=k, d=d)
 # .closest_allocation_cpp(as.matrix(x), )
 
 
