@@ -140,9 +140,9 @@ rownames(sq1) <- c("Final Objective Value", "Number of Iteration", "Best solutio
 te1 <- rbind(value1[2,], runn1[2,], first1[2,])
 colnames(te1) <- paste0("MNU ",stopn)
 rownames(te1) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(sq1, caption = "Performance on data 3_square2 using different MNU with fixed MCN of 1000 and limit of SN*N")
+knitr::kable(sq1, caption = "Performance on data square2 using different MNU with fixed MCN of 1000 and limit of SN*N", digits = 4)
 ## ---- te1 ----
-knitr::kable(te1, caption = "Performance on data 4_tetra using different MNU with fixed MCN of 1000 and limit of SN*N")
+knitr::kable(te1, caption = "Performance on data tetra using different MNU with fixed MCN of 1000 and limit of SN*N", digits = 4)
 
 
 ## ----  ----
@@ -167,9 +167,9 @@ rownames(sq2) <- c("Final Objective Value", "Number of Iteration", "Best solutio
 te2 <- rbind(value2[2,], runn2[2,], first2[2,])
 colnames(te2) <- paste0("MCN ",stopn)
 rownames(te2) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(sq2, caption = "Performance on data 3_square2 using different MCN with fixed MNU of 200 and limit of SN*N")
+knitr::kable(sq2, caption = "Performance on data square2 using different MCN with fixed MNU of 200 and limit of SN*N", digits = 4)
 ## ---- te2 ----
-knitr::kable(te2, caption = "Performance on data 4_tetra using different MCN with fixed MNU of 200 and limit of SN*N")
+knitr::kable(te2, caption = "Performance on data tetra using different MCN with fixed MNU of 200 and limit of SN*N", digits = 4)
 
 
 ## ----  ----
@@ -196,9 +196,9 @@ rownames(sq3) <- c("Final Objective Value", "Number of Iteration", "Best solutio
 te3 <- rbind(value3[2,], runn3[2,], first3[2,])
 colnames(te3) <- paste0("Limit ",stopn)
 rownames(te3) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
-knitr::kable(sq3, caption = "Performance on data 3_square2 using different limit with fixed MNU of 200 and MCN of 550")
+knitr::kable(sq3, caption = "Performance on data square2 using different limit with fixed MNU of 200 and MCN of 550", digits = 4)
 ## ---- te3 ----
-knitr::kable(te3, caption = "Performance on data 4_tetra using different limit with fixed MNU of 200 and MCN of 550")
+knitr::kable(te3, caption = "Performance on data tetra using different limit with fixed MNU of 200 and MCN of 550", digits = 4)
 
 ## ----  ----
 
@@ -213,6 +213,20 @@ for(tr in 1:10){
   cat("\rData", tr, "\n")
 }
 saveRDS(train_3_5, "train_3_5.rds")
+
+## ---- table2 ----
+
+train_3_5 <- readRDS("train_3_5.rds")
+tab2 <- sapply(train_3_5, function(x) c(x$value, x$n_iter, x$first_optim))
+tab2 <- t(tab2) %>%
+  as.data.frame()
+tra_di <- sapply(train, function(x) NCOL(as.data.frame(x)))
+tab2 <- cbind(tra_names,tra_di, tab2)
+colnames(tab2) <- c("Data","Dimension","Final Objective Value", "Number of Iteration", "Best solution was first found")
+knitr::kable(tab2, caption = "Performance measures using the initial parameters for the training data")
+# plot_cluster(as.matrix(train[[3]]), alloc = train_3_3[[3]]$alloc , k=tra_k[[3]], par = train_3_3[[3]]$par)
+
+
 
 # -------------------------------------------------------------------------
 # 
