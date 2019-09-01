@@ -135,18 +135,31 @@ Figure \@ref(fig:sudoku) is an example of $9\times 9$ sudoku puzzle with $3\time
 knitr::include_graphics("sudoku.png")
 ```
 
-@pacurib2009solving apply the ABC algorithm by imposing the third constrain in the solution space while only evaluate objective function using the other two constrains in the algorithm.  
-
-## Solution representation
-
-The 
-
+@pacurib2009solving apply the ABC algorithm by imposing the third constrain in the solution space while only evaluate objective function using the other two constrains in the algorithm. The solution representation would simply be a vector of numbers, where the position of the number corresponds to the index of the cell they are in. The optimization problem is to minimize the number of duplicate digits found on each row and column, while the third constraint is set to be always satistified for a valid solution.  
 
 ## The parameters specification
 
-## Approach of finding neighbour
+The number of food souces in the experiments of @pacurib2009solving is defined to be 100, the same as the number of the employed bees, while the number of onlooker bees to be set as 200. The number of scout bees is set to be 10% of the employed bees which is 10. The maximum number of iteration is set to be 100,000. 
 
+In general ABC algorithm, the food sources are abondanded when the number that they does not change accumulates to the limit. In the Sudoku problem, the food sources are paired to a randonly generated new food source by the scout bee, and if new food source has a higher fitness than the old one, the old one is replaced, so the value of the limit is no long a parameter needed in this problem.
 
+There are two stopping criteria. While the objective function is the number of duplicate digits, one of the criteria is having a fitness value of 1, If this criteria is met it means that the optimal solution to the puzzle has been found. If this criteria is not met, instead the algorithm stops when it reachs the maximum number of cycles, it means the algorithm has not yet find the optimal solution to the puzzel and it produced the best solution obtained at the time the algorithm stops. 
+
+## Adjusted approach
+
+The approach of creating new solution is adjusted to fit this specific problem. Given the solution representation of a vector of digits, a random number $j$ is chosen for the feasible solution $X_i$ and the randomly chosen neighbor $X_k$. If we denote the new solution as $V_i$, the value of each element (denoted using subscript $j$ ) of $V_i$ is determined by the following equation:
+
+$$V_{ij} = X_{ij} + rand[0,1]\times |X_{ij} - X_{ij}|$$
+
+The function to generate new solution is defined using the uniform random number between 0 and 1 and the absolute value of difference to ensure no negative solution is created. If the value obtained is greater than the value that is allowed in the sudoku puzzle, for example 9 in the $9\times 9$ puzzle, the modulo of the value plus one is used as the final value of $V_{ij}$.
+
+There is no guarantee that the new solution is going to satisfied the third rule above. If a new solution violates the sub-block constraint, a swap operation is trigered: the original location of the violating element $V_{ij}$ us replaced with $X_{ij}$. Then the feasible new solution will be considered in the greedy selection approach comparing the current solution.
+
+The fitness is calculated using the generic function in Equation \@ref(eq:nectar) and the probability for the onlooker bee to find food source is calculated using the general funcition in Equation \@ref(eq:prob).We will introduce them in the clustering section.
+
+## Experiments and Conclusion
+
+@pacurib2009solving apply the ABC algorithm to sudoku puzzles with three different difficulities. By comparing the average number of cycles needed to solve the sudoku puzzles and the average time needed, they conclude that the more difficult the puzzle is, the longer it needs to solve the puzzle. They also find that the modified ABC algorithm outperforms the Genetic-Algorithm-based sudoku solver.
 
 
 # Detailed process in the context of clustering
