@@ -1,0 +1,170 @@
+---
+title: Artificial Bee Colony (ABC) algorithm and Clustering
+author: Yangzhuoran Yang
+date: \today
+classoption: compress
+toc: true
+bibliography: ../assign1.bib
+biblio-style: "apalike"
+link-citations: true
+header-includes:
+  - \usepackage[makeroom]{cancel}
+  - \widowpenalties 1 150
+output: 
+  binb::monash:
+    keep_tex: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, cache=TRUE, dev.args=list(bg=grey(0.9), pointsize=11), fig.height = 7, fig.width = 7)
+library(tidyverse)
+# library(ggforce)
+library(gridExtra)
+```
+
+# Artificial Bee Colony (ABC) 
+
+## Phases
+
+
+
+```{r ABC, fig.cap = "Phases of ABC algorithm\n Source: Kumar, S.,et al. (2014)", out.width="50%"}
+knitr::include_graphics("ABC.png")
+```
+
+
+
+## Initialization
+
+```r
+ 1. Data
+ 2. Generate the initial solution
+ 3. Evaluate the nectar (fitness)
+
+```
+
+Parameters:
+
+ - The number of initial food sources $SN$
+
+Simulation:
+
+ - Initial solution input  
+ - Initial food sources
+
+
+
+
+## Employed bees
+
+
+```r
+ 4. While (Condition not met){
+ 5. For each employed bee{
+     Produce new solution 
+     Greedy selection }
+
+```
+
+### Finding neighbour
+
+$$\nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})$$
+
+## Employed bees
+
+
+```r
+ 4. While (Condition not met){
+ 5. For each employed bee{
+     Produce new solution 
+     Greedy selection }
+
+```
+
+### Calculate fitness
+
+$$fit_i = \frac{1}{1/f_i}$$
+
+
+## Onlooker bees
+
+
+```r
+ 6. Calculate the probabilities of solution
+ 7. For each onlooker bee{  
+     Select a solution using probabilities
+     Produce new solution
+     Greedy selection }
+          
+```
+
+### Calculate probabilities
+
+$$p_i = \frac{fit_i}{\sum^{SN}_{i=1} fit_i}$$
+
+
+
+
+## Scout bees
+
+```r
+ 8. Abandon non-improving solution 
+ 9. Replace it with new solution
+```
+Parameter:
+
+- The limit
+
+\pause
+
+### Finding new solution
+
+$$z_i^j = z_{min}^j + \delta_i^j(z_{max}^j-z_{min}^j)$$
+
+
+## Stopping criteria
+
+```r
+10. Record the best solution }
+11. End
+
+```
+
+Parameters:
+
+ - Maximum number of iterations
+ - Maximum number of unimproved global minimum
+
+
+
+
+# Clustering
+
+## Adjustment
+
+### Solution representation: 
+  
+  $k\times D$ matrix \pause  $\ \ \Rightarrow$ vector
+  
+  \pause
+
+### Standardization
+
+  $z^*_{ij} = \frac{z_{ij}}{\max_{j}|z_{ij}|}$
+
+\pause
+
+### Initialize different foods sources
+
+ - Evenly assigned across the solution space $\times$
+ - Randomly sample between bounds $\times$
+ \pause
+ - Sample from the existing data points
+
+# Comparison
+
+
+
+## References {.allowframebreaks}
+
+Kumar, S., Sharma, V. K., & Kumari, R. (2014). Randomized memetic artificial bee colony algorithm. arXiv preprint arXiv:1408.0102.
