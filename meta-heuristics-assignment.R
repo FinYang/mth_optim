@@ -122,28 +122,91 @@ tr_tu <- train[index]
 tr_tu_k <- tra_k[index]
 tune1 <- NULL
 for(istop in seq(300, 700, 100)){
-  tune1[[(istop/100)-2]] <- mapply(run_ABC,x= as.matrix(tr_tu), k=tr_tu_k, MoreArgs =  list(n_stop = istop, max_cycle = 1e3, limit = NULL))
+  tune1[[(istop/100)-2]] <- mapply(run_ABC,x= as.matrix(tr_tu), k=tr_tu_k, 
+                                   MoreArgs =  list(n_stop = istop, max_cycle = 1e3, limit = NULL), 
+                                   SIMPLIFY = F)
 }
 
-saveRDS(tune1, "tune1.rds")
+# saveRDS(tune1, "tune1.rds")
+tune1 <- readRDS("tune1.rds")
+stopn <- seq(300, 700, 100)
+value1 <- sapply(tune1, function(x) c(x[[1]]$value, x[[2]]$value))
+runn1 <- sapply(tune1, function(x) c(x[[1]]$n_iter, x[[2]]$n_iter))
+first1 <- sapply(tune1, function(x) c(x[[1]]$first_optim, x[[2]]$first_optim))
+sq1 <- rbind(value1[1,], runn1[1,], first1[1,])
+colnames(sq1) <- paste0("Max.No.unchange ",stopn)
+rownames(sq1) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
+knitr::kable(sq1)
+te1 <- rbind(value1[2,], runn1[2,], first1[2,])
+colnames(te1) <- paste0("Max.No.unchange ",stopn)
+rownames(te1) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
+knitr::kable(te1)
+
+
+##
 
 tune2 <- NULL
 for(istop in seq(300, 700, 100)){
-  tune2[[(istop/100)-2]] <- mapply(run_ABC,x= as.matrix(tr_tu), k=tr_tu_k, MoreArgs =  list(n_stop = istop, max_cycle = isop, limit = NULL))
+  tune2[[(istop/100)-2]] <- mapply(run_ABC,x= as.matrix(tr_tu), k=tr_tu_k,
+                                   MoreArgs =  list(n_stop = 200, max_cycle = istop, limit = NULL),
+                                   SIMPLIFY = F)
 }
 
-saveRDS(tune1, "tune1.rds")
+# saveRDS(tune2, "tune2.rds")
+tune2 <- readRDS("tune2.rds")
+stopn <- seq(300, 700, 100)
+value2 <- sapply(tune2, function(x) c(x[[1]]$value, x[[2]]$value))
+runn2 <- sapply(tune2, function(x) c(x[[1]]$n_iter, x[[2]]$n_iter))
+first2 <- sapply(tune2, function(x) c(x[[1]]$first_optim, x[[2]]$first_optim))
+sq2 <- rbind(value2[1,], runn2[1,], first2[1,])
+colnames(sq2) <- paste0("Max.No.unchange ",stopn)
+rownames(sq2) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
+knitr::kable(sq2)
+te2 <- rbind(value2[2,], runn2[2,], first2[2,])
+colnames(te2) <- paste0("Max.No.unchange ",stopn)
+rownames(te2) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
+knitr::kable(te2)
+
+
+
+##
+
 
 tune3 <- NULL
-for(istop in seq(300, 700, 100)){
-  tune3[[(istop/100)-2]] <- mapply(run_ABC,x= as.matrix(tr_tu), k=tr_tu_k, MoreArgs =  list(n_stop = istop, max_cycle = 1e3, limit = istop))
+for(istop in seq(20, 70, 10)){
+  tune3[[(istop/10)-1]] <- mapply(run_ABC,x= as.matrix(tr_tu), k=tr_tu_k,
+                                   MoreArgs =  list(n_stop = 200, max_cycle = 550, limit = istop), 
+                                   SIMPLIFY = F)
 }
 
-saveRDS(tune1, "tune1.rds")
+# saveRDS(tune3, "tune3.rds")
+tune3 <- readRDS("tune3.rds")
+stopn <- seq(20, 70, 10)
+value3 <- sapply(tune3, function(x) c(x[[1]]$value, x[[2]]$value))
+runn3 <- sapply(tune3, function(x) c(x[[1]]$n_iter, x[[2]]$n_iter))
+first3 <- sapply(tune3, function(x) c(x[[1]]$first_optim, x[[2]]$first_optim))
+sq3 <- rbind(value3[1,], runn3[1,], first3[1,])
+colnames(sq3) <- paste0("Max.No.unchange ",stopn)
+rownames(sq3) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
+knitr::kable(sq3)
+te3 <- rbind(value3[2,], runn3[2,], first3[2,])
+colnames(te3) <- paste0("Max.No.unchange ",stopn)
+rownames(te3) <- c("Final Objective Value", "Number of Iteration", "Best solution was first found")
+knitr::kable(te3)
+
 
 
 ## ---- tu_tab ----
 
+
+## ---- 3-5 ----
+train_3_5 <- NULL
+for(tr in 1:10){
+  
+  train_3_5[[tr]] <- run_ABC(train[[tr]], k=tra_k[[tr]], n_stop = 200, max_cycle = 700, limit = 40)
+  cat("\rData", tr, "\n")
+}
+saveRDS(train_3_5, "train_3_5.rds")
 
 # -------------------------------------------------------------------------
 # 

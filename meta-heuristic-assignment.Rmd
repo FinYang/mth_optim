@@ -313,11 +313,16 @@ The parameters we choose to evaluate and select are The limit (the number of ite
 
 We implement a coordinate descent approach where we try different values of one parameter and keep other parameters fixed at the same time. We firstly keep the limit fixed as by @akay2009parameter a value of $SN\times D$ is suited to data with general form. We also keep MCN as 1000 since from the results above no data set rearches MCn of 1,000, but quite a few data sets stops when the number of unchanged solution rearches 200. We acknowdge that there might be correlation issue where the effects of parameters are not independent with each other especially when MCN and the max number of unchange control the stopping of the algorithm together.
 
-We then report the different values we tried in Table \@ref(fig:tu_tab).
+We then report the different values we tried in Table 2-6 in the Appendix. 
 
-```{r tu_tab}
-```
 
+
+## Testing new parameters
+
+
+
+
+## Test data set
 
 
 
