@@ -1,6 +1,6 @@
 
 
-
+#' The ABC algorithm
 #' @param par Vector. Initial value to search for parameter
 #' @param fn The function to optimize over
 #' @param ... Other arguments to the function
@@ -18,7 +18,7 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
   #   }
   # }
   
-  #get probabiliyoes
+  # get probabilities
   comment_on_food <- function(){
     prob <<- nectar/sum(nectar)
     prob[is.nan(prob)] <<- 0
@@ -37,15 +37,19 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
   #   }
   # }
   
+  # scout bee function
   send_scout_bees <- function(){
     max_stay <- max(n_stay)
+    # finding abandoned source 
     if(max_stay >= limit){
       leave <-   which.max(n_stay)
       # tem <-  c(t(replicate(k,mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))))
       tem <-  c(as.matrix(data[sample(NROW(data), k),]))
       # tem <-  t(mapply(function(lb, ub) runif(1, lb, ub), lb=lb, ub=ub))
       
+      # replace it with new solution
       try_scout <- 0
+      # minimum cluster size constraint
       while(size_limit(tem, x=x, k=k, d=d, const = const)){
         tem <-  c(as.matrix(data[sample(NROW(data), k),]))
         try_scout <- try_scout +1
@@ -63,8 +67,11 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
     
   }
   
+  # Finding neighbours and creating new solutions 
+  # Used by the employed bees and the onlooker bees
   smell_neighbor <- function(food){
     par_change <- sample(D, 1)
+    # sample the parameter j to change
     sample_nei <- function(x){
       if(length(x)==1){ 
         return(x)
@@ -72,18 +79,21 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
         sample(x, 1)
       }
     }
+    # sample neighbour
     neighbor <- sample_nei((1:SN)[-i])
     nu <- foods[i,]
     
+    # generate new solution
     nu[[par_change]] <- foods[[i, par_change]] + runif(1, -1, 1)*(foods[[i, par_change]] - foods[[neighbor, par_change]])
     if(nu[[par_change]]<lb[[par_change]]) nu[[par_change]] <- lb[[par_change]] 
     if(nu[[par_change]]>ub[[par_change]]) nu[[par_change]] <- ub[[par_change]] 
-    
+    # check if the new solution fits the minimum cluster size
     if(!size_limit(nu, x=x, k=k, d=d, const = const)){
       
       obj_nu <- func(nu)
       nectar_nu <- taste_nectar(obj_nu)
-      
+      # decide whether take the new solution 
+      # greedy selection
       if(nectar_nu >= nectar[[i]]){
         n_stay[[i]]  <<- 0
         foods[i,] <<- nu
@@ -99,10 +109,12 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
     
   }
   
+  # calculate the fitness
   taste_nectar <- function(obj){
     1/(1+obj)
   }
   
+  # record the best solution in each iteration
   appreciate_best_food <- function(){
     if(any(obj<global_min)){
       global_min <<- min(obj)
@@ -114,8 +126,13 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
   }
   data <- x
   ########
+  # Start of the algorithm
+  
+  # objective function
   func <- function(par) fun(par, x=as.matrix(x), k=k, d=d)
-  D <- length(par)
+  # dimension
+  D <- length(par) 
+  # check for lower and upper bounds
   if (length(lb) == 1 && length(par) > 1) 
     lb <- rep(lb, D)
   if (length(ub) == 1 && length(par) > 1) 
@@ -125,8 +142,9 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
   # ini
   # foods <- matrix(runif(SN*D, lb, ub), nrow = SN, ncol = D)
   # foods <- mapply(function(lb, ub) seq(lb,ub,length.out=SN), lb=lb, ub=ub)
+  # initialising food sources
   foods <- t(replicate(SN, c(as.matrix(data[sample(NROW(data), k),]))))
-  
+  # function to check minimun cluster size
   size_limit <- function(nu,x, k, d, const){
     centerr <- matrix(nu, nrow = k, ncol = d)
     allocc <- .closest_allocation_cpp(as.matrix(x), centerr)
@@ -134,7 +152,7 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
   }
   
   no_food <- sapply(split(foods, 1:NROW(foods)), function(nu) size_limit(nu =nu,x=as.matrix(x), k=k, d=d, const = const ))
-  
+  # simulate other food sources until it satisfy the minimum cluster size
   try_no_food <- 0
   while(any(no_food)){
     n_no_food <- sum(no_food)
@@ -143,12 +161,13 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
     try_no_food <- try_no_food +1
     cat("\rNumber of initial foods tried:", try_no_food)
     if(try_no_food == 2500){
+      # relax the constraint
       const <- (NROW(x)/(10*k))
       break
     } 
   }
   cat("\n")
-  
+  # calculate fitness
   obj <- apply(foods, 1, func)
   nectar <- taste_nectar(obj)
   n_stay <- numeric(SN)
@@ -161,16 +180,17 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
   n_unchange <- 0
   appreciate_best_food()
   round <- 0
-  
+  # start the iterations
   path <- c(global_par, min = global_min)
   while(round < max.cycle && n_unchange < n.stop){
     # employed bee
     for(i in seq_len(SN)){
       smell_neighbor()
     }
-    #
+    # calculate probability
     comment_on_food()
     
+    # the onlooker bee
     i <- 1
     t <- 0
     while(t < SN){
@@ -182,7 +202,7 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
       i <- i+1
       if(i > SN) i <- 1
     }
-    #
+    # record the best solution
     appreciate_best_food()
     path <- rbind(path, c(global_par,  global_min))
     # scout bee
@@ -190,6 +210,7 @@ ABC <- function(par, fun, x,k,d, SN  = 20, limit= 100, max.cycle= 1000,
     round <- round + 1
     cat("\r",round/max.cycle*100, "%")
   }
+  # the index when the optimum first appears
   first_optim <- which(sapply(split(path, 1:NROW(path)), identical, c(tail(path,1))), useNames = F)[[1]]
   
   ## move centroids to the centre

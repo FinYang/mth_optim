@@ -6,13 +6,16 @@ library(kableExtra)
 # library(furrr)
 source("ABC.R")
 sourceCpp("cluster.cpp")
+
+
+# standardising the data
 stan <- function(x){
   max_x <- apply(x, 2, function(x) max(abs(x)))
   out <- mapply(function(x, max_x) x/max_x, x=as.data.frame(x), max_x = max_x)
   return(out)
 }
 
-
+# wraper to run the ABC algorithm and report desired values
 run_ABC <- function(x, k, n_stop = 200, max_cycle = 1e3, limit = NULL, obj_func = c( "db", "euclidean")){
   # return TRUE if violates the size limit
   size_limit <- function(nu,x, k, d, const){
@@ -27,11 +30,13 @@ run_ABC <- function(x, k, n_stop = 200, max_cycle = 1e3, limit = NULL, obj_func 
   par <-c(x[sample(NROW(x), k),])
   try_par <- 0
   cat("\n")
+  # simulate initial value until it fits the minimum cluster size
   while(size_limit(par, x=x, k=k, d=d, const = const)){
     par <- c(x[sample(NROW(x), k),])
     try_par <- try_par +1
     cat("\rNumber of initial par tried:", try_par)
     if(try_par == 4000){
+      # relax the constraint
       const <- (NROW(x)/(10*k))
       break
     } 

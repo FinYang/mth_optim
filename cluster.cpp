@@ -4,7 +4,7 @@ using namespace Rcpp;
 
 //   
 //   
-//   
+//  calculate the eculidean distance
 
 double ecu_dist(NumericVector x) {
   double out = 0;
@@ -16,6 +16,7 @@ double ecu_dist(NumericVector x) {
   return pow(out, power);
 }
 
+// allocate points to their closest centroid
 // [[Rcpp::export(name=".closest_allocation_cpp")]]
 IntegerVector closest_allocation(NumericMatrix x, NumericMatrix centre){
   int k = centre.nrow();
@@ -35,6 +36,7 @@ IntegerVector closest_allocation(NumericMatrix x, NumericMatrix centre){
   
 }
 
+// Objective function: sum of distance between points and their centroids
 // [[Rcpp::export(name=".cluster_obj_cpp")]]
 double cluster_obj_cpp(NumericVector par, NumericMatrix x, int k, int d){
   NumericVector cen = clone(par);
@@ -50,6 +52,7 @@ double cluster_obj_cpp(NumericVector par, NumericMatrix x, int k, int d){
   return obj;
 }
 
+//  Calculate the DB index
 // [[Rcpp::export(name=".db")]]
 double db(NumericVector par, NumericMatrix x, int k, int d){
   NumericVector cen = clone(par);
@@ -97,9 +100,6 @@ double db(NumericVector par, NumericMatrix x, int k, int d){
 
 
 /***R
-# clusterSim::index.DB(as.matrix(x), alloc+1, q=1)$DB
-# .db(qu, as.matrix(x), k=k, d=d)
-# .closest_allocation_cpp(as.matrix(x), )
 
 
 

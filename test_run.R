@@ -8,7 +8,7 @@ library(ggpubr)
 source("ABC.R")
 sourceCpp("cluster.cpp")
 stan <- function(x){
-  max_x <- apply(x, 2, max)
+  max_x <- apply(x, 2, function(x) max(abs(x)))
   out <- mapply(function(x, max_x) x/max_x, x=as.data.frame(x), max_x = max_x)
   return(out)
 }
@@ -95,9 +95,20 @@ test <- lapply(paste0("test/",tes_names), read_csv, col_names = F)
 test_3_6 <- NULL
 for(tr in 1:10){
   
-  test_3_6[[tr]] <- replicate(10, run_ABC(test[[tr]], k=tes_k[[tr]], n_stop = 200, max_cycle = 700, limit = 40))
+  test_3_6[[tr]] <- replicate(10, run_ABC(as.matrix(test[[tr]]), k=tes_k[[tr]], n_stop = 200, max_cycle = 700, limit = 40), 
+                              simplify = F)
   cat("\rData", tr, "\n")
-  saveRDS(test_3_6[[tr]], paste0("test_3_6", sub(".csv$", "", tes_names[[tr]]), ".rds"))
+  saveRDS(test_3_6[[tr]], paste0("2test_3_6", sub(".csv$", "", tes_names[[tr]]), ".rds"))
   
 }
-saveRDS(test_3_6, "test_3_6.rds")
+saveRDS(test_3_6, "2test_3_6.rds")
+
+
+## ---- test-all ----
+
+test_3_6 <- readRDS("2test_3_6.rds")
+obj_value <-  sapply(test_3_6, function(eachdata) sapply(eachdata, function(eachrun) eachrun$value))
+colnames(obj_value) <- tes_names
+table2 <- apply(obj_value, 2, function(x) c(min(x), mean(x), max(x)))
+rownames(table2) <- c("Best", "Average", "Worest")
+
