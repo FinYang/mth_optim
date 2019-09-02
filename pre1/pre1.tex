@@ -53,7 +53,7 @@
 
 \hypersetup{
       pdftitle={Artificial Bee Colony (ABC) algorithm and Clustering},
-        pdfauthor={Yangzhuoran Yang},
+        pdfauthor={Yangzhuoran (Fin) Yang},
           pdfborder={0 0 0},
     breaklinks=true}
 %\urlstyle{same}  % Use monospace font for urls
@@ -160,8 +160,8 @@
 
 
   \author[
-        Yangzhuoran Yang
-    ]{Yangzhuoran Yang}
+        Yangzhuoran (Fin) Yang
+    ]{Yangzhuoran (Fin) Yang}
 
 
 \date[
@@ -191,8 +191,7 @@
 \protect\hypertarget{phases}{}
 
 \begin{figure}
-\includegraphics[width=0.5\linewidth]{ABC} \caption{Phases of ABC algorithm
- Source: Kumar, S.,et al. (2014)}\label{fig:ABC}
+\includegraphics[width=0.5\linewidth]{ABC} \caption{Phases of ABC. Source: Kumar, S. et al. (2014)}\label{fig:ABC}
 \end{figure}
 
 \end{frame}
@@ -340,6 +339,101 @@ Parameters:
 
 \end{frame}
 
+\begin{frame}{Intensification vs Diversification}
+\protect\hypertarget{intensification-vs-diversification}{}
+
+\begin{block}{Local search}
+
+Creat new solution from neighbours
+
+\begin{itemize}
+\tightlist
+\item
+  The employed bee
+\item
+  The onlooker bee (with tendency)
+\end{itemize}
+
+\pause
+
+\end{block}
+
+\begin{block}{Global search}
+
+Replace current solution using new solution found from solution space
+
+\begin{itemize}
+\tightlist
+\item
+  Abandon scheme
+\item
+  The scout bee
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\hypertarget{comparison}{%
+\section{Comparison}\label{comparison}}
+
+\begin{frame}{Escaping local optim}
+\protect\hypertarget{escaping-local-optim}{}
+
+Simulated annealing:
+
+\begin{itemize}
+\tightlist
+\item
+  Being able to accept worse solution based on temperature
+\end{itemize}
+
+\pause
+
+ABC:
+
+\begin{itemize}
+\tightlist
+\item
+  Abandon solution that does not improve for many iteraions (combined
+  with global search)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Reproduction}
+\protect\hypertarget{reproduction}{}
+
+\begin{columns}
+\begin{column}{0.48\textwidth}
+
+Genetic Algorithm:
+\begin{itemize}
+\item Selection
+\item Crossover
+\item Mutation
+\item Evaluation
+\item Update
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+
+\pause
+
+Each bee in ABC:
+\begin{itemize}
+\item Finding neighbour
+\item Creat new solution
+\item (Randomly)
+\item Calculate fitness
+\item Greedily select
+\end{itemize}
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
 \hypertarget{clustering}{%
 \section{Clustering}\label{clustering}}
 
@@ -375,6 +469,44 @@ Parameters:
 \end{itemize}
 
 \end{block}
+
+\end{frame}
+
+\begin{frame}{Constraint and Relexation}
+\protect\hypertarget{constraint-and-relexation}{}
+
+Minimum cluster size: \(\frac{n}{2d}\)
+
+Too hard to find a solution so we:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate initial input solution up to 4000 times
+\item
+  Initialize food sources up to 2500 times
+\item
+  Globally search in the scout bee up to 2000 times
+\end{itemize}
+
+\pause
+
+Minimum cluster size is relaxed to \(\frac{n}{10d}\) if the algorithm
+reaches the first two condition
+
+\end{frame}
+
+\begin{frame}{Result 1}
+\protect\hypertarget{result-1}{}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{pre1_files/figure-beamer/unnamed-chunk-1-1} \end{center}
+
+\end{frame}
+
+\begin{frame}{Result 2}
+\protect\hypertarget{result-2}{}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{pre1_files/figure-beamer/unnamed-chunk-2-1} \end{center}
 
 \end{frame}
 

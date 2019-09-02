@@ -306,6 +306,8 @@ plotdata <- mapply(function(data, i) data[[i]] ,  data = test_3_6, i = best_run,
 # plots <- mapply(function(data, dalloc, k, dpar) plot_cluster(data, alloc = dalloc$alloc, k=k, par = dpar$par), 
 #                 data = test, dalloc = plotdata,  k  =tes_k, dpar=plotdata)
 
+# saveRDS(plotdata, "test_plotdata.rds")
+
 plot_test <- function(index){
   plot_cluster(data = test[[index]], alloc = plotdata[[index]]$alloc, k = length(plotdata[[index]]$par)/2, par = plotdata[[index]]$par)
 }

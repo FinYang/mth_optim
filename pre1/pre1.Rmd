@@ -1,6 +1,6 @@
 ---
 title: Artificial Bee Colony (ABC) algorithm and Clustering
-author: Yangzhuoran Yang
+author: Yangzhuoran (Fin) Yang
 date: \today
 classoption: compress
 toc: true
@@ -28,7 +28,7 @@ library(gridExtra)
 
 
 
-```{r ABC, fig.cap = "Phases of ABC algorithm\n Source: Kumar, S.,et al. (2014)", out.width="50%"}
+```{r ABC, fig.cap = "Phases of ABC. Source: Kumar, S. et al. (2014)", out.width="50%"}
 knitr::include_graphics("ABC.png")
 ```
 
@@ -135,11 +135,72 @@ Parameters:
  - Maximum number of iterations
  - Maximum number of unimproved global minimum
 
+## Intensification vs Diversification
+
+### Local search
+
+Creat new solution from neighbours
+
+ - The employed bee
+ - The onlooker bee (with tendency)
+ 
+\pause
+
+### Global search
+
+Replace current solution using new solution found from solution space
+
+ - Abandon scheme
+ - The scout bee
+
+
 # Comparison
 
-## Simulated annealing
+## Escaping local optim
 
-## Genetic Algorithm
+Simulated annealing:
+
+ - Being able to accept worse solution based on temperature
+
+\pause
+
+ABC:
+
+ - Abandon solution that does not improve for many iteraions (combined with global search)
+
+
+## Reproduction
+
+
+
+\begin{columns}
+\begin{column}{0.48\textwidth}
+
+Genetic Algorithm:
+\begin{itemize}
+\item Selection
+\item Crossover
+\item Mutation
+\item Evaluation
+\item Update
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+
+\pause
+
+Each bee in ABC:
+\begin{itemize}
+\item Finding neighbour
+\item Creat new solution
+\item (Randomly)
+\item Calculate fitness
+\item Greedily select
+\end{itemize}
+
+\end{column}
+\end{columns}
+
 
 # Clustering
 
@@ -166,7 +227,62 @@ Parameters:
 
 ## Constraint and Relexation
 
-## Table 2
+Minimum cluster size: $\frac{n}{2d}$
+
+Too hard to find a solution so we:
+
+ - Simulate initial input solution up to 4000 times
+ - Initialize food sources up to 2500 times
+ - Globally search in the scout bee up to 2000 times
+ 
+\pause
+
+Minimum cluster size is relaxed to $\frac{n}{10d}$ if the algorithm reaches the first two condition
+ 
+## Result 1
+
+```{r, fig.align = "center", out.width = "70%"}
+tes_names <- dir("../test")
+tes_k <- sub("_.*", "", tes_names) %>% 
+  as.numeric()
+
+stan <- function(x){
+  max_x <- apply(x, 2, function(x) max(abs(x)))
+  out <- mapply(function(x, max_x) x/max_x, x=as.data.frame(x), max_x = max_x)
+  return(out)
+}
+
+plot_cluster <- function(data, alloc, k, par){
+  if(NCOL(data)!=2) stop("high dimension")
+  data <- as.matrix(stan(data))
+  # qplot(x=data[,1], y= data[,2])
+  ggplot() +
+    geom_point(mapping =  aes(x=data[,1], y=data[,2],color = as.factor(alloc))) +
+    geom_point(aes(x=par[1:k], y=par[(k+1):(2*k)]), size=2)  +
+    theme(axis.title = element_blank(), legend.position = "none",
+        plot.background=element_rect(fill = '#FAFAFA', colour = '#FAFAFA'))
+}
+
+
+test <- lapply(paste0("../test/",tes_names), read_csv, col_names = F)
+plotdata <- readRDS("../test_plotdata.rds")
+plot_test <- function(index){
+  plot_cluster(data = test[[index]], alloc = plotdata[[index]]$alloc, k = length(plotdata[[index]]$par)/2, par = plotdata[[index]]$par)
+}
+## ---- p3 ----
+plot_test(3)
+```
+
+
+## Result 2
+
+
+
+```{r, fig.align = "center", out.width = "70%"}
+## ---- p4 ----
+plot_test(4)
+```
+
 
 
 
