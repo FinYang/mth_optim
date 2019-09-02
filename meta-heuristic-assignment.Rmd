@@ -18,7 +18,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, out.width = "80%", fig.align = "center", fig.pos = "h")
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, out.width = "80%", fig.align = "center", fig.pos = "H")
 knitr::read_chunk('meta-heuristics-assignment.R')
 ```
 
@@ -29,18 +29,18 @@ knitr::read_chunk('meta-heuristics-assignment.R')
 
 # Introduction
 
-Artificial Bee Colony (ABC) algorithm is a meta-heuristic optimization algorithm recently introduced by @Karaboga2005. It simulates the behaviour of a honey bee swarm in the attempt to find the optimal solution. As a general optimization algorithm, it does not limit to Clustering problem. We now give a brief overview of how the ABC algorithm works and summarize the algorithm in the pseudo-code that follows. Introduction of each component in detail is given later in the clustering section. Part of the notation and formulations are adopted from @karaboga2011novel.
+Artificial Bee Colony (ABC) algorithm is a meta-heuristic optimization algorithm recently introduced by @Karaboga2005. It simulates the behaviour of a honey bee swarm in the attempt to find the optimal solution. As a general optimization algorithm, it is not limited to Clustering problem. We now give a brief overview of how the ABC algorithm works and summarize the algorithm in the pseudo-code that follows. Introduction of each component in detail is given later in the clustering section. Part of the notation and formulations are adopted from @karaboga2011novel.
 
 
 ## Overview
 
-Other than parameter initialization and solution evaluation, the ABC algorithm can be structured into three phases: the employed bee phase, the onlooker bee phase, and the scout bee phase. Each phase mimics the behaviour of a group of bees in a honey bee swarm. 
+The ABC algorithm can be structured into three phases: the employed bee phase, the onlooker bee phase, and the scout bee phase. Each phase mimics the behaviour of a group of bees in a honey bee swarm. 
 
-At the beginning of the algorithm, the total number of food sources (the solution set) is to be determined and denoted as $SN$ (swarm size). The swarm size is one of the most important parameters in the ABC algorithm, as a large swarm size increases the accuracy and decrease efficiency. We will discuss the impact of swarm size in more detail in the parameter section.
+Before the algorithm enters the employed bee phase, the total number of food sources (the solution set) is to be determined and denoted as $SN$ (swarm size). We will discuss the impact of swarm size in more detail in the parameter section. @akay2009parameter argue the robustness of the algorithm is not affected by different swarm size in general.
 
 After $SN$ being decided, the ABC algorithm will simulate the position of initial food sources. The way to simulate the food sources has been tailored in different problems in the literature: they can be evenly assigned across the solution space (@ABCoptim), randomly generated from a distribution (@karaboga2011novel), or they can be randomly selected from different data points for the problem of clustering. The main idea is to cover the solution space as much as possible.
 
-The number of employed bees or the number of the onlooker bees is the same as the swarm size, or to be specified by the user. In the employed bee phase, the bees search locally to find a neighbour, create a new solution by combining the existing solutions, then decide if to replace the current solution with the new solution using a greedy selection approach. The onlooker bee then performs similar neighbourhood search, the difference is the onlooker bee will search neighbours and create new solutions around existing solutions with better quality, so the onlooker bees provide a tendency towards where it is likely to produce a good solution. The way that the employed bees and onlooker bees find a neighbour and create new solutions and the which solution that the onlooker bees select can be calculated using the general methods in the ABC algorithm, or can be different depending on the problem at hand.
+The number of employed bees or the number of the onlooker bees is the same as the swarm size, or to be specified by the user. In the employed bee phase, the bees search locally to find a neighbour, create a new solution by combining the existing solutions, then decide if to replace the current solution with the new solution using a greedy selection approach. The onlooker bee then performs similar neighbourhood search, the difference is the onlooker bee will search neighbours and create new solutions around existing solutions with better quality, so the onlooker bees provide a tendency towards where it is likely to produce a good solution. The way that the employed bees and onlooker bees find a neighbour and create new solutions and which solution that the onlooker bees select can be calculated using the general methods in the ABC algorithm, or can be different depending on the problem at hand.
 
 After the phases of the employed bee and onlooker bee, whether one solution has been improved is recorded for each food source. If one solution could not be improved up to some certain number of iteration, it will be discarded and the scout bees will find a replacement in the solution space to fill the position, where the way to find new solutions can be independent with the current solutions. The employed bee and the onlooker bee search locally while the scout bee is in charge of the global search. In other words, the employed bee and the onlooker bee emphasis intensification by producing better solutions based on the current solution set, while the scout bee emphasis diversification search solutions independently from the current set of solutions. The ABC algorithm aims to achieve a balance between intensification and diversification through three different phases mimicking three different types of bee.
 
@@ -77,9 +77,9 @@ Algorithm: Artifical Bee Colony
 ```
 
 
-## The parameters
+## Parameters
 
-There are three parameters in the ABC determines the quality of optimization and needs to be taken carefully: 1. the number of food sources (SN) which is also the number of employed bees or the onlooker bees; 2. the value of limit that decides when to abandon food sources; 3. the stopping conditions, such as the maximum cycle number (MCN) or the maximum number of unchanged iteration. 
+There are three parameters in the ABC determines the quality of optimization and needs to be taken carefully: 1. the number of food sources (SN) which may also be the number of employed bees or the onlooker bees; 2. the value of limit that decides when to abandon food sources; 3. the stopping conditions, such as the maximum cycle number (MCN) or the maximum number of unchanged iteration. 
 
 The number of employed bees, the onlooker bees, or the scout bees can also be customized based on the specified problem. As @karaboga2011novel emphasis the three parameters mentioned above, we will assume the number of the employed bees or the onlooker bees are the same as the swarm size $SN$ and assume the number of scout bees is one per iteration in the following discussion, which would be sufficient in general optimization problem. 
 
@@ -98,7 +98,7 @@ If we consider the maximum cycle number (MCN) as the stopping condition, a small
 
 ## Comparison
 
-We compare the ABC algorithm to two other meta-heuristics: The Simulated Annealing and the Genetic Algorithm. The ABC algorithm shares some of the same features of other meta-heuristics while having its different technic to some of the other problems. We now look at how the problem-specific elements in those algorithms are presented in the ABC algorithm.
+We compare the ABC algorithm to two other meta-heuristics: The Simulated Annealing and the Genetic Algorithm. The ABC algorithm shares some of the same features of other meta-heuristics while having its different technic to some of the other problems. We now look at how the elements in those algorithms are presented in the ABC algorithm.
 
 ### Escape local optimum differently from Simulated Annealing
 
@@ -120,15 +120,15 @@ The scout bee phase in the ANC provides an additional global search that is lack
 
 #### Tendency towards the better-performed solution
 
-The onlooker bees find the food sources with better quality and conduct search around them: the create new solutions using good solutions. This improves the efficiency of the algorithm as intuitively good solutions may cluster together. A similar feature can be found in come modified genetic algorithm. The way to select the parent solutions may be weighted towards good solutions.
+The onlooker bees find the food sources with better quality and conduct search around them: the create new solutions using good solutions. This improves the efficiency of the algorithm as intuitively good solutions may cluster together. A similar feature can be found in some modified genetic algorithm. The way to select the parent solutions may be weighted towards good solutions.
 
 # Applying the ABC Algorithm to Solve Sudoku Puzzles
 
 @pacurib2009solving provides solution of Sudoku puzzles using the ABC algorithm. Sudoku puzzle is a logic-based combinatorial puzzle. Players are given a map of $n\times n$ squares (cells) with some of the squares filled with numbers called the starting squares. The player aims to fill out the rest of the cells based on the following three rules
 
-1. A number can only appear once in each row 
-2. A number can only appear once in each column 
-3. A number can only appear once in a $m\times m$ predefined sub-block.
+1. A unique number can only appear once in each row 
+2. A unique number can only appear once in each column 
+3. A unique number can only appear once in a $m\times m$ predefined sub-block.
 
 Figure \@ref(fig:sudoku) is an example of $9\times 9$ sudoku puzzle with $3\times 3$ sub-blocks.
 
@@ -190,7 +190,7 @@ $$z^*_{ij} = \frac{z_{ij}}{\max_{j}|z_{ij}|}$$
 
 where $i$ denotes the observation, $j$ is the index of the variable. Using this approach, the coordinates of the data point will be bounded between -1 and 1 (if the variable only has positive values, it will be bounded between 0 and 1). The bounded can be a valid starting point in simulation in the scout bee phase and in setting initial value in general. It also drives the values that are close to zero away from 0 when the variable is intrinsically smaller than 1.
 
-We do not use the popular standardization that centres the variable to have mean zero and scales standard deviation to one, as the bound of data set will be arbitrary to uniformly apply. We do recommend using different scaling method based on the nature of the data set.
+We do not use the popular standardization that centres the variable to have mean zero and scales standard deviation to one, as the bound of data set will be too arbitrary to uniformly apply. We do recommend using different scaling method based on the nature of the data set.
 
 ## Initialization 
 
@@ -218,14 +218,14 @@ We do not need to use this function as in the problem of clustering, the distanc
 
 ## The Employed Bee
 
-The number of employed bees is set to be the same as the number of food sources $SN$ as in the basic ABC algorithm. For each employed bee at each food source, the bee implements a neighbourhood search to find a new solution by combining the neighbour find with the current position using 
+The number of employed bees is set to be the same as the number of food sources $SN$ as in the basic ABC algorithm. For each employed bee at each food source, the bee implements a neighbourhood search to find a new solution by combining the neighbour with the current position using 
 
 \begin{equation}
 (\#eq:find-neighbour)
 \nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})
 \end{equation}
 
-where $i\in \{1,2,\ldots,SN\}$ is the index of the current solution, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of elements we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots, D\}$ is the randomly generated index denoting the position of the element. $phi_{ij}$ is a random number simulated using a uniform distribution with bound -1 and 1.
+where $i\in \{1,2,\ldots,SN\}$ is the index of the current solution, and $j\in \{1,2,\ldots,SN\}$ is the randomly generated index of the neighbour. If we denote $D$ as the number of elements we need to optimize in one solution (the number of dimensions), then $k\in \{1,2,\ldots, D\}$ is the randomly generated index denoting the position of the element. $\phi_{ij}$ is a random number simulated using a uniform distribution with bound -1 and 1.
 
 Other than the above general step to generate new solutions, in the clustering problem, we add the additional constraints that the new solution needs to produce clusters that have minimum $\frac{n}{2k}$ data points in them. If the constraint is not satisfied, the bee would skip the greedy algorithm and forget the new solution before entering the next phase.
 
@@ -251,7 +251,7 @@ p_i=a\times\frac{fit_i}{\max_i(fit_i)}+b
 
 with $a=0.9$ and $b=0.1$. Probability values are calculated by using the quality of nectar $fit_i$ and normalized by dividing maximum $fit_i$.
 
-We would adopt the first approach as the choice of the parameter $a$ and $b$ in the second equation is quite arbitrary. Under the above $a$ and $b$ values, when the value of nectar is (approximately) the same for all the food source, the probability of going to each food source is (nearly) 1, then the onlooker bees are nothing different from the employed bees. Instead, using the ratio of current nectar to the total nectar gains additional randomness in such a situation, while on average the times of selecting each food source is the same as using the other method.
+We would adopt the first approach as the choice of the parameter $a$ and $b$ in the second equation is quite arbitrary. Under the above $a$ and $b$ values, when the value of nectar is (approximately) the same for all the food source, the probability of going to each food source is (nearly) 1, then the onlooker bees are not very different from the employed bees. Instead, using the ratio of current nectar to the total nectar gains additional randomness in such a situation, while on average the times of selecting each food source is the same as using the other method.
 
 In our setting, the number of onlooker bees is the same as the employed bee or the number of food sources $SN$ as in basic ABC algorithm. Each onlooker bees selects a solution as the base solution, finds a new solution like the employed bee using equation \@ref(eq:find-neighbour), and choose whether to switch solution using the same greedy approach.
 
@@ -312,11 +312,11 @@ We use a subset of the training data sets to tune our parameters. The data sets 
 
 The parameters we choose to evaluate and select are the limit (the number of iterations that each food source can stay the same before being abandoned), the maximum cycle number (MCN) and the maximum number of unchanged iteration (MNU).  The number of food sources $SN$ is well studied in @akay2009parameter. They argue that the algorithm is robust with different values of $SN$ in general.
 
-We implement a coordinate descent approach where we try different values of one parameter and keep other parameters fixed at the same time. We firstly keep the limit fixed as the current setting of the limit changes with different data set, more likely to remain robust. We also keep MCN as 1000 since from the results above no data set reaches MCN of 1,000, but quite a few data sets stop when the number of the unchanged iteration reaches 200. We acknowledge that there might be a correlation issue where the effects of parameters are not independent with each other especially when MCN and the max number of unchanged iteration control the stopping of the algorithm together.
+We implement a coordinate descent approach where we try different values of one parameter and keep other parameters fixed at the same time. We firstly keep the limit fixed as the current setting of the limit changes with different data set, which more likely to remain robust. We also keep MCN as 1000 since from the results above no data set reaches MCN of 1,000, but quite a few data sets stop when the number of the unchanged iteration reaches 200. We acknowledge that there might be a correlation issue where the effects of parameters are not independent with each other especially when MCN and the max number of unchanged iteration control the stopping of the algorithm together.
 
-We then report the different values we tried in the Appendix. We start with MCN of 1000 and a limit of $SN\times D$ and increase MNU see if additional iteration can improve the optimization. The results for the two data sets are reported in Table \@ref(tab:sq1) and Table \@ref(tab:te1). If we simply look at the final objective value, then increasing MNU would always increase the performance. Because the MNC and MNU control the stopping condition, it would be ideal if we can find a balance to make the number of iteration close to the maximum number, not wasting any unnecessary runs. For data `4_tetra` the algorithm always stops because of the MNU and for `3_square2` only when the MNU is larger enough to 600 it would reach MCN, so we would aim to decrease MNC instead of MNU considering the time it costs to run more iterations.
+We then report the different values we tried in the Appendix. We start with MCN of 1000 and a limit of $SN\times D$ and increase MNU see if additional iteration can improve the optimization. The results for the two data sets are reported in Table \@ref(tab:sq1) and Table \@ref(tab:te1). If we simply look at the final objective value, then increasing MNU would always increase the performance. Because the MCN and MNU control the stopping condition, it would be ideal if we can find a balance to make the number of iteration close to the maximum number, not wasting any unnecessary runs. For data `4_tetra` the algorithm always stops because of the MNU and for `3_square2` only when the MNU is larger enough to 600 it would reach MCN, so we would aim to decrease MCN instead of MNU considering the time it costs to run more iterations.
 
-We keep MNU at 200 and try different values for MNC. The results are reported in Table \@ref(tab:sq2) ann \@ref(tab:te2). MCN of 500 is optimal for `3_square2` and 600 for `4_tetra`, so we take the average of 550, but also keep in mind that the number of clusters for these two data set is relatively small. Then we try different value for the limit in Table \@ref(tab:sq3) ann \@ref(tab:te3). The good values of the limit range between 30 and 50, we take an average of 40. Note the number of iteration reaches the maximum number multiple times, so we decided to increase MCN to 700 to accommodate high dimensional data and data with more clusters.
+We keep MNU at 200 and try different values for MCN. The results are reported in Table \@ref(tab:sq2) ann \@ref(tab:te2). MCN of 500 is optimal for `3_square2` and 600 for `4_tetra`, so we take the average of 550, but also keep in mind that the number of clusters for these two data set is relatively small. Then we try different value for the limit in Table \@ref(tab:sq3) ann \@ref(tab:te3). The good values of the limit range between 30 and 50, we take an average of 40. Note the number of iteration reaches the maximum number multiple times, so we decided to increase MCN to 700 to accommodate high dimensional data and data with more clusters.
 
 ```{r sqte4}
 ```
@@ -349,9 +349,9 @@ Note because of the huge number of clusters, simulating initial solution and ini
 
 The plots are presented in the Appendix. Most of them seem reasonable. The clustering for `2sp2globb` in Figure \@ref(fig:p4) shows perfect classification. The distribution of the points in that data set is intrinsically easy to identify. Following problems are presented in some other plots.
 
-1. In Figure \@ref(fig:p2),  \@ref(fig:p3),\@ref(fig:p6), \@ref(fig:p7),\@ref(fig:p8), and \@ref(fig:p9), there might still be some room to improve on the clustering if the number of clusters specified fits the pattern more. For example, in Figure \@ref(fig:p2), by looking at the pattern of the colours we can say one extra centroid would make a difference.
+1. In Figure \@ref(fig:p2), \@ref(fig:p3), \@ref(fig:p6), \@ref(fig:p7), \@ref(fig:p8), and \@ref(fig:p9), there might still be some room to improve on the clustering if the number of clusters specified fits the pattern more. For example, in Figure \@ref(fig:p2), by looking at the pattern of the colours we can say one extra centroid would make a difference.
 
-2. In Figure \@ref(fig:p6),\@ref(fig:p7), and \@ref(fig:p8), for example, there are some points on the edge of a clear cluster is identified to be in another cluster. This is because the allocation scheme we are using is closet allocation: allocation depends on the distance of the point to the centroids instead of pattens. We could improve the algorithm if take the pattern into consideration in allocation.
+2. In Figure \@ref(fig:p6), \@ref(fig:p7), and \@ref(fig:p8), for example, there are some points on the edge of a clear cluster is identified to be in another cluster. This is because the allocation scheme we are using is closest allocation: allocation depends on the distance of the point to the centroids instead of pattens. We could improve the algorithm if take the pattern into consideration in allocation.
 
 3. In Figure \@ref(fig:p1), \@ref(fig:p5), and \@ref(fig:p10), the patterns are more complicated than what closed allocation can detect. For example, in Figure \@ref(fig:p5) the `smile`, the cluster human can determine could be three clusters inside a cycle, which itself is a cluster. But using closest allocation and the DB index (even using other clustering algorithms), we cannot detect clusters within a cluster.
 
@@ -372,18 +372,12 @@ With the objective function being the DB index, the requirement of minimum clust
 
 
 
-<!-- \pagebreak -->
 
-<!-- # References -->
-
-<!-- <div id="refs"></div> -->
 
 \pagebreak
 
-<!-- # (APPENDIX) Appendix {-} -->
 # Appendix
 
-<!-- ## Evaluations during parameter tuning -->
 
 ```{r sq1}
 ```
@@ -403,10 +397,8 @@ With the objective function being the DB index, the requirement of minimum clust
 ```{r te3}
 ```
 
-\pagebreak
 
 
-<!-- ## Plots of clustering on test data set -->
 
 ```{r plot-3-7}
 ```
@@ -447,7 +439,9 @@ With the objective function being the DB index, the requirement of minimum clust
 <!-- \pagebreak -->
 
 <!-- # References -->
+\pagebreak
 
+`r '# References {-}'`
 
 
 

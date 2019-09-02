@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.7.29)  2 SEP 2019 13:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.7.29)  2 SEP 2019 15:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1190,11 +1190,12 @@ LaTeX Font Info:    Font shape `T1/Carlito-TLF/m/n' will be
 ] (./pre1.toc) [3
 
 ]
-<ABC.png, id=52, 345.29pt x 421.575pt>
-File: ABC.png Graphic file (type png)
-<use ABC.png>
-Package pdftex.def Info: ABC.png  used on input line 197.
-(pdftex.def)             Requested size: 154.65605pt x 188.82571pt.
+<pre1_files/figure-beamer/ABC-1.pdf, id=52, 505.89pt x 505.89pt>
+File: pre1_files/figure-beamer/ABC-1.pdf Graphic file (type pdf)
+<use pre1_files/figure-beamer/ABC-1.pdf>
+Package pdftex.def Info: pre1_files/figure-beamer/ABC-1.pdf  used on input line
+ 197.
+(pdftex.def)             Requested size: 194.86813pt x 194.87245pt.
 LaTeX Font Info:    Font shape `T1/Carlito-TLF/m/n' will be
 (Font)              scaled to size 12.0pt on input line 197.
 LaTeX Font Info:    Font shape `T1/Carlito-TLF/bx/n' in size <12> not available
@@ -1204,12 +1205,12 @@ LaTeX Font Info:    Font shape `T1/Carlito-TLF/bx/n' in size <12> not available
 LaTeX Font Info:    Font shape `T1/Carlito-TLF/b/n' will be
 (Font)              scaled to size 12.0pt on input line 197.
 
-Overfull \vbox (34.04358pt too high) detected at line 197
+Overfull \vbox (40.09032pt too high) detected at line 197
  []
 
 [4
 
- <./ABC.png (PNG copy)>]
+ <./pre1_files/figure-beamer/ABC-1.pdf>]
 \openout4 = `pre1.vrb'.
 
 (./pre1.vrb
@@ -1389,7 +1390,7 @@ l.497 \end{frame}
                   [26
 
 ]
-<pre1_files/figure-beamer/unnamed-chunk-1-1.pdf, id=199, 505.89pt x 505.89pt>
+<pre1_files/figure-beamer/unnamed-chunk-1-1.pdf, id=204, 505.89pt x 505.89pt>
 File: pre1_files/figure-beamer/unnamed-chunk-1-1.pdf Graphic file (type pdf)
 <use pre1_files/figure-beamer/unnamed-chunk-1-1.pdf>
 Package pdftex.def Info: pre1_files/figure-beamer/unnamed-chunk-1-1.pdf  used o
@@ -1402,7 +1403,7 @@ Overfull \vbox (26.1608pt too high) detected at line 504
 [27
 
  <./pre1_files/figure-beamer/unnamed-chunk-1-1.pdf>]
-<pre1_files/figure-beamer/unnamed-chunk-2-1.pdf, id=212, 505.89pt x 505.89pt>
+<pre1_files/figure-beamer/unnamed-chunk-2-1.pdf, id=217, 505.89pt x 505.89pt>
 File: pre1_files/figure-beamer/unnamed-chunk-2-1.pdf Graphic file (type pdf)
 <use pre1_files/figure-beamer/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: pre1_files/figure-beamer/unnamed-chunk-2-1.pdf  used o
@@ -1436,15 +1437,15 @@ Package rerunfilecheck Info: File `pre1.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  27029 strings out of 494553
- 508177 string characters out of 6175971
+ 508311 string characters out of 6175971
  595374 words of memory out of 5000000
  29946 multiletter control sequences out of 15000+600000
  141807 words of font info for 94 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  68i,14n,95p,1875b,889s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{e:/TinyTeX/texmf-dis
-t/fonts/enc/dvips/lm/lm-mathsy.enc}{e:/TinyTeX/texmf-dist/fonts/enc/dvips/carli
-to/crlt_57h366.enc}{e:/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{e:/
+t/fonts/enc/dvips/lm/lm-mathsy.enc}{e:/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
+-mathit.enc}{e:/TinyTeX/texmf-dist/fonts/enc/dvips/carlito/crlt_57h366.enc}{e:/
 TinyTeX/texmf-dist/fonts/enc/dvips/carlito/crlt_z7vml3.enc}{e:/TinyTeX/texmf-di
 st/fonts/enc/dvips/lm/lm-ec.enc}<e:/TinyTeX/texmf-dist/fonts/type1/typoland/car
 lito/Carlito-Bold.pfb><e:/TinyTeX/texmf-dist/fonts/type1/typoland/carlito/Carli
@@ -1453,10 +1454,10 @@ e:/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><e:/TinyTeX/texmf-dist/f
 onts/type1/public/lm/lmmi12.pfb><e:/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
 sy10.pfb><e:/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><e:/TinyTeX/te
 xmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on pre1.pdf (29 pages, 389118 bytes).
+Output written on pre1.pdf (29 pages, 338662 bytes).
 PDF statistics:
- 285 PDF objects out of 1000 (max. 8388607)
- 230 compressed objects within 3 object streams
+ 290 PDF objects out of 1000 (max. 8388607)
+ 234 compressed objects within 3 object streams
  78 named destinations out of 1000 (max. 500000)
  28765 words of extra memory for PDF output out of 29859 (max. 10000000)
 

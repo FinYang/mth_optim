@@ -28,8 +28,87 @@ library(gridExtra)
 
 
 
-```{r ABC, fig.cap = "Phases of ABC. Source: Kumar, S. et al. (2014)", out.width="50%"}
-knitr::include_graphics("ABC.png")
+```{r ABC, fig.cap = "Phases of ABC. Source: Kumar, S. et al. (2014)", out.width="63%"}
+# knitr::include_graphics("ABC.png")
+rec1 <- data.frame(x1 = 0, x2 = 4, y1 = 1, y2 = 2)
+rec2 <- data.frame(x1 = 0, x2 = 4, y1 = 3, y2 = 4)
+rec3 <- data.frame(x1 = 0, x2 = 4, y1 = 5, y2 = 6)
+rec4 <- data.frame(x1 = 0, x2 = 4, y1 = 7, y2 = 8)
+rec5 <- data.frame(x1 = 0, x2 = 4, y1 = 12, y2 = 13)
+rec6 <- data.frame(x1 = -3, x2 = -1, y1 = 9, y2 = 11)
+dia <- data.frame(x = c(0,2,4,2), y = c(10,9,10,11))
+text1 <- data.frame(x = 2, y = 1.5, label="Memorize the Best Food Source")
+text2 <- data.frame(x = 2, y = 3.5, label="Update Scout Bees")
+text3 <- data.frame(x = 2, y = 5.5, label="Update Onlooker Bees")
+text4 <- data.frame(x = 2, y = 7.5, label="Update Employed Bees")
+text5 <- data.frame(x = 2, y = 12.5, label="Initialization of Parameters")
+text6 <- data.frame(x = -2, y = 10, label="Best Solution\n Found So Far")
+text7 <- data.frame(x = 2, y = 10, label="Termination Criteria\n Satisfied?")
+
+arraw1 <- data.frame(x1 = 2, x2 = 2, y1 = 12, y2 = 11)
+arraw2 <- data.frame(x1 = 2, x2 = 2, y1 = 9, y2 = 8)
+arraw3 <- data.frame(x1 = 2, x2 = 2, y1 = 7, y2 = 6)
+arraw4 <- data.frame(x1 = 2, x2 = 2, y1 = 5, y2 = 4)
+arraw5 <- data.frame(x1 = 2, x2 = 2, y1 = 3, y2 = 2)
+arraw6 <- data.frame(x1 = 0, x2 = -1, y1 = 10, y2 = 10)
+
+arraw7 <- data.frame(x1 = 2, x2 = 2, y1 = 1, y2 = 0)
+arraw8 <- data.frame(x1 = 2, x2 = 5, y1 = 0, y2 = 0)
+arraw9 <- data.frame(x1 = 5, x2 = 5, y1 = 0, y2 = 10)
+arraw10 <- data.frame(x1 = 5, x2 = 4, y1 = 10, y2 = 10)
+
+
+ggplot() +
+  theme(axis.line=element_blank(),
+        axis.text.x=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(),
+        legend.position="none",
+        panel.background=element_blank(),
+        panel.border=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        plot.background=element_rect(fill = '#FAFAFA', colour = '#FAFAFA')) +
+  geom_rect(data=rec1, aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2), fill = "#4E5C68") +
+  geom_rect(data=rec2, aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2), fill = "#4E5C68") +
+  geom_rect(data=rec3, aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2), fill = "#4E5C68") +
+  geom_rect(data=rec4, aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2), fill = "#4E5C68") +
+  geom_rect(data=rec5, aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2), fill = "#4E5C68") +
+  geom_rect(data=rec6, aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2), fill = "#4E5C68") +
+  geom_polygon(data = dia, aes(x=x, y=y), fill = "#4E5C68") +
+  geom_text(data=text1, aes(x=x, y=y, label = label), color = "#e1e1ea", size = 5) +
+  geom_text(data=text2, aes(x=x, y=y, label = label), color = "#e1e1ea", size = 5) +
+  geom_text(data=text3, aes(x=x, y=y, label = label), color = "#e1e1ea", size = 5) +
+  geom_text(data=text4, aes(x=x, y=y, label = label), color = "#e1e1ea", size = 5) +
+  geom_text(data=text5, aes(x=x, y=y, label = label), color = "#e1e1ea", size = 5) +
+  geom_text(data=text6, aes(x=x, y=y, label = label), color = "#e1e1ea", size = 5) +
+  geom_text(data=text7, aes(x=x, y=y, label = label), color = "#e1e1ea", size = 5) +
+  geom_segment(data = arraw1, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", arrow = arrow(length = unit(0.1, "inches")),color = "#0063A7") +
+  geom_segment(data = arraw2, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", arrow = arrow(length = unit(0.1, "inches")),color = "#0063A7") +
+  geom_segment(data = arraw3, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", arrow = arrow(length = unit(0.1, "inches")),color = "#0063A7") +
+  geom_segment(data = arraw4, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", arrow = arrow(length = unit(0.1, "inches")),color = "#0063A7") +
+  geom_segment(data = arraw5, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", arrow = arrow(length = unit(0.1, "inches")),color = "#0063A7") +
+  geom_segment(data = arraw6, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", arrow = arrow(length = unit(0.1, "inches")),color = "#0063A7") +
+  geom_segment(data = arraw7, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", color = "#0063A7") +
+  geom_segment(data = arraw8, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", color = "#0063A7") +
+  geom_segment(data = arraw9, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", color = "#0063A7") +
+  geom_segment(data = arraw10, aes(x = x1, y = y1 , xend = x2, yend = y2 ), size = 2, 
+               lineend = "round", linejoin = "round", arrow = arrow(length = unit(0.1, "inches")),color = "#0063A7") +
+  geom_text(data=data.frame(x=2.5, y=8.5, label = "No"), aes(x=x, y=y, label = label), size = 5) +
+  geom_text(data=data.frame(x=-0.5, y=10.5, label = "Yes"), aes(x=x, y=y, label = label), size = 5) +
+  xlim(c(-3,5)) +
+  ylim(c(0, 13))
 ```
 
 
@@ -45,7 +124,7 @@ knitr::include_graphics("ABC.png")
 
 Parameters:
 
- - The number of initial food sources $SN$
+ - The number of initial food sources $SN=20$
 
 Simulation:
 
@@ -113,7 +192,7 @@ $$p_i = \frac{fit_i}{\sum^{SN}_{i=1} fit_i}$$
 ```
 Parameter:
 
-- The limit
+- The limit: 40
 
 \pause
 
@@ -132,8 +211,8 @@ $$z_i^j = z_{min}^j + \delta_i^j(z_{max}^j-z_{min}^j)$$
 
 Parameters:
 
- - Maximum number of iterations
- - Maximum number of unimproved global minimum
+ - Maximum number of iterations: 700
+ - Maximum number of unimproved global minimum: 200
 
 ## Intensification vs Diversification
 
