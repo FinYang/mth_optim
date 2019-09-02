@@ -18,7 +18,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, out.width = "80%", fig.align = "center")
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, out.width = "80%", fig.align = "center", fig.pos = "h")
 knitr::read_chunk('meta-heuristics-assignment.R')
 ```
 
@@ -276,11 +276,12 @@ where $z_i$ is the abandoned source and $j\in{1,2,\ldots,D}$ is the index of dim
 In each iteration, the best solution in terms of the DB index will be recorded and updataed if the new solution is better than the current global solution. The algorithm will stop once it reaches the maximum number of cycles or the number of unchanged iteration reaches the criteria. 
 
 
-See @akay2009parameter for a full discussion on the parameter tuning on the ABC algorithm. We follow their recommendataion and use $SN\times D$ as the value of the limit, Based on their argument, the ABC algorithm can provide a consistant robust result with different the swarm size. The minimum swarm size they use in testing is 50. We decrease the value to 20 to try to decrease the time it needs to run in each iteration. We set the maximum number of iteartion to be 1000 and the maximum number of unchange iteration to be 200, 20% of the maximum number of iteration, to achieve a reasonable running time.
+See @akay2009parameter for a full discussion on the parameter tuning on the ABC algorithm. Based on their argument, the ABC algorithm can provide a consistant robust result with different the swarm size. The minimum swarm size they use in testing is 50. We decrease the value to 20 to try to decrease the time it needs to run in each iteration. We set the maximum number of iteartion to be 1000 and the maximum number of unchange iteration to be 200, 20% of the maximum number of iteration, to achieve a reasonable running time. 
+We use $k\times D$ as the value of the limit, as the number of iterations required for a bee to conduct a decent local search is considered to be related to the number of dimension and the number of clusters. When the number of dimension is large or when the number of cluster is large, it is harder to find a better solution so we increase the limit accordingly.
 
 ## Relaxation in High Dimensional Data
 
-For the constraint we imposed on the clustering problem that each cluster must include to a certain amount of data points sometimes is hard to satisfied, especially in the initial food sources simulation, even we are starting with sampling form existing data point. Therefore, we set the following relaxation in each attempt to find feasible solution. In those situation, the solution produced using the ABC algorithm may not admits the constraint.
+For the constraint we imposed on the clustering problem that each cluster must include to a certain amount of data points sometimes is hard to satisfied, especially in the initial food sources simulation, even if we are starting with sampling form existing data point. Therefore, we set the following relaxation in each attempt to find feasible solution. In those situation, the solution produced using the ABC algorithm may not admits the minimum cluster size constraint.
 
 1. For the initial solution input, a maximum of 4,000 simulation is tested against the constraint.
 2. For the simulation for food sources, a maximum of 2,500 simulation is tested against the constraint
@@ -301,7 +302,7 @@ Table \@ref(tab:table1) gives the performance measures of the algorithm on the t
 
 The `18_s-set1` data set is the one data set that research the condition to relax the constraint that each cluster must has $\frac{n}{2k}$ data points for it has 18 clusters and the sample size is 5,000, but in terms of the final objuective value, it is has the best value of DB index among all the data set. The number of iteration it requires to find the optimal solution is not bad comparing to other data set with a large number of cluster.
 
-Some of the data sets that require the least time including `3_square2` and `7_aggregation`. For `3_square2` the result is not suprising for it is a two dimensional data with only 3 clusters. The result for `7_aggregation` is doubtfull for its 7 clusters, and by looking at the difference between the total number of iteration and the time it first admits the final solution, we can say that the algorithm stops because the number of unchanged global solution has rearched 200. If we change the stopping criteria it may improve further with more iterations.
+Some of the data sets that require the least time including `3_square2` and `7_aggregation`. For `3_square2` the result is not suprising for it is a two dimensional data with only 3 clusters. The result for `7_aggregation` is doubtfull for its 7 clusters, and by looking at the difference between the total number of iteration and the time it first admits the final solution, we can say that the algorithm stops because the number of unchanged global solution has rearched 200. If we change the parameters it may improve further with more iterations.
 
 The highest objective function belongs to `4_tetra`, which may because its extra dimension to others. The number of iteration is in the middle of the distribution. In conclusion, if the final objective value is not the only measure of performence, it is quite hard to comment on the performence without seeing the plots visually.
 
@@ -311,13 +312,16 @@ We use a subset of the training data sets to tune our parameters. The data sets 
 
 The parameters we choose to evaluate and select are The limit (the number of iteartion that each food source can stay the same before being abandoned), the maximum cycle number (MCN) and the maximum number of unchange (MNU).  The number of food sources $SN$, is well studyed in @akay2009parameter. They argue that the algorithm is robust with different value of $SN$ in general.
 
-We implement a coordinate descent approach where we try different values of one parameter and keep other parameters fixed at the same time. We firstly keep the limit fixed as by @akay2009parameter a value of $SN\times D$ is suited to data with general form. We also keep MCN as 1000 since from the results above no data set rearches MCN of 1,000, but quite a few data sets stops when the number of unchanged solution rearches 200. We acknowdge that there might be correlation issue where the effects of parameters are not independent with each other especially when MCN and the max number of unchange control the stopping of the algorithm together.
+We implement a coordinate descent approach where we try different values of one parameter and keep other parameters fixed at the same time. We firstly keep the limit fixed as the current setting of the limit changes with different data set, more likely to remain robust. We also keep MCN as 1000 since from the results above no data set rearches MCN of 1,000, but quite a few data sets stops when the number of unchanged solution rearches 200. We acknowdge that there might be correlation issue where the effects of parameters are not independent with each other especially when MCN and the max number of unchange control the stopping of the algorithm together.
 
-We then report the different values we tried. We start with MCN of 1000 and limit of $SN\times D$, and increase MNU see if additional iteration can improve the optimization. The results for the two data sets are reported in Table \@ref(fig:sq1) and Table \@ref(fig:te1). If we simply look at the final objective value, then increasing MNU would always increase the performence. Because the MNC and MNU controls the stopping condition, it would be ideal if we can find a balance that about half of the time algorithm stops because of MNC and the other half because of MNU, not wasting any unneccary runs. For data `4_tetra` the algorithm always stops because of the MNU and for `3_square2` only when the MNU is larger enough to 600 it would reach MCN, so we would aim to decrease MNC instead of MNU considering the time it costs to run more iterations.
+We then report the different values we tried in the Appendix. We start with MCN of 1000 and limit of $SN\times D$, and increase MNU see if additional iteration can improve the optimization. The results for the two data sets are reported in Table \@ref(tab:sq1) and Table \@ref(tab:te1). If we simply look at the final objective value, then increasing MNU would always increase the performence. Because the MNC and MNU controls the stopping condition, it would be ideal if we can find a balance to make the number of iteration close to the maximum number, not wasting any unneccary runs. For data `4_tetra` the algorithm always stops because of the MNU and for `3_square2` only when the MNU is larger enough to 600 it would reach MCN, so we would aim to decrease MNC instead of MNU considering the time it costs to run more iterations.
 
-We keep MNU at 200 and try different value for MNC. The results are reported in Table \@ref(fig:sq2) ann \@ref(fig:te2). MCN of 500 is optimal for `3_square2` and 600 for `4_tetra`, so we take the average of 550, but also keep in mind that the number of clusters for these two data set are reletively small. Then we try different value for the limit in Table \@ref(fig:sq3) ann \@ref(fig:te3). The good values of limit range between 30 and 50, we take the average of 40. Note the number of iteration reaches the maximum number multiple times, so we decided to increase MCN to 700 to accomendate high dimensional data and data with more clusters.
+We keep MNU at 200 and try different value for MNC. The results are reported in Table \@ref(tab:sq2) ann \@ref(tab:te2). MCN of 500 is optimal for `3_square2` and 600 for `4_tetra`, so we take the average of 550, but also keep in mind that the number of clusters for these two data set are reletively small. Then we try different value for the limit in Table \@ref(tab:sq3) ann \@ref(tab:te3). The good values of limit range between 30 and 50, we take the average of 40. Note the number of iteration reaches the maximum number multiple times, so we decided to increase MCN to 700 to accomendate high dimensional data and data with more clusters.
 
+```{r sqte4}
+```
 
+We report the performence of the two data set in Table \@ref(tab:sqte4). Both of the data sets present slightly improvment over final objective value. The increase on the number of iteration for `4_tetra` may due to the increase in the limit from 12 to 40. As limit goes up, the global search of the scout bees is trigered less frequently, which gives the employed bees and the onlooker bees more time to implement local search. It shows by adjusting the limit, the intensification and diversification are more balanced: neighbourhood of each solution is search more throurghly without being abandoned too early.
 
 ## Testing new parameters
 
@@ -325,14 +329,61 @@ We keep MNU at 200 and try different value for MNC. The results are reported in 
 ```{r table2}
 ```
 
-We evaluate the performence of our new parameters on the training set`
+We evaluate the performence of our new parameters on the training set and report the results in \@ref(tab:table2). All data sets but `18_2d-no0` showed improvement over objective value. The final objective value for `18_2d-no0` is only worsened by 0.0037. The improvemnt over other data sets ranges from 0.002 to 0.04. It is not surprising to see that the two data sets with the highest number of clusters appear to be either not improving (`18_2d-no0`), or least improved by 0.002 (`18_s-set1`). Other than the reason of the larger number of clusters, we only tune our parameters based on the data sets with a small number of clusters. The best parameters used for data sets with many clusters may need to be considered different in this case.
+
+The number of iteration that the best solution was first found for most of the data sets increases, likely due to the increased limit. As we discussed before, a larger limit gives room to implement better local search, emphsising intensification more. After adjusting MCN, the number of iterations used by each data set is very close to MCN, which is more efficient than before.
 
 ## Test data set
 
+```{r test-data}
+```
+
+```{r table3}
+```
+
+The performences for the test data set are reported in Table \@ref(tab:table3). In general, the algorithm performs more stably on the data set with small number of clusters. The most typical one is `2sp2globb` with 3 clusters. the results are indistinguiable with 4 dicimal places. For `D` with 26 clusters, the final objective value ranges from 0.60 to 0.67. There are some exceptions, indicating the performence is largely related to the pattern of the data.
+
+Note because of the huge number of clusters, simulating initial solution and initial food sources for data `D` is vary hard. All ten runs trigered the relaxation condition so we have to decrease the minimum cluster size for the problem to be solvable within a reasonal time constraint.
+
+## Comments on the plots
+
+The plots are presented in the Appendix. Most of them seem reasonable. The clustering for `2sp2globb` in Figure \@ref(fig:p4) shows perfect classification. The distribution of the points in that data set is intrincically eaily to identify. Following problems atr presented in some other plots.
+
+1. In Figure \@ref(fig:p2),  \@ref(fig:p3),\@ref(fig:p6), \@ref(fig:p7),\@ref(fig:p8), and \@ref(fig:p9), there might still be some room to imrpove on the clustering if the number of clusters specified fits the pattern more. For example, in Figure \@ref(fig:p2), by looking at the pattern of the coloe we can say one extra centroid would make a differnce.
+
+2. In Figure \@ref(fig:p6),\@ref(fig:p7), and \@ref(fig:p8), for example, there are some points on the edge of a clear cluster is identified to be in another cluster. This is because the allocation scheme we are using is closet allocation: allocation depends on the distance of the point to the centroids instead of pattens. We could improve the algorithm if take the pattern into consideration in allocation.
+
+3. In Figure \@ref(fig:p1), \@ref(fig:p5), and \@ref(fig:p10), the patterns are more complacated than what closed allocation can detect. For example, in Figure \@ref(fig:p5) the `smile`, the cluster human can deternme could be three clusters inside a cycle, which itself is a cluster. But using closest allocation and the DB index (even using other clustering algorithm), we cannot detect clusters within cluster.
+
+4. Note many of the identified centroids are not in the center of the cluster. This is because the DB index tries to increase the distance between centroids and decrease within cluster distance at the same time. Moving centroids away from each other (and away from the center of the cluster) will improve the DB index.
+
+
+## Conclusion
+
+The ABC algorithm is very flexible in the sense that we can modify it to fit different problems and objective function. It is easy to adjust between intensification and diversification by changing the behaviour properties of the bees and modifing the parameters with out change the general idea of mimicing honey bee colony. It can escape local optim quite easily using the solution abandon mechanism, and the parameters directly control the time it needs to run, producing reliable results relatively quickly.
+
+Because of the flexcity of the algorithm, the settings of the algorithm needs to be taken carefully. For example, the function to find neighbours, the way to calculate onlooker bee probabilities, and the number of scout bees are not considered as parameters we need to train in the above discussion, but they can be and needs to be modified with respect to specific problem, which requires more testing and adjusting.
+
+The difference between using the ABC algorithm to solve clustering problem and to solve general numerical problem is mostly about the different objective funcion, which is the same for other algorithms. The ABC algorithm is eaily modified to solve clustering problem, but it is not specifical designed for cluster. The  design of ABC algorithm does not consider the features in clustering problem, unlike the algorithm that is specificly for clustering problem such k-means. It treats the clustering problem using the same optimization strategy as in a numerical problem which may not be the most efficient approach. Furthermore, for the same reason, the pattern of the resulting clusters from the ABC algorithm depends entirely on the form of the objective function. It cannot incoporate complicated pattern if the objective function cannot be eaily calculated.
+
+The objective function we are using in the above practive is the DB index, which is relatively complicated to evaluate. Combined with the ABC algorithm where in each iteration each bee need to evaluate the solution using the DB index, it will decrease the efficience. Using the DB index in the clustering problem also increases the probability that the centroids are not in the center of the clusters, which might be desired in some cases but in general a different objective function may help with the process of finding patterns.
+
+With the objective function being the DB index, the requirement of minimum cluster size helps with identify new solutions as the DB index itself does not guarantee a proper position of the centroid: the centroid may be away from the main cluster and a small DB index can still be found. On the other hand, the minimum cluster size would greatly delay the whole algorithm, as even since the start of the process, an optimization algorithm with a ranom component like ABC can struggle to find a feasible solution according to the minimum cluster size without further assumption and treatment. The minimum cluster size is needed in this sceniaro, but not the most efficient approach comparing to a different set of objective function and constaints.
 
 
 
+<!-- \pagebreak -->
 
+<!-- # References -->
+
+<!-- <div id="refs"></div> -->
+
+\pagebreak
+
+<!-- # (APPENDIX) Appendix {-} -->
+# Appendix
+
+<!-- ## Evaluations during parameter tuning -->
 
 ```{r sq1}
 ```
@@ -351,6 +402,58 @@ We evaluate the performence of our new parameters on the training set`
 
 ```{r te3}
 ```
+
+\pagebreak
+
+
+<!-- ## Plots of clustering on test data set -->
+
+```{r plot-3-7}
+```
+
+
+```{r p1, fig.cap = "Clustering of ds2c2sc"} 
+```
+
+```{r p2, fig.cap = "Clustering of s-set1"}
+```
+
+```{r p3, fig.cap = "Clustering of D"}
+```
+
+```{r p4, fig.cap = "Clustering of 2sp2globb"}
+```
+
+```{r p5, fig.cap = "Clustering of smile"}
+```
+
+```{r p6, fig.cap = "Clustering of 2d-no4"}
+```
+
+```{r p7, fig.cap = "Clustering of square4"}
+```
+
+```{r p8, fig.cap = "Clustering of cure-t2"}
+```
+
+```{r p9, fig.cap = "Clustering of ds4c2sc"}
+```
+
+```{r p10, fig.cap = "Clustering of complex"}
+```
+
+
+
+<!-- \pagebreak -->
+
+<!-- # References -->
+
+
+
+
+
+
+
 
 
 
