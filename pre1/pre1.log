@@ -1,28 +1,35 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.7.29)  2 SEP 2019 15:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.7.29)  3 SEP 2019 12:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **pre1.tex
 (./pre1.tex
 LaTeX2e <2018-12-01>
-(e:/TinyTeX/texmf-dist/tex/latex/beamer/beamer.cls
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2019/07/23 v3.56 A class for typesetting presentations
-(e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasemodes.sty (e:/TinyTeX/texmf-d
-ist/tex/latex/etoolbox/etoolbox.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasem
+odes.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.
+sty
 Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count80
 )
 \beamer@tempbox=\box27
 \beamer@tempcount=\count81
 \c@beamerpauses=\count82
-(e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasedecode.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbased
+ecode.sty
 \beamer@slideinframe=\count83
 \beamer@minimum=\count84
 \beamer@decode@box=\box28
 )
 \beamer@commentbox=\box29
 \beamer@modecount=\count85
-) (e:/TinyTeX/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/ifpdf.s
+ty
 Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 )
 \headdp=\dimen102
@@ -67,19 +74,28 @@ Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 \beamer@coveringdepth=\count102
 \beamer@sectionadjust=\count103
 \beamer@tocsectionnumber=\count104
-(e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseoptions.sty (e:/TinyTeX/texmf
--dist/tex/latex/graphics/keyval.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseo
+ptions.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.st
+y
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 ))
 \beamer@paperwidth=\skip42
 \beamer@paperheight=\skip43
-(e:/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.
+sty
 Package: geometry 2018/04/16 v5.8 Page Geometry
-(e:/TinyTeX/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/ifvtex.
+sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
-) (e:/TinyTeX/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ifxetex/ifxetex.
+sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count105
@@ -94,44 +110,71 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen124
 \Gm@layoutvoffset=\dimen125
 \Gm@dimlist=\toks15
-) (e:/TinyTeX/texmf-dist/tex/latex/extsizes/size14.clo
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/extsizes/size14.cl
+o
 File: size14.clo 1999/11/11 v1.4a NON-Standard LaTeX file (size option)
-) (e:/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (e:/TinyTeX/texmf
--dist/tex/latex/graphics/graphicx.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf
+core.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.
+sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
-(e:/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.
+sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
-(e:/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (e:/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graph
+ics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
-(e:/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdfte
+x.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen126
 \Gin@req@width=\dimen127
-) (e:/TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (e:/TinyTeX/texmf
--dist/tex/latex/pgf/utilities/pgfrcs.sty (e:/TinyTeX/texmf-dist/tex/generic/pgf
-/utilities/pgfutil-common.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pg
+fsys.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfr
+cs.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pg
+futil-common.tex
 \pgfutil@everybye=\toks16
 \pgfutil@tempdima=\dimen128
 \pgfutil@tempdimb=\dimen129
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)) (e:
-/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pg
+futil-common-lists.tex))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pg
+futil-latex.def
 \pgfutil@abb=\box36
-(e:/TinyTeX/texmf-dist/tex/latex/ms/everyshi.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
-)) (e:/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (e:/TinyTeX
-/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pg
+frcs.code.tex
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision
+.tex)
 Package: pgfrcs 2019/07/17 v3.1.4a (3.1.4a)
-)) (e:/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/
+pgfsys.code.tex
 Package: pgfsys 2019/07/17 v3.1.4a (3.1.4a)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pg
+fkeys.code.tex
 \pgfkeys@pathtoks=\toks17
 \pgfkeys@temptoks=\toks18
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pg
+fkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks19
 ))
 \pgf@x=\dimen130
@@ -154,23 +197,36 @@ Package: pgfsys 2019/07/17 v3.1.4a (3.1.4a)
 \t@pgf@tokb=\toks21
 \t@pgf@tokc=\toks22
 \pgf@sys@id@count=\count112
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/
+pgf.cfg
 File: pgf.cfg 2019/07/17 v3.1.4a (3.1.4a)
 )
 Driver file for pgf: pgfsys-pdftex.def
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/
+pgfsys-pdftex.def
 File: pgfsys-pdftex.def 2019/07/17 v3.1.4a (3.1.4a)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/
+pgfsys-common-pdf.def
 File: pgfsys-common-pdf.def 2019/07/17 v3.1.4a (3.1.4a)
-))) (e:/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+)))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/
+pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgfsyssoftpath@smallbuffer@items=\count113
 \pgfsyssoftpath@bigbuffer@items=\count114
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/
+pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-)) (e:/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+)) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.s
+ty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
-(e:/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color
+.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -183,32 +239,52 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcore.code.tex
 Package: pgfcore 2019/07/17 v3.1.4a (3.1.4a)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (e:/TinyTeX/texmf-
-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (e:/TinyTeX/texmf-dist/tex/gener
-ic/pgf/math/pgfmathutil.code.tex) (e:/TinyTeX/texmf-dist/tex/generic/pgf/math/p
-gfmathparser.code.tex
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+.code.tex
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+calc.code.tex
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+util.code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+parser.code.tex
 \pgfmath@dimen=\dimen140
 \pgfmath@count=\count115
 \pgfmath@box=\box37
 \pgfmath@toks=\toks23
 \pgfmath@stack@operand=\toks24
 \pgfmath@stack@operation=\toks25
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex (e:/Tin
-yTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code
-.tex) (e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.
-tex)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.te
-x) (e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) 
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (e
-:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics
-.code.tex))) (e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.code.tex
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.basic.code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.trigonometric.code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.random.code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.comparison.code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.base.code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.round.code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.misc.code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+functions.integerarithmetics.code.tex)))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+float.code.tex
 \c@pgfmathroundto@lastzeros=\count116
-)) (e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (e:/TinyTeX/tex
-mf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.
+code.tex)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgf@picminx=\dimen141
 \pgf@picmaxx=\dimen142
@@ -225,77 +301,116 @@ File: pgfcorepoints.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgf@zx=\dimen153
 \pgf@zy=\dimen154
 )
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgf@path@lastx=\dimen155
 \pgf@path@lasty=\dimen156
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgf@shorten@end@additional=\dimen157
 \pgf@shorten@start@additional=\dimen158
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgfpic=\box38
 \pgf@hbox=\box39
 \pgf@layerbox@main=\box40
 \pgf@picture@serial@count=\count117
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.te
-x
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgflinewidth=\dimen159
 )
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.t
-ex
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgf@pt@x=\dimen160
 \pgf@pt@y=\dimen161
 \pgf@pt@temp=\dimen162
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorequick.code.tex
 File: pgfcorequick.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcoreobjects.code.tex
 File: pgfcoreobjects.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 )
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.te
-x
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorepathprocessing.code.tex
 File: pgfcorepathprocessing.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgfarrowsep=\dimen163
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgf@max=\dimen164
 \pgf@sys@shading@range@num=\count118
 \pgf@shadingcount=\count119
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgfexternal@startupbox=\box41
-)) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorelayers.code.tex
 File: pgfcorelayers.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.te
-x
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcoretransparency.code.tex
 File: pgfcoretransparency.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorepatterns.code.tex
 File: pgfcorepatterns.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/p
+gfcorerdf.code.tex
 File: pgfcorerdf.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-))) (e:/TinyTeX/texmf-dist/tex/latex/pgf/utilities/xxcolor.sty
+)))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/xxco
+lor.sty
 Package: xxcolor 2003/10/24 ver 0.1
 \XC@nummixins=\count120
 \XC@countmixins=\count121
-) (e:/TinyTeX/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/atbegsh
+i.sty
 Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
-(e:/TinyTeX/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/infware
+rr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-) (e:/TinyTeX/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/ltxcmds
+.sty
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)) (e:/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.
+sty
 Package: hyperref 2019/06/12 v6.88h Hypertext links for LaTeX
-(e:/TinyTeX/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/hobsub-
+hyperref.sty
 Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
 
-(e:/TinyTeX/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/hobsub-
+generic.sty
 Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
 Package hobsub Info: Skipping package `infwarerr' (already loaded).
@@ -328,25 +443,34 @@ Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
 Package hobsub Info: Skipping package `atbegshi' (already loaded).
 Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
-) (e:/TinyTeX/texmf-dist/tex/latex/oberdiek/auxhook.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/auxhook.s
+ty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
-) (e:/TinyTeX/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/kvoptions
+.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
 \@linkdim=\dimen165
 \Hy@linkcounter=\count122
 \Hy@pagecounter=\count123
-(e:/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.de
+f
 File: pd1enc.def 2019/06/12 v6.88h Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
 \Hy@SavedSpaceFactor=\count124
-(e:/TinyTeX/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/hyperr
+ef.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 Package hyperref Info: Option `unicode' set `true' on input line 4424.
-(e:/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2019/06/12 v6.88h Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -362,7 +486,7 @@ Package hyperref Info: Backreferencing OFF on input line 4570.
 Package hyperref Info: Implicit mode OFF; no redefinition of LaTeX internals.
 Package hyperref Info: Bookmarks ON on input line 4803.
 \c@Hy@tempcnt=\count125
-(e:/TinyTeX/texmf-dist/tex/latex/url/url.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
@@ -386,43 +510,66 @@ Package hyperref Message: Stopped early.
 
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
-(e:/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.d
+ef
 File: hpdftex.def 2019/06/12 v6.88h Hyperref driver for pdfTeX
 \Fld@listcount=\count128
 \c@bookmark@seq@number=\count129
-(e:/TinyTeX/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/rerunfile
+check.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
-)) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaserequires.sty (e:/TinyTeX/t
-exmf-dist/tex/latex/beamer/beamerbasecompatibility.sty) (e:/TinyTeX/texmf-dist/
-tex/latex/beamer/beamerbasefont.sty (e:/TinyTeX/texmf-dist/tex/latex/amsfonts/a
-mssymb.sty
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaser
+equires.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasec
+ompatibility.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasef
+ont.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.s
+ty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-(e:/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.
+sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \@emptytoks=\toks26
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetranslator.sty (e:/TinyTe
-X/texmf-dist/tex/latex/translator/translator.sty
+)))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaset
+ranslator.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/transla
+tor.sty
 Package: translator 2019-05-31 v1.12a Easy translation of strings in LaTeX
-)) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasemisc.sty) (e:/TinyTeX/texm
-f-dist/tex/latex/beamer/beamerbasetwoscreens.sty) (e:/TinyTeX/texmf-dist/tex/la
-tex/beamer/beamerbaseoverlay.sty
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasem
+isc.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaset
+woscreens.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseo
+verlay.sty
 \beamer@argscount=\count130
 \beamer@lastskipcover=\skip44
 \beamer@trivlistdepth=\count131
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetitle.sty) (e:/TinyTeX/texm
-f-dist/tex/latex/beamer/beamerbasesection.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaset
+itle.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbases
+ection.sty
 \c@lecture=\count132
 \c@part=\count133
 \c@section=\count134
 \c@subsection=\count135
 \c@subsubsection=\count136
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseframe.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasef
+rame.sty
 \beamer@framebox=\box42
 \beamer@frametitlebox=\box43
 \beamer@zoombox=\box44
@@ -437,24 +584,39 @@ f-dist/tex/latex/beamer/beamerbasesection.sty
 \beamer@envbody=\toks27
 \framewidth=\dimen170
 \c@framenumber=\count140
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseverbatim.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasev
+erbatim.sty
 \beamer@verbatimfileout=\write4
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseframesize.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasef
+ramesize.sty
 \beamer@splitbox=\box45
 \beamer@autobreakcount=\count141
 \beamer@autobreaklastheight=\dimen171
 \beamer@frametitletoks=\toks28
 \beamer@framesubtitletoks=\toks29
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseframecomponents.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasef
+ramecomponents.sty
 \beamer@footins=\box46
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasecolor.sty) (e:/TinyTeX/texm
-f-dist/tex/latex/beamer/beamerbasenotes.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasec
+olor.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasen
+otes.sty
 \beamer@frameboxcopy=\box47
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetoc.sty) (e:/TinyTeX/texmf-
-dist/tex/latex/beamer/beamerbasetemplates.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaset
+oc.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaset
+emplates.sty
 \beamer@sbttoks=\toks30
-(e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseauxtemplates.sty (e:/TinyTeX/
-texmf-dist/tex/latex/beamer/beamerbaseboxes.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasea
+uxtemplates.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseb
+oxes.sty
 \bmb@box=\box48
 \bmb@colorbox=\box49
 \bmb@boxshadow=\box50
@@ -466,8 +628,11 @@ texmf-dist/tex/latex/beamer/beamerbaseboxes.sty
 \bmb@prevheight=\dimen175
 )
 \beamer@blockheadheight=\dimen176
-)) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaselocalstructure.sty (e:/Tin
-yTeX/texmf-dist/tex/latex/tools/enumerate.sty
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasel
+ocalstructure.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/enumerate.st
+y
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 \@enLab=\toks31
 )
@@ -475,23 +640,33 @@ Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 \c@table=\count143
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasenavigation.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasen
+avigation.sty
 \beamer@section@min@dim=\dimen177
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetheorems.sty (e:/TinyTeX/te
-xmf-dist/tex/latex/amsmath/amsmath.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaset
+heorems.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.st
+y
 Package: amsmath 2018/12/01 v2.17b AMS math features
 \@mathmargin=\skip51
 For additional information on amsmath, use the `?' option.
-(e:/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.st
+y
 Package: amstext 2000/06/29 v2.01 AMS text
-(e:/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks32
 \ex@=\dimen178
-)) (e:/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen179
-) (e:/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count144
@@ -531,7 +706,8 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 \mathdisplay@stack=\toks36
 LaTeX Info: Redefining \[ on input line 2844.
 LaTeX Info: Redefining \] on input line 2845.
-) (e:/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.sty
+) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.st
+y
 Package: amsthm 2017/10/31 v2.20.4
 \thm@style=\toks37
 \thm@bodyfont=\toks38
@@ -544,17 +720,26 @@ Package: amsthm 2017/10/31 v2.20.4
 \dth@everypar=\toks42
 )
 \c@theorem=\count156
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasethemes.sty)) (e:/TinyTeX/te
-xmf-dist/tex/latex/beamer/beamerthemedefault.sty (e:/TinyTeX/texmf-dist/tex/lat
-ex/beamer/beamerfontthemedefault.sty) (e:/TinyTeX/texmf-dist/tex/latex/beamer/b
-eamercolorthemedefault.sty) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerinner
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaset
+hemes.sty))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamertheme
+default.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerfontt
+hemedefault.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamercolor
+themedefault.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerinner
 themedefault.sty
 \beamer@dima=\dimen187
 \beamer@dimb=\dimen188
-) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerouterthemedefault.sty))) (e:/Ti
-nyTeX/texmf-dist/tex/latex/pgf/utilities/pgfpages.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerouter
+themedefault.sty)))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfp
+ages.sty
 Package: pgfpages 2011/01/05 ver 0.02
-(e:/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count157
 \calc@Bcount=\count158
@@ -576,7 +761,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \pgfphysicalheight=\dimen191
 \pgfphysicalwidth=\dimen192
 \pgfpages@shipoutbox=\box55
-) (e:/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -610,7 +795,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-) (e:/TinyTeX/texmf-dist/tex/latex/base/fixltx2e.sty
+) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fixltx2e.st
+y
 Package: fixltx2e 2016/12/29 v2.1a fixes to LaTeX (obsolete)
 Applying: [2015/01/01] Old fixltx2e package on input line 46.
 
@@ -619,54 +805,80 @@ Package fixltx2e Warning: fixltx2e is not required with releases after 2015
 (fixltx2e)                See the latexrelease package for details.
 
 Already applied: [0000/00/00] Old fixltx2e package on input line 53.
-) (e:/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
-(e:/TinyTeX/texmf-dist/tex/latex/base/t1enc.def
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-)) (e:/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
+)) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputenc.s
+ty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks43
 \inpenc@posthook=\toks44
 ) (./beamerthememonash.sty (./beamerthememetropolis.sty
 Package: beamerthememetropolis 2017/01/23 v1.2 Metropolis Beamer theme
-(e:/TinyTeX/texmf-dist/tex/latex/pgfopts/pgfopts.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgfopts/pgfopts.st
+y
 Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
-(e:/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (e:/TinyTeX/texmf-di
-st/tex/generic/pgf/utilities/pgfkeys.code.tex))
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfk
+eys.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pg
+fkeys.code.tex))
 \pgfopts@list@add@a@toks=\toks45
 \pgfopts@list@add@b@toks=\toks46
 ) (./beamerinnerthememetropolis.sty
 Package: beamerinnerthememetropolis 2017/01/23 Metropolis inner theme
-(e:/TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (e:/TinyTeX/texmf-d
-ist/tex/latex/pgf/basiclayer/pgf.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/
+tikz.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf
+.sty
 Package: pgf 2019/07/17 v3.1.4a (3.1.4a)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfm
+oduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgfnodeparttextbox=\box56
-) (e:/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfm
+oduleplot.code.tex
 File: pgfmoduleplot.code.tex 2019/07/17 v3.1.4a (3.1.4a)
-) (e:/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/
+pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2019/07/17 v3.1.4a (3.1.4a)
 \pgf@nodesepstart=\dimen193
 \pgf@nodesepend=\dimen194
-) (e:/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/
+pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2019/07/17 v3.1.4a (3.1.4a)
-)) (e:/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (e:/TinyTeX/texmf-
-dist/tex/latex/pgf/math/pgfmath.sty (e:/TinyTeX/texmf-dist/tex/generic/pgf/math
-/pgfmath.code.tex)) (e:/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.cod
-e.tex
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgff
+or.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/math/pgfmath.s
+ty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+.code.tex))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pg
+ffor.code.tex
 Package: pgffor 2019/07/17 v3.1.4a (3.1.4a)
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath
+.code.tex)
 \pgffor@iter=\dimen195
 \pgffor@skip=\dimen196
 \pgffor@stack=\toks47
 \pgffor@toks=\toks48
-)) (e:/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlaye
+r/tikz/tikz.code.tex
 Package: tikz 2019/07/17 v3.1.4a (3.1.4a)
 
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.te
-x
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pg
+flibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgf@plot@mark@count=\count166
 \pgfplotmarksize=\dimen197
@@ -687,7 +899,9 @@ File: pgflibraryplothandlers.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \tikznumberofchildren=\count168
 \tikznumberofcurrentchild=\count169
 \tikz@fig@count=\count170
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfm
+odulematrix.code.tex
 File: pgfmodulematrix.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 \pgfmatrixcurrentrow=\count171
 \pgfmatrixcurrentcolumn=\count172
@@ -695,8 +909,8 @@ File: pgfmodulematrix.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 )
 \tikz@expandcount=\count174
 
-(e:/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
-topaths.code.tex
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlaye
+r/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2019/07/17 v3.1.4a (3.1.4a)
 )))
 \metropolis@titleseparator@linewidth=\skip60
@@ -718,20 +932,27 @@ Package: beamerfontthememetropolis 2017/01/23 Metropolis font theme
 Package beamerthememetropolis Warning: You need to compile with XeLaTeX or LuaL
 aTeX to use the Fira fonts on input line 95.
 
-)) (./beamercolorthemeMonashWhite.sty) (./beamerfontthememonash.sty (e:/TinyTeX
-/texmf-dist/tex/latex/carlito/carlito.sty
+)) (./beamercolorthemeMonashWhite.sty) (./beamerfontthememonash.sty
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/carlito/carlito.st
+y
 Package: carlito 2014/08/20 (Bob Tennent) Supports Carlito fonts for LaTeX, pdf
 LaTeX, luaLaTeX and xeLaTeX.
-(e:/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.st
+y
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
-(e:/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (e:/TinyTeX/texmf-dist/t
-ex/generic/xkeyval/xkvutils.tex
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.
+tex
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils
+.tex
 \XKV@toks=\toks49
 \XKV@tempa@toks=\toks50
 )
 \XKV@depth=\count175
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
-)) (e:/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+)) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.s
+ty
 Package: textcomp 2018/08/11 v2.0j Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
@@ -745,11 +966,11 @@ Package textcomp Info: Sub-encoding information:
 (textcomp)             Family '?' is the default used for unknown fonts.
 (textcomp)             See the documentation for details.
 Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
-(e:/TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
-(e:/TinyTeX/texmf-dist/tex/latex/base/ts1enc.dfu
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1enc.dfu
 File: ts1enc.dfu 2018/10/05 v1.2f UTF-8 support for inputenc
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
@@ -885,9 +1106,11 @@ Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
 Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
-) (e:/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
-) (e:/TinyTeX/texmf-dist/tex/latex/fontaxes/fontaxes.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontaxes/fontaxes.
+sty
 Package: fontaxes 2014/03/23 v1.0d Font selection axes
 LaTeX Info: Redefining \upshape on input line 29.
 LaTeX Info: Redefining \itshape on input line 31.
@@ -895,8 +1118,11 @@ LaTeX Info: Redefining \slshape on input line 33.
 LaTeX Info: Redefining \scshape on input line 37.
 )
 LaTeX Info: Redefining \textin on input line 153.
-)) (e:/TinyTeX/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (e:/Tin
-yTeX/texmf-dist/tex/latex/textpos/textpos.sty
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerinner
+themerounded.sty)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/textpos/textpos.st
+y
 Package: textpos 2019/04/15 v1.9.1
 Package: textpos 2019/04/15 1.9.1, absolute positioning of text on the page
 \TP@textbox=\box61
@@ -912,10 +1138,14 @@ Grid set 16 x 16 = 22.7622pt x 17.07166pt
 \TP@tbargs=\toks51
 \TP@prevdepth=\dimen269
 TextBlockOrigin set to 0pt x 0pt
-)) (e:/TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
+))
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/upquote/upquote.st
+y
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
-) (e:/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtyp
+e.sty
 Package: microtype 2019/02/28 v2.7b Micro-typographical refinements (RS)
 \MT@toks=\toks52
 \MT@count=\count176
@@ -923,7 +1153,9 @@ LaTeX Info: Redefining \textls on input line 790.
 \MT@outer@kern=\dimen270
 LaTeX Info: Redefining \textmicrotypecontext on input line 1336.
 \MT@listname@count=\count177
-(e:/TinyTeX/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtyp
+e-pdftex.def
 File: microtype-pdftex.def 2019/02/28 v2.7b Definitions specific to pdftex (RS)
 
 LaTeX Info: Redefining \lsstyle on input line 914.
@@ -931,11 +1163,15 @@ LaTeX Info: Redefining \lslig on input line 914.
 \MT@outer@space=\skip69
 )
 Package microtype Info: Loading configuration file microtype.cfg.
-(e:/TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtyp
+e.cfg
 File: microtype.cfg 2019/02/28 v2.7b microtype main configuration file (RS)
 ))
 Package hyperref Info: Option `breaklinks' set `true' on input line 58.
-(e:/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.
+sty
 Package: fancyvrb 2019/01/15
 Style option: `fancyvrb' v3.2a <2019/01/15> (tvz)
 \FV@CodeLineNo=\count178
@@ -944,14 +1180,16 @@ Style option: `fancyvrb' v3.2a <2019/01/15> (tvz)
 \c@FancyVerbLine=\count179
 \FV@StepNumber=\count180
 \FV@OutFile=\write5
-) (e:/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.st
+y
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip70
 \fb@frw=\dimen271
 \fb@frh=\dimen272
 \FrameRule=\dimen273
 \FrameSep=\dimen274
-) (e:/TinyTeX/texmf-dist/tex/latex/cancel/cancel.sty
+) (c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/cancel/cancel.st
+y
 Package: cancel 2013/04/12 v2.2 Cancel math terms
 ) (./pre1.aux)
 \openout1 = `pre1.aux'.
@@ -975,13 +1213,15 @@ LaTeX Font Info:    ... okay on input line 173.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 173.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 173.
 
-(e:/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 173.
 LaTeX Font Info:    Try loading font information for T1+Carlito-TLF on input li
 ne 173.
-(e:/TinyTeX/texmf-dist/tex/latex/carlito/T1Carlito-TLF.fd
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/carlito/T1Carlito-
+TLF.fd
 File: T1Carlito-TLF.fd 2014/08/20 (autoinst) Font definitions for T1/Carlito-TL
 F.
 )
@@ -1021,9 +1261,13 @@ LaTeX Font Info:    Font shape `T1/Carlito-TLF/m/n' will be
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(e:/TinyTeX/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/epstopdf-
+base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-(e:/TinyTeX/texmf-dist/tex/latex/oberdiek/grfext.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/grfext.st
+y
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1032,15 +1276,21 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
-(e:/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstop
+df-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )) ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box64
 Package hyperref Info: Link coloring OFF on input line 173.
-(e:/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
+ty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
-(e:/TinyTeX/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/gettitl
+estring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count181
@@ -1112,28 +1362,28 @@ ine 173.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  T1/lmtt/m/n --> T1/lmtt/bx/n on input line 173.
 
-(e:/TinyTeX/texmf-dist/tex/latex/translator/translator-basic-dictionary-English
-.dict
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/transla
+tor-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 )
-(e:/TinyTeX/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-
-English.dict
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/transla
+tor-bibliography-dictionary-English.dict
 Dictionary: translator-bibliography-dictionary, Language: English 
 )
-(e:/TinyTeX/texmf-dist/tex/latex/translator/translator-environment-dictionary-E
-nglish.dict
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/transla
+tor-environment-dictionary-English.dict
 Dictionary: translator-environment-dictionary, Language: English 
 )
-(e:/TinyTeX/texmf-dist/tex/latex/translator/translator-months-dictionary-Englis
-h.dict
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/transla
+tor-months-dictionary-English.dict
 Dictionary: translator-months-dictionary, Language: English 
 )
-(e:/TinyTeX/texmf-dist/tex/latex/translator/translator-numbers-dictionary-Engli
-sh.dict
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/transla
+tor-numbers-dictionary-English.dict
 Dictionary: translator-numbers-dictionary, Language: English 
 )
-(e:/TinyTeX/texmf-dist/tex/latex/translator/translator-theorem-dictionary-Engli
-sh.dict
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/transla
+tor-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 \c@mv@tabular=\count182
@@ -1172,8 +1422,8 @@ LaTeX Font Info:    Font shape `T1/Carlito-TLF/b/n' will be
 (Font)              scaled to size 24.0pt on input line 178.
 [1
 
-{e:/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./titlepage.png>] (.
-/pre1.toc
+{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
+x.map} <./titlepage.png>] (./pre1.toc
 LaTeX Font Info:    Font shape `T1/Carlito-TLF/m/n' will be
 (Font)              scaled to size 17.28pt on input line 1.
 )
@@ -1215,14 +1465,16 @@ Overfull \vbox (40.09032pt too high) detected at line 197
 
 (./pre1.vrb
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 5.
-(e:/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 8.
 LaTeX Font Info:    Try loading font information for OT1+Carlito-TLF on input l
 ine 17.
-(e:/TinyTeX/texmf-dist/tex/latex/carlito/OT1Carlito-TLF.fd
+
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/carlito/OT1Carlito
+-TLF.fd
 File: OT1Carlito-TLF.fd 2014/08/20 (autoinst) Font definitions for OT1/Carlito-
 TLF.
 )
@@ -1237,17 +1489,17 @@ LaTeX Font Info:    Font shape `OT1/Carlito-TLF/m/n' will be
 LaTeX Font Info:    Font shape `OT1/Carlito-TLF/m/n' will be
 (Font)              scaled to size 7.0pt on input line 17.
 LaTeX Font Info:    Try loading font information for OML+lmm on input line 17.
-(e:/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 17.
 
-(e:/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Try loading font information for OMX+lmex on input line 17.
 
-(e:/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -1257,15 +1509,19 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 17.
 LaTeX Font Info:    Try loading font information for U+msa on input line 17.
-(e:/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-) (e:/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.c
+fg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 17.
-(e:/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (e:/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
+)
+(c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.c
+fg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/Carlito-TLF/m/n' will be
@@ -1333,7 +1589,7 @@ l.375 \end{frame}
 ] [15
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{escaping-loc
-al-optim}) has been already used, duplicate ignored
+al-optima}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.402 \end{frame}
@@ -1345,7 +1601,7 @@ l.402 \end{frame}
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.435 \end{frame}
+l.434 \end{frame}
                   [18
 
 ] (./pre1.toc) [19
@@ -1356,37 +1612,37 @@ l.435 \end{frame}
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.473 \end{frame}
+l.472 \end{frame}
                   [21
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{adjustment})
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.473 \end{frame}
+l.472 \end{frame}
                   [22
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{adjustment})
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.473 \end{frame}
+l.472 \end{frame}
                   [23
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{adjustment})
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.473 \end{frame}
+l.472 \end{frame}
                   [24
 
 ] [25
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{constraint-a
-nd-relexation}) has been already used, duplicate ignored
+nd-relaxation}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.497 \end{frame}
+l.496 \end{frame}
                   [26
 
 ]
@@ -1394,10 +1650,10 @@ l.497 \end{frame}
 File: pre1_files/figure-beamer/unnamed-chunk-1-1.pdf Graphic file (type pdf)
 <use pre1_files/figure-beamer/unnamed-chunk-1-1.pdf>
 Package pdftex.def Info: pre1_files/figure-beamer/unnamed-chunk-1-1.pdf  used o
-n input line 504.
+n input line 503.
 (pdftex.def)             Requested size: 216.51753pt x 216.51723pt.
 
-Overfull \vbox (26.1608pt too high) detected at line 504
+Overfull \vbox (26.1608pt too high) detected at line 503
  []
 
 [27
@@ -1407,10 +1663,10 @@ Overfull \vbox (26.1608pt too high) detected at line 504
 File: pre1_files/figure-beamer/unnamed-chunk-2-1.pdf Graphic file (type pdf)
 <use pre1_files/figure-beamer/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: pre1_files/figure-beamer/unnamed-chunk-2-1.pdf  used o
-n input line 511.
+n input line 510.
 (pdftex.def)             Requested size: 216.51753pt x 216.51723pt.
 
-Overfull \vbox (26.1608pt too high) detected at line 511
+Overfull \vbox (26.1608pt too high) detected at line 510
  []
 
 [28
@@ -1427,34 +1683,39 @@ Overfull \vbox (26.1608pt too high) detected at line 511
 \tf@snm=\write9
 \openout9 = `pre1.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 524.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 524.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 523.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 523.
 (./pre1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 524.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 524.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 523.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 523.
 Package rerunfilecheck Info: File `pre1.out' has not changed.
 (rerunfilecheck)             Checksum: 9A21922BA29D180BA0B36003E6E35346;379.
  ) 
 Here is how much of TeX's memory you used:
- 27029 strings out of 494553
- 508311 string characters out of 6175971
+ 27027 strings out of 494553
+ 519935 string characters out of 6175971
  595374 words of memory out of 5000000
  29946 multiletter control sequences out of 15000+600000
  141807 words of font info for 94 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  68i,14n,95p,1875b,889s stack positions out of 5000i,500n,10000p,200000b,80000s
-{e:/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{e:/TinyTeX/texmf-dis
-t/fonts/enc/dvips/lm/lm-mathsy.enc}{e:/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
--mathit.enc}{e:/TinyTeX/texmf-dist/fonts/enc/dvips/carlito/crlt_57h366.enc}{e:/
-TinyTeX/texmf-dist/fonts/enc/dvips/carlito/crlt_z7vml3.enc}{e:/TinyTeX/texmf-di
-st/fonts/enc/dvips/lm/lm-ec.enc}<e:/TinyTeX/texmf-dist/fonts/type1/typoland/car
-lito/Carlito-Bold.pfb><e:/TinyTeX/texmf-dist/fonts/type1/typoland/carlito/Carli
-to-Italic.pfb><e:/TinyTeX/texmf-dist/fonts/type1/typoland/carlito/Carlito.pfb><
-e:/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><e:/TinyTeX/texmf-dist/f
-onts/type1/public/lm/lmmi12.pfb><e:/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
-sy10.pfb><e:/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><e:/TinyTeX/te
-xmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on pre1.pdf (29 pages, 338662 bytes).
+{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-math
+ex.enc}{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
+-mathsy.enc}{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/
+lm/lm-mathit.enc}{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/d
+vips/carlito/crlt_57h366.enc}{c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist
+/fonts/enc/dvips/carlito/crlt_z7vml3.enc}{c:/Users/yangy/AppData/Roaming/TinyTe
+X/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/yangy/AppData/Roaming/TinyT
+eX/texmf-dist/fonts/type1/typoland/carlito/Carlito-Bold.pfb><c:/Users/yangy/App
+Data/Roaming/TinyTeX/texmf-dist/fonts/type1/typoland/carlito/Carlito-Italic.pfb
+><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/typoland/carlit
+o/Carlito.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
+blic/lm/lmex10.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/fonts/typ
+e1/public/lm/lmmi12.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist/font
+s/type1/public/lm/lmsy10.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf-dist
+/fonts/type1/public/lm/lmtk10.pfb><c:/Users/yangy/AppData/Roaming/TinyTeX/texmf
+-dist/fonts/type1/public/lm/lmtt12.pfb>
+Output written on pre1.pdf (29 pages, 338210 bytes).
 PDF statistics:
  290 PDF objects out of 1000 (max. 8388607)
  234 compressed objects within 3 object streams

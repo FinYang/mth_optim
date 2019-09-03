@@ -162,7 +162,7 @@ $$\nu_{ij} = z_{ij} + \phi_{ij}(z_{ij}-z_{kj})$$
 
 ### Calculate fitness
 
-$$fit_i = \frac{1}{1/f_i}$$
+$$fit_i = \frac{1}{1+f_i}$$
 
 
 ## Onlooker bees
@@ -218,7 +218,7 @@ Parameters:
 
 ### Local search
 
-Creat new solution from neighbours
+Create new solution from neighbours
 
  - The employed bee
  - The onlooker bee (with tendency)
@@ -235,7 +235,7 @@ Replace current solution using new solution found from solution space
 
 # Comparison
 
-## Escaping local optim
+## Escaping local optima
 
 Simulated annealing:
 
@@ -245,7 +245,7 @@ Simulated annealing:
 
 ABC:
 
- - Abandon solution that does not improve for many iteraions (combined with global search)
+ - Abandon solution that does not improve for many iterations (combined with global search)
 
 
 ## Reproduction
@@ -271,10 +271,9 @@ Genetic Algorithm:
 Each bee in ABC:
 \begin{itemize}
 \item Finding neighbour
-\item Creat new solution
-\item (Randomly)
-\item Calculate fitness
-\item Greedily select
+\item Creating new solution
+\item Calculating fitness
+\item Greedy selection
 \end{itemize}
 
 \end{column}
@@ -293,20 +292,20 @@ Each bee in ABC:
 
 ### Standardization
 
-  $z^*_{ij} = \frac{z_{ij}}{\max_{j}|z_{ij}|}$
+  $z^*_{ij} = \frac{z_{ij}}{\max_{}|z_{ij}|}$
 
 \pause
 
 ### Initialize different foods sources
 
  - Evenly assigned across the solution space $\times$
- - Randomly sample between bounds $\times$
+ - Randomly sampled between bounds $\times$
  \pause
- - Sample from the existing data points
+ - Sampled from the existing data points
 
-## Constraint and Relexation
+## Constraint and Relaxation
 
-Minimum cluster size: $\frac{n}{2d}$
+Minimum cluster size: $\frac{n}{2k}$
 
 Too hard to find a solution so we:
 
@@ -316,7 +315,7 @@ Too hard to find a solution so we:
  
 \pause
 
-Minimum cluster size is relaxed to $\frac{n}{10d}$ if the algorithm reaches the first two condition
+Minimum cluster size is relaxed to $\frac{n}{10k}$ if the algorithm reaches the first two condition
  
 ## Result 1
 

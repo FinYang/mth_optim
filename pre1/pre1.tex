@@ -261,7 +261,7 @@ Simulation:
 
 \begin{block}{Calculate fitness}
 
-\[fit_i = \frac{1}{1/f_i}\]
+\[fit_i = \frac{1}{1+f_i}\]
 
 \end{block}
 
@@ -344,7 +344,7 @@ Parameters:
 
 \begin{block}{Local search}
 
-Creat new solution from neighbours
+Create new solution from neighbours
 
 \begin{itemize}
 \tightlist
@@ -377,8 +377,8 @@ Replace current solution using new solution found from solution space
 \hypertarget{comparison}{%
 \section{Comparison}\label{comparison}}
 
-\begin{frame}{Escaping local optim}
-\protect\hypertarget{escaping-local-optim}{}
+\begin{frame}{Escaping local optima}
+\protect\hypertarget{escaping-local-optima}{}
 
 Simulated annealing:
 
@@ -395,7 +395,7 @@ ABC:
 \begin{itemize}
 \tightlist
 \item
-  Abandon solution that does not improve for many iteraions (combined
+  Abandon solution that does not improve for many iterations (combined
   with global search)
 \end{itemize}
 
@@ -423,10 +423,9 @@ Genetic Algorithm:
 Each bee in ABC:
 \begin{itemize}
 \item Finding neighbour
-\item Creat new solution
-\item (Randomly)
-\item Calculate fitness
-\item Greedily select
+\item Creating new solution
+\item Calculating fitness
+\item Greedy selection
 \end{itemize}
 
 \end{column}
@@ -450,7 +449,7 @@ Each bee in ABC:
 
 \begin{block}{Standardization}
 
-\(z^*_{ij} = \frac{z_{ij}}{\max_{j}|z_{ij}|}\)
+\(z^*_{ij} = \frac{z_{ij}}{\max_{}|z_{ij}|}\)
 
 \pause
 
@@ -463,19 +462,19 @@ Each bee in ABC:
 \item
   Evenly assigned across the solution space \(\times\)
 \item
-  Randomly sample between bounds \(\times\) \pause
+  Randomly sampled between bounds \(\times\) \pause
 \item
-  Sample from the existing data points
+  Sampled from the existing data points
 \end{itemize}
 
 \end{block}
 
 \end{frame}
 
-\begin{frame}{Constraint and Relexation}
-\protect\hypertarget{constraint-and-relexation}{}
+\begin{frame}{Constraint and Relaxation}
+\protect\hypertarget{constraint-and-relaxation}{}
 
-Minimum cluster size: \(\frac{n}{2d}\)
+Minimum cluster size: \(\frac{n}{2k}\)
 
 Too hard to find a solution so we:
 
@@ -491,7 +490,7 @@ Too hard to find a solution so we:
 
 \pause
 
-Minimum cluster size is relaxed to \(\frac{n}{10d}\) if the algorithm
+Minimum cluster size is relaxed to \(\frac{n}{10k}\) if the algorithm
 reaches the first two condition
 
 \end{frame}

@@ -203,7 +203,7 @@ Once the position of the inition solutions has been determined, the fitness $f_i
 
 \begin{equation}
 (\#eq:nectar)
-fit_i = \frac{1}{1/f_i}
+fit_i = \frac{1}{1+f_i}
 \end{equation}
 
 In the case when the cost function produces negative fitness, the quality of the nectar can be calculated by:
