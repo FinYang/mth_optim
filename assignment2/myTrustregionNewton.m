@@ -41,3 +41,36 @@ function [x,Delta,k]=myTrustregionNewton(f,gf,Hf,subsolve,x,Delta,...
 %--------------------------------------------------------------------------
 % WRITE YOUR CODE BELOW THIS LINE!
 %--------------------------------------------------------------------------
+qf = @(x, d) f(x) + gf(x)'*d + 0.5*d'*Hf(x)*d;
+k=0;
+d = zeros([size(x), maxstep]);
+pred = zeros(maxstep,1);
+ared = zeros(maxstep,1);
+rho = zeros(maxstep,1);
+
+while (gf(x) ~= 0)
+   k = k+1;
+   d(:,:,k) = subsolve(f,gf,Hf,x,Delta);
+   pred(k,1) = f(x) - qf(x,d(:,:,k));
+   ared(k,1) = f(x) - f(x+d(:,:,k));
+   rho(k,1) = ared(k,1)/pred(k,1);
+   if(rho(k,1)>= eta1)
+       x = x+d(:,:,k);       
+   end
+   
+   if(rho(k,1)< eta1)
+       Delta = gamma1 * Delta;
+   elseif(rho(k,1)>= eta2)
+       Delta = max(DeltaMin, gamma2*Delta);
+   else
+       Delta = max(DeltaMin, Delta);
+   end
+   
+   if(norm(gf(x)) <= tol || k>=maxstep)
+       break
+   end
+   
+end
+
+
+end
